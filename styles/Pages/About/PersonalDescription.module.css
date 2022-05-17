@@ -1,0 +1,43 @@
+.container{
+    width: 25rem;
+    /* max-height: 60vh; */
+
+    z-index: 20;
+    cursor: grab;
+
+    background-color:#fff;
+    border: 1px solid #000;
+    border-radius: 1rem;
+    padding: 2rem;
+   
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    /* overflow-y: scroll; */
+    line-height: 125%;;
+}
+
+.container a {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.container a:hover {
+    text-decoration: none;
+}
+
+.button{
+    position: absolute;
+    top: 0;
+    right: -3rem;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 1rem;
+    background-color:#fff;
+    border: 1px solid #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+}
