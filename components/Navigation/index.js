@@ -75,6 +75,7 @@ const Navigation = () => {
   const handleContactClick = () => {
     state.setCurrentCategory("contact")
     state.setCurrentPage("")
+    state.setCurrentSorting("")
     closeMenu()
   }
 
@@ -111,6 +112,7 @@ const Navigation = () => {
   const handleStudioClick = () => {
     state.setCurrentCategory("about")
     state.setCurrentPage("studio")
+    state.setCurrentSorting("")
     closeMenu()
   }
 

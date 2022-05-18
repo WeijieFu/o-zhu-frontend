@@ -8,12 +8,10 @@ import PersonDescription from "../About/PersonDescription"
 import useNavigationState from "../../state/NavigationState"
 import generateRandom from "./generateRandom"
 
+import { row, column, count, blinkTimes, interval } from "./GridSetting"
+
 const TeamGrid = () => {
   const state = useNavigationState()
-  const count = 66
-  const row = 6
-  const column = 11
-  const blinkTimes = 10
   const [cells, setCells] = useState([])
 
   const [data, setData] = useState([])
@@ -32,7 +30,6 @@ const TeamGrid = () => {
   }, [])
 
   useEffect(() => {
-    console.log(data)
     let i = 0
     const blickInterval = setInterval(() => {
       let initialCell = Array.from({ length: count }, () => {
@@ -47,7 +44,7 @@ const TeamGrid = () => {
         const finalCell = sortByRandom(count, row, column, data.length)
         setCells(finalCell)
       }
-    }, 200)
+    }, interval)
   }, [data])
   //HANDLE SORTING METHOD CHANGE
   useEffect(() => {

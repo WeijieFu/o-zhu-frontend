@@ -3,11 +3,19 @@ import styles from "../../styles/Grid/Grid.module.css"
 
 import Link from "next/link"
 import getContact from "../../api/getContact"
-
+import { count, blinkTimes, interval } from "./GridSetting"
 const ContactGrid = ({ currentPage }) => {
-  const count = 66
-  const blinkTimes = 5
   const [cells, setCells] = useState([])
+  const [data, setData] = useState([])
+
+  useEffect(() => {
+    async function fetchAPI() {
+      const data = await getContact()
+      setData(data)
+    }
+    fetchAPI()
+  }, [])
+
   useEffect(() => {
     let i = 0
     const blickInterval = setInterval(async () => {
@@ -20,10 +28,8 @@ const ContactGrid = ({ currentPage }) => {
       })
       setCells(initialCell)
       i++
-      if (i > blinkTimes) {
+      if (i > blinkTimes && data) {
         clearInterval(blickInterval)
-
-        const data = await getContact()
 
         let finalCell = Array.from({ length: count }, (_, index) => {
           return {
@@ -34,8 +40,8 @@ const ContactGrid = ({ currentPage }) => {
         })
         setCells(finalCell)
       }
-    }, 100)
-  }, [])
+    }, interval)
+  }, [data])
 
   return (
     <div className={styles["grid-container"]}>

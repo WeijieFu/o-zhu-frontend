@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import styles from "../../styles/Grid/Grid.module.css"
 
+import { count, blinkTimes, interval } from "./GridSetting"
+
 const HomeGrid = () => {
-  const count = 66
-  const blinkTimes = 10
   const [cells, setCells] = useState([])
   useEffect(() => {
     let i = 0
@@ -18,7 +18,7 @@ const HomeGrid = () => {
         initialCell = Array(count).fill("0")
         setCells(initialCell)
       }
-    }, 100)
+    }, interval)
   }, [])
 
   return (
