@@ -32,6 +32,10 @@ const Navigation = () => {
     state.setIsTeamSortingMenuOpen(!state.isTeamSortingMenuOpen)
   }
 
+  const handleAwardSortingMenuToggle = () => {
+    state.setIsAwardSortingMenuOpen(!state.isAwardSortingMenuOpen)
+  }
+
   const handleSubMenuToggle = () => {
     if (state.currentCategory === "projects") {
       handleProjectsMenuToggle()
@@ -47,6 +51,10 @@ const Navigation = () => {
     if (state.currentPage === "team") {
       handleTeamSortingMenuToggle()
     }
+
+    if (state.currentPage === "award") {
+      handleAwardSortingMenuToggle()
+    }
   }
   /*
  HANDLE LINK
@@ -60,10 +68,12 @@ const Navigation = () => {
     state.setIsAPMenuOpen(false)
     //TERIARY
     state.setIsTeamSortingMenuOpen(false)
+    state.setIsAwardSortingMenuOpen(false)
   }
   const handleAwardClick = () => {
     state.setCurrentCategory("award & press")
     state.setCurrentPage("award")
+    state.setCurrentSorting("random")
     closeMenu()
   }
   const handlePressClick = () => {
@@ -294,6 +304,21 @@ const Navigation = () => {
       >
         <div className={styles["menu-item"]} onClick={handleSortingByName}>
           <span className={styles["menu-item-title"]}>Name</span>
+        </div>
+
+        <div className={styles["menu-item"]} onClick={handleSortingByRandom}>
+          <span className={styles["menu-item-title"]}>Random</span>
+        </div>
+      </div>
+
+      {/* AWARD SORTING MENU */}
+      <div
+        className={`${styles["menu-wrapper"]} ${
+          state.isAwardSortingMenuOpen ? "" : styles["menu-wrapper-hidden"]
+        } ${styles["menu-tertiary"]}`}
+      >
+        <div className={styles["menu-item"]} onClick={handleSortingByName}>
+          <span className={styles["menu-item-title"]}>Date</span>
         </div>
 
         <div className={styles["menu-item"]} onClick={handleSortingByRandom}>

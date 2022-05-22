@@ -38,7 +38,7 @@ const StudioGrid = () => {
           }
         })
         setCells(finalCell)
-        console.log(data)
+        // console.log(data[0].Model.data.attributes.url)
       }
     }, interval)
   }, [data])
@@ -57,7 +57,7 @@ const StudioGrid = () => {
           )
         })}
       </div>
-      {data.length > 0 && <StudioScene />}
+      {data.length > 0 && <StudioScene data={data} />}
     </>
   )
 }

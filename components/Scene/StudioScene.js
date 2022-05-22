@@ -1,9 +1,11 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { Suspense, useEffect, useRef, useState } from "react"
 import { Canvas, useThree, useFrame } from "@react-three/fiber"
 
 import styles from "../../styles/Scene/Scene.module.css"
 
 import getCellPosition from "./getCellPosition"
+
+import Model from "./Model"
 
 const position = [0, 10, 10]
 const zoom = 1
@@ -12,11 +14,7 @@ const bottom = -8
 const left = -11
 const right = 11
 
-const StudioScene = () => {
-  useEffect(() => {
-    console.log(getCellPosition(0).x)
-    console.log(getCellPosition(0).z)
-  })
+const StudioScene = ({ data }) => {
   return (
     <div className={styles["canvas"]}>
       <Canvas
@@ -37,30 +35,34 @@ const StudioScene = () => {
       >
         {/* <gridHelper /> */}
         {/* <color attach="background" args={["lightgrey"]} /> */}
-        <ambientLight />
-        <pointLight position={[10, 10, 10]} />
-        <Box
-          position={[getCellPosition(0).x, 0.5, getCellPosition(0).z]}
-          rotation={[0, -Math.PI / 4, 0]}
-        />
-        <Box
-          position={[getCellPosition(1).x, 0.5, getCellPosition(1).z]}
-          rotation={[0, -Math.PI / 4, 0]}
-        />
-
+        <ambientLight intensity={0.5} />
+        {/* <pointLight
+          position={[10, 10, 10]}
+          castShadow
+          intensity={1.0}
+          shadow-mapSize-width={2048}
+          shadow-mapSize-height={2048}
+          shadow-camera-far={100}
+          shadow-camera-left={-10}
+          shadow-camera-right={10}
+          shadow-camera-top={10}
+          shadow-camera-bottom={-10}
+        /> */}
+        <Light />
+        <Suspense>
+          {data.map((value, index) => {
+            return (
+              <Model
+                url={value.Model.data.attributes.url}
+                index={index}
+                key={index}
+              />
+            )
+          })}
+        </Suspense>
         <GroundPlage />
       </Canvas>
     </div>
-  )
-}
-
-function Box(props) {
-  const ref = useRef()
-  return (
-    <mesh {...props}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshStandardMaterial color={"orange"} />
-    </mesh>
   )
 }
 
@@ -81,10 +83,32 @@ function GroundPlage() {
     camera.updateProjectionMatrix()
   }
   return (
-    <mesh rotation={[-Math.PI / 2, 0, 0]}>
+    <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
       <planeBufferGeometry args={[right * 2, right * 2 * 1.414]} />
-      <meshBasicMaterial color="white" />
+      <shadowMaterial attach="material" transparent opacity={0.5} />
     </mesh>
+  )
+}
+
+const Light = () => {
+  const light = useRef()
+  useFrame((state) => {
+    light.current.position.set(20 * state.pointer.x, 40, -20 * state.pointer.y)
+  })
+  return (
+    <directionalLight
+      castShadow
+      position={[0, 5, 5]}
+      intensity={1.5}
+      shadow-mapSize-width={4096}
+      shadow-mapSize-height={4096}
+      shadow-camera-far={200}
+      shadow-camera-left={-15}
+      shadow-camera-right={15}
+      shadow-camera-top={15}
+      shadow-camera-bottom={-15}
+      ref={light}
+    />
   )
 }
 

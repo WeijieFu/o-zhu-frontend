@@ -3,7 +3,7 @@ import Navigation from "../../components/Navigation"
 
 const Press = () => {
   return (
-    <div>
+    <div className={styles.container}>
       Press
       <Navigation></Navigation>
     </div>

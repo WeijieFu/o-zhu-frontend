@@ -4,7 +4,6 @@ import styles from "../styles/Home.module.css"
 
 import Navigation from "../components/Navigation"
 import HomeGrid from "../components/Grid/HomeGrid"
-import Scene from "../components/Scene"
 
 export default function Home() {
   return (
@@ -16,7 +15,6 @@ export default function Home() {
       </Head>
       <HomeGrid />
       <Navigation />
-      {/* <Scene /> */}
     </div>
   )
 }
