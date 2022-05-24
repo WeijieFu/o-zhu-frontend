@@ -55,7 +55,9 @@ const ContactGrid = ({ currentPage }) => {
 
               <div className={styles["grid-cell-link"]}>
                 <Link href={item.url}>
-                  <a target="_blank">{item.value}</a>
+                  <a target="_blank" rel="noreferrer">
+                    {item.value}
+                  </a>
                 </Link>
               </div>
             </span>

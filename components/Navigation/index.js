@@ -32,8 +32,8 @@ const Navigation = () => {
     state.setIsTeamSortingMenuOpen(!state.isTeamSortingMenuOpen)
   }
 
-  const handleAwardSortingMenuToggle = () => {
-    state.setIsAwardSortingMenuOpen(!state.isAwardSortingMenuOpen)
+  const handleAPSortingMenuToggle = () => {
+    state.setIsAPSortingMenuOpen(!state.isAPSortingMenuOpen)
   }
 
   const handleSubMenuToggle = () => {
@@ -43,7 +43,8 @@ const Navigation = () => {
     if (state.currentCategory === "about") {
       handleAboutMenuToggle()
     }
-    if (state.currentCategory === "award and press") {
+    console.log(state.currentCategory)
+    if (state.currentCategory === "award & press") {
       handleAPMenuToggle()
     }
   }
@@ -52,8 +53,8 @@ const Navigation = () => {
       handleTeamSortingMenuToggle()
     }
 
-    if (state.currentPage === "award") {
-      handleAwardSortingMenuToggle()
+    if (state.currentCategory === "award & press") {
+      handleAPSortingMenuToggle()
     }
   }
   /*
@@ -68,7 +69,7 @@ const Navigation = () => {
     state.setIsAPMenuOpen(false)
     //TERIARY
     state.setIsTeamSortingMenuOpen(false)
-    state.setIsAwardSortingMenuOpen(false)
+    state.setIsAPSortingMenuOpen(false)
   }
   const handleAwardClick = () => {
     state.setCurrentCategory("award & press")
@@ -79,6 +80,7 @@ const Navigation = () => {
   const handlePressClick = () => {
     state.setCurrentCategory("award & press")
     state.setCurrentPage("press")
+    state.setCurrentSorting("random")
     closeMenu()
   }
 
@@ -138,6 +140,11 @@ const Navigation = () => {
 
   const handleSortingByName = () => {
     state.setCurrentSorting("name")
+    closeMenu()
+  }
+
+  const handleSortingByDate = () => {
+    state.setCurrentSorting("date")
     closeMenu()
   }
 
@@ -311,13 +318,13 @@ const Navigation = () => {
         </div>
       </div>
 
-      {/* AWARD SORTING MENU */}
+      {/* AWARD AND PRESS SORTING MENU */}
       <div
         className={`${styles["menu-wrapper"]} ${
-          state.isAwardSortingMenuOpen ? "" : styles["menu-wrapper-hidden"]
+          state.isAPSortingMenuOpen ? "" : styles["menu-wrapper-hidden"]
         } ${styles["menu-tertiary"]}`}
       >
-        <div className={styles["menu-item"]} onClick={handleSortingByName}>
+        <div className={styles["menu-item"]} onClick={handleSortingByDate}>
           <span className={styles["menu-item-title"]}>Date</span>
         </div>
 

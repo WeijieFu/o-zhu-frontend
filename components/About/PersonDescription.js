@@ -29,7 +29,7 @@ const PersonDescription = ({
             <div className={styles.section} key={index}>
               <div>{value.Type}</div>
               <div>
-                <a href={value.URL} target="_blank">
+                <a href={value.URL} target="_blank" rel="noreferrer">
                   {value.Value}
                 </a>
               </div>

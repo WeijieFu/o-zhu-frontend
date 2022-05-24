@@ -10,7 +10,7 @@ import generateRandom from "./generateRandom"
 
 import { row, column, count, blinkTimes, interval } from "./GridSetting"
 
-const AwardGrid = () => {
+const PressGrid = () => {
   const state = useNavigationState()
   const [cells, setCells] = useState([])
 
@@ -118,4 +118,4 @@ const AwardGrid = () => {
   )
 }
 
-export default AwardGrid
+export default PressGrid
