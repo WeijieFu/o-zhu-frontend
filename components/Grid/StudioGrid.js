@@ -2,11 +2,14 @@ import React, { useEffect, useState, useRef } from "react"
 import styles from "../../styles/Grid/Grid.module.css"
 import Link from "next/link"
 import getStudio from "../../api/getStudio"
+import { useRouter } from "next/router"
 
 import { count, blinkTimes, interval } from "./GridSetting"
 import StudioScene from "../Scene/StudioScene"
 
 const StudioGrid = () => {
+  const router = useRouter()
+
   const [cells, setCells] = useState([])
 
   const [data, setData] = useState([])
@@ -57,7 +60,7 @@ const StudioGrid = () => {
           )
         })}
       </div>
-      {data.length > 0 && <StudioScene data={data} />}
+      {data && <StudioScene data={data} router={router} />}
     </>
   )
 }

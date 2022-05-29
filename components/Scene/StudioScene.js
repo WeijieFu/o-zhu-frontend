@@ -14,7 +14,7 @@ const bottom = -8
 const left = -11
 const right = 11
 
-const StudioScene = ({ data }) => {
+const StudioScene = ({ data, router }) => {
   return (
     <div className={styles["canvas"]}>
       <Canvas
@@ -56,6 +56,8 @@ const StudioScene = ({ data }) => {
                 url={value.Model.data.attributes.url}
                 index={index}
                 key={index}
+                router={router}
+                location={value.Location}
               />
             )
           })}

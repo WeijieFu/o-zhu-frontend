@@ -2,7 +2,7 @@ import React, { useEffect } from "react"
 import { useGLTF } from "@react-three/drei"
 import getCellPosition from "./getCellPosition"
 
-export default function Model({ url, index }) {
+export default function Model({ url, index, router, location }) {
   const { nodes } = useGLTF(url)
   let meshes = []
   const handlePointerEnter = (e) => {
@@ -10,6 +10,9 @@ export default function Model({ url, index }) {
   }
   const handlePointerLeave = (e) => {
     e.srcElement.style.cursor = "auto"
+  }
+  const handleClick = (e) => {
+    router.push(`/about/studio/${location.toLowerCase()}`)
   }
   meshes = nodes.Scene.children.map((mesh) => {
     return (
@@ -20,6 +23,7 @@ export default function Model({ url, index }) {
         key={mesh.geometry.uuid}
         onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}
+        onClick={handleClick}
       >
         <meshStandardMaterial side={2} color="pink" />
       </mesh>
