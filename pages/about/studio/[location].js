@@ -39,7 +39,7 @@ const Location = () => {
     <div className={styles.container}>
       {currentLocation && (
         <>
-          {/* <LocationGrid currentLocation={currentLocation} /> */}
+          <LocationGrid currentLocation={currentLocation} />
           <Navigation />
         </>
       )}

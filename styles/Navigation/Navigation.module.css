@@ -60,9 +60,9 @@
     grid-column:8/11;
 }
 
-.menu-button-text:hover, .menu-button-icon:hover{
+/* .menu-button-text:hover, .menu-button-icon:hover{
     color: aqua;
-}
+} */
 
 .menu-button-hidden{
     visibility: hidden;
