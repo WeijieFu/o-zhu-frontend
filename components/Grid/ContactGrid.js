@@ -39,6 +39,7 @@ const ContactGrid = ({ currentPage }) => {
           }
         })
         setCells(finalCell)
+        console.log(data)
       }
     }, interval)
   }, [data])
@@ -52,14 +53,23 @@ const ContactGrid = ({ currentPage }) => {
           <span className={styles["grid-cell"]} key={index}>
             <span className={styles["grid-cell-label"]}>
               <div>{item.type}</div>
-
-              <div className={styles["grid-cell-link"]}>
-                <Link href={item.url}>
-                  <a target="_blank" rel="noreferrer">
+              {item.type === "Email" ? (
+                <div className={styles["grid-cell-link"]}>
+                  <a
+                    target="_blank"
+                    rel="noreferrer"
+                    href={`mailto:${item.value}`}
+                  >
                     {item.value}
                   </a>
-                </Link>
-              </div>
+                </div>
+              ) : (
+                <div className={styles["grid-cell-link"]}>
+                  <a target="_blank" rel="noreferrer" href={item.url}>
+                    {item.value}
+                  </a>
+                </div>
+              )}
             </span>
           </span>
         )

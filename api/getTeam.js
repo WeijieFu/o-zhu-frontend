@@ -2,9 +2,9 @@ import baseURL from "./baseURL"
 
 const getTeam = async () => {
   try {
-    const res = await fetch(`${baseURL}/team?populate=deep`)
+    const res = await fetch(`${baseURL}/Team`)
     const team = await res.json()
-    return team.data.attributes.Member
+    return team.data
   } catch (err) {
     console.log(err)
   }

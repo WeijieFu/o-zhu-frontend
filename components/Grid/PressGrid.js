@@ -60,9 +60,9 @@ const PressGrid = () => {
     finalCell.fill({ name: "0" })
     randomArray.forEach((value, index) => {
       finalCell[value] = {
-        name: data[index].attributes.Date,
-        image: data[index].attributes.Image.data.attributes.url,
-        url: data[index].attributes.URL,
+        name: data[index].Date.slice(0, 10),
+        image: data[index].Image,
+        url: data[index].URL,
         index: index,
       }
     })

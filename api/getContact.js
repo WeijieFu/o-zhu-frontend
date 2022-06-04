@@ -2,9 +2,9 @@ import baseURL from "./baseURL"
 
 const getContact = async () => {
   try {
-    const res = await fetch(`${baseURL}/contact?populate=deep`)
+    const res = await fetch(`${baseURL}/Contact`)
     const contact = await res.json()
-    return contact.data.attributes.Contacts
+    return contact.data
   } catch (err) {
     console.log(err)
   }

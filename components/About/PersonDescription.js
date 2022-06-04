@@ -21,21 +21,38 @@ const PersonDescription = ({
           <div>{personDescriptionData.Position2}</div>
         </div>
         <div className={styles.section}>
-          {" "}
           {personDescriptionData.Description}
         </div>
-        {personDescriptionData.Contact.map((value, index) => {
-          return (
-            <div className={styles.section} key={index}>
-              <div>{value.Type}</div>
-              <div>
-                <a href={value.URL} target="_blank" rel="noreferrer">
-                  {value.Value}
-                </a>
-              </div>
+
+        <div className={styles.section}>
+          <div>Email</div>
+          <div>
+            <a href={`mailto:${personDescriptionData.Email}`}>
+              {personDescriptionData.Email}
+            </a>
+          </div>
+        </div>
+        {personDescriptionData.Instagram && (
+          <div className={styles.section}>
+            <div>Instagram</div>
+            <div>
+              <a href={personDescriptionData.Instagram}>
+                {personDescriptionData.Instagram}
+              </a>
             </div>
-          )
-        })}
+          </div>
+        )}
+        {personDescriptionData.Facebook && (
+          <div className={styles.section}>
+            <div>Facebook</div>
+            <div>
+              <a href={personDescriptionData.Facebook}>
+                {personDescriptionData.Facebook}
+              </a>
+            </div>
+          </div>
+        )}
+
         <div className={styles.button} onClick={handleClose}>
           <CloseButton />
         </div>

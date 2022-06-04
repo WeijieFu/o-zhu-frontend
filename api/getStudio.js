@@ -2,9 +2,16 @@ import baseURL from "./baseURL"
 
 const getStudio = async () => {
   try {
-    const res = await fetch(`${baseURL}/studio?populate=deep`)
+    const res = await fetch(
+      `${baseURL}/Studio`
+      // {
+      //   method: "GET",
+      //   mode: "no-cors",
+      // }
+    )
     const studio = await res.json()
-    return studio.data.attributes.Locations
+    console.log(studio.data)
+    return studio.data
   } catch (err) {
     console.log(err)
   }

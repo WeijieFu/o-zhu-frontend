@@ -53,7 +53,7 @@ const StudioScene = ({ data, router }) => {
           {data.map((value, index) => {
             return (
               <Model
-                url={value.Model.data.attributes.url}
+                url={value.Model}
                 index={index}
                 key={index}
                 router={router}

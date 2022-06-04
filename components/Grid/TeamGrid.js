@@ -71,7 +71,7 @@ const TeamGrid = () => {
     randomArray.forEach((value, index) => {
       finalCell[value] = {
         name: data[index].Name,
-        image: data[index].Image.data.attributes.url,
+        image: data[index].Image,
         index: index,
       }
     })

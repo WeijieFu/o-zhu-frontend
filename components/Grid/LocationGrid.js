@@ -41,10 +41,7 @@ const LocationGrid = ({ currentLocation }) => {
       </span>
 
       <span className={`${styles["grid-cell-image-large"]}`}>
-        <img
-          src={currentLocation.Image.data.attributes.url}
-          alt={currentLocation.Image.data.attributes.name}
-        />
+        <img src={currentLocation.Image} alt={currentLocation.Location} />
       </span>
       {!isInformationShown && (
         <span
