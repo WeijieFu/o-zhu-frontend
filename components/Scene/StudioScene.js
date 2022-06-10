@@ -58,7 +58,7 @@ const StudioScene = ({ data, router }) => {
                 key={index}
                 router={router}
                 target={value.Location}
-                root="/about/studio/"
+                root="/about/studio"
               />
             )
           })}
