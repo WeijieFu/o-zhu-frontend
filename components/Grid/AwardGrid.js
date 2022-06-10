@@ -93,7 +93,9 @@ const AwardGrid = () => {
   return (
     <>
       <div className={styles["grid-container"]}>
-        <div className={styles["grid-title"]}>OFFICE ZHU</div>
+        <div className={styles["grid-title"]}>
+          {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
+        </div>
         {cells.map((item, index) => {
           return (
             <span className={styles["grid-cell"]} key={index}>

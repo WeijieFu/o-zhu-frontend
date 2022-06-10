@@ -1,8 +1,9 @@
 import React, { useEffect } from "react"
 import { useGLTF } from "@react-three/drei"
 import getCellPosition from "./getCellPosition"
-
-export default function Model({ url, index, router, location }) {
+import useNavigationState from "../../state/NavigationState"
+export default function Model({ url, index, router, target, root }) {
+  const state = useNavigationState()
   const { nodes } = useGLTF(url)
   let meshes = []
   const handlePointerEnter = (e) => {
@@ -12,7 +13,8 @@ export default function Model({ url, index, router, location }) {
     e.srcElement.style.cursor = "auto"
   }
   const handleClick = (e) => {
-    router.push(`/about/studio/${location.toLowerCase()}`)
+    router.push(`${root}/${target.toLowerCase()}`)
+    state.setCurrentSorting("")
   }
   meshes = nodes.Scene.children.map((mesh) => {
     return (

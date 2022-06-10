@@ -1,15 +1,17 @@
 import React, { useEffect, useState, useRef } from "react"
 import styles from "../../styles/Grid/Grid.module.css"
-import Link from "next/link"
-import getStudio from "../../api/getStudio"
 import { useRouter } from "next/router"
 
 import { count, blinkTimes, interval } from "./GridSetting"
-import StudioScene from "../Scene/StudioScene"
+import ProjectScene from "../Scene/ProjectScene"
+import getProjects from "../../api/getProjects"
+
 import useNavigationState from "../../state/NavigationState"
 
-const StudioGrid = () => {
+const ProjectsGrid = () => {
   const router = useRouter()
+  const { category } = router.query
+
   const state = useNavigationState()
 
   const [cells, setCells] = useState([])
@@ -17,12 +19,14 @@ const StudioGrid = () => {
   const [data, setData] = useState([])
 
   useEffect(() => {
-    async function fetchAPI() {
-      const data = await getStudio()
-      setData(data)
+    if (category) {
+      async function fetchAPI() {
+        const data = await getProjects(category)
+        setData(data)
+      }
+      fetchAPI()
     }
-    fetchAPI()
-  }, [])
+  }, [category])
 
   useEffect(() => {
     let i = 0
@@ -40,12 +44,11 @@ const StudioGrid = () => {
 
         let finalCell = Array.from({ length: count }, (_, index) => {
           return {
-            name: data[index] ? data[index].Location : "0",
-            nameCN: data[index] ? data[index].LocationCN : "0",
+            name: data[index] ? data[index].Name : "0",
+            nameCN: data[index] ? data[index].NameCN : "0",
           }
         })
         setCells(finalCell)
-        // console.log(data[0].Model.data.attributes.url)
       }
     }, interval)
   }, [data])
@@ -68,9 +71,15 @@ const StudioGrid = () => {
           )
         })}
       </div>
-      {data && <StudioScene data={data} router={router} />}
+      {data && (
+        <ProjectScene
+          data={data}
+          router={router}
+          root={`/projects/${category}/`}
+        />
+      )}
     </>
   )
 }
 
-export default StudioGrid
+export default ProjectsGrid

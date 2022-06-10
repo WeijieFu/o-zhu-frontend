@@ -14,7 +14,7 @@ const bottom = -8
 const left = -11
 const right = 11
 
-const StudioScene = ({ data, router }) => {
+const ProjectScene = ({ data, router, root }) => {
   return (
     <div className={styles["canvas"]}>
       <Canvas
@@ -33,21 +33,8 @@ const StudioScene = ({ data, router }) => {
         }}
         flat
       >
-        {/* <gridHelper /> */}
-        {/* <color attach="background" args={["lightgrey"]} /> */}
         <ambientLight intensity={0.5} />
-        {/* <pointLight
-          position={[10, 10, 10]}
-          castShadow
-          intensity={1.0}
-          shadow-mapSize-width={2048}
-          shadow-mapSize-height={2048}
-          shadow-camera-far={100}
-          shadow-camera-left={-10}
-          shadow-camera-right={10}
-          shadow-camera-top={10}
-          shadow-camera-bottom={-10}
-        /> */}
+
         <Light />
         <Suspense>
           {data.map((value, index) => {
@@ -57,8 +44,8 @@ const StudioScene = ({ data, router }) => {
                 index={index}
                 key={index}
                 router={router}
-                target={value.Location}
-                root="/about/studio/"
+                target={value._id}
+                root={value.Category}
               />
             )
           })}
@@ -115,4 +102,4 @@ const Light = () => {
   )
 }
 
-export default StudioScene
+export default ProjectScene

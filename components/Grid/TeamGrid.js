@@ -35,6 +35,7 @@ const TeamGrid = () => {
       let initialCell = Array.from({ length: count }, () => {
         return {
           name: Math.floor(Math.random() * 10),
+          nameCN: Math.floor(Math.random() * 10),
         }
       })
       setCells(initialCell)
@@ -67,10 +68,11 @@ const TeamGrid = () => {
   const sortByRandom = (count, row, column, length) => {
     const randomArray = generateRandom(count, row, column, length)
     const finalCell = Array(count)
-    finalCell.fill({ name: "0" })
+    finalCell.fill({ name: "0", nameCN: "0" })
     randomArray.forEach((value, index) => {
       finalCell[value] = {
         name: data[index].Name,
+        nameCN: data[index].NameCN,
         image: data[index].Image,
         index: index,
       }
@@ -83,10 +85,11 @@ const TeamGrid = () => {
     const filteredCell = cells.filter((cell) => cell.name !== "0")
     const sortedCell = _.sortBy(filteredCell, ({ name }) => name.toLowerCase())
     const finalCell = Array(count)
-    finalCell.fill({ name: "0" })
+    finalCell.fill({ name: "0", nameCN: "0" })
     sortedCell.forEach((value, index) => {
       finalCell[index] = {
         name: value.name,
+        nameCN: value.nameCN,
         image: value.image,
         index: index,
       }
@@ -110,12 +113,16 @@ const TeamGrid = () => {
       )}
 
       <div className={styles["grid-container"]}>
-        <div className={styles["grid-title"]}>OFFICE ZHU</div>
+        <div className={styles["grid-title"]}>
+          {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
+        </div>
         {cells.map((item, index) => {
           return (
             <span className={styles["grid-cell"]} key={index}>
               <span className={styles["grid-cell-label"]}>
-                <div className={styles["grid-cell-name"]}>{item.name}</div>
+                <div className={styles["grid-cell-name"]}>
+                  {state.currentLanguage == "cn" ? item.nameCN : item.name}
+                </div>
                 {item.image && (
                   <img
                     className={styles["grid-cell-image"]}

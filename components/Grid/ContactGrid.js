@@ -4,10 +4,13 @@ import styles from "../../styles/Grid/Grid.module.css"
 import Link from "next/link"
 import getContact from "../../api/getContact"
 import { count, blinkTimes, interval } from "./GridSetting"
+
+import useNavigationState from "../../state/NavigationState"
+
 const ContactGrid = ({ currentPage }) => {
   const [cells, setCells] = useState([])
   const [data, setData] = useState([])
-
+  const state = useNavigationState()
   useEffect(() => {
     async function fetchAPI() {
       const data = await getContact()
@@ -39,14 +42,15 @@ const ContactGrid = ({ currentPage }) => {
           }
         })
         setCells(finalCell)
-        console.log(data)
       }
     }, interval)
   }, [data])
 
   return (
     <div className={styles["grid-container"]}>
-      <div className={styles["grid-title"]}>OFFICE ZHU</div>
+      <div className={styles["grid-title"]}>
+        {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
+      </div>
 
       {cells.map((item, index) => {
         return (

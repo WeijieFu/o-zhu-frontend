@@ -1,15 +1,15 @@
 import React from "react"
 import Navigation from "../../../components/Navigation"
-import Grid from "../../../components/Grid/HomeGrid"
+import ProjectsGrid from "../../../components/Grid/ProjectsGrid"
 
 import styles from "../../../styles/Pages/Projects/Exhibition.module.css"
-const Exhibition = () => {
+const Projects = () => {
   return (
     <div className={styles["container"]}>
-      <Grid />
+      <ProjectsGrid />
       <Navigation />
     </div>
   )
 }
 
-export default Exhibition
+export default Projects
