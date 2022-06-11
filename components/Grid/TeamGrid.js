@@ -83,7 +83,15 @@ const TeamGrid = () => {
 
   const sortByName = () => {
     const filteredCell = cells.filter((cell) => cell.name !== "0")
-    const sortedCell = _.sortBy(filteredCell, ({ name }) => name.toLowerCase())
+    const sortedCell = []
+    if (state.currentLanguage == "en") {
+      sortedCell = _.sortBy(filteredCell, ({ name }) => name.toLowerCase())
+    }
+
+    if (state.currentLanguage == "cn") {
+      sortedCell = _.sortBy(filteredCell, ({ nameCN }) => nameCN)
+    }
+
     const finalCell = Array(count)
     finalCell.fill({ name: "0", nameCN: "0" })
     sortedCell.forEach((value, index) => {

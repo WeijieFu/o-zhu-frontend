@@ -9,7 +9,8 @@ const useNavigationState = create((set) => ({
   isAboutMenuOpen: false,
   isAPMenuOpen: false,
   isTeamSortingMenuOpen: false,
-  isAPSortingMenuOpen: false,
+  isAPSortingMenuMenuOpen: false,
+  isProjectsSortingOpen: false,
   currentLanguage: "en",
   setCurrentPage: (page) => set((state) => ({ currentPage: page })),
   setCurrentCategory: (category) =>
@@ -24,6 +25,8 @@ const useNavigationState = create((set) => ({
     set((state) => ({ isTeamSortingMenuOpen: bool })),
   setIsAPSortingMenuOpen: (bool) =>
     set((state) => ({ isAPSortingMenuOpen: bool })),
+  setIsProjectsSortingMenuOpen: (bool) =>
+    set((state) => ({ isProjectsSortingMenuOpen: bool })),
   setCurrentLanguage: (language) =>
     set((state) => ({ currentLanguage: language })),
 }))

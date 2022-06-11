@@ -36,6 +36,10 @@ const Navigation = () => {
     state.setIsAPSortingMenuOpen(!state.isAPSortingMenuOpen)
   }
 
+  const handleProjectsSortingMenuToggle = () => {
+    state.setIsProjectsSortingMenuOpen(!state.isProjectsSortingMenuOpen)
+  }
+
   const handleSubMenuToggle = () => {
     if (state.currentCategory === "projects") {
       handleProjectsMenuToggle()
@@ -56,6 +60,10 @@ const Navigation = () => {
     if (state.currentCategory === "award & press") {
       handleAPSortingMenuToggle()
     }
+
+    if (state.currentCategory === "projects") {
+      handleProjectsSortingMenuToggle()
+    }
   }
   /*
  HANDLE LINK
@@ -70,6 +78,7 @@ const Navigation = () => {
     //TERIARY
     state.setIsTeamSortingMenuOpen(false)
     state.setIsAPSortingMenuOpen(false)
+    state.setIsProjectsSortingMenuOpen(false)
   }
   const handleAwardClick = () => {
     state.setCurrentCategory("award & press")
@@ -96,35 +105,41 @@ const Navigation = () => {
   const handleAllClick = () => {
     state.setCurrentCategory("projects")
     state.setCurrentPage("all")
+    state.setCurrentSorting("random")
     closeMenu()
   }
   const handleExhibitionClick = () => {
     state.setCurrentCategory("projects")
     state.setCurrentPage("exhibition")
+    state.setCurrentSorting("random")
     closeMenu()
   }
 
   const handleInteriorClick = () => {
     state.setCurrentCategory("projects")
     state.setCurrentPage("interior")
+    state.setCurrentSorting("random")
     closeMenu()
   }
 
   const handleArchitectureClick = () => {
     state.setCurrentCategory("projects")
     state.setCurrentPage("architecture")
+    state.setCurrentSorting("random")
     closeMenu()
   }
 
   const handleUrbanDesignClick = () => {
     state.setCurrentCategory("projects")
     state.setCurrentPage("urban design")
+    state.setCurrentSorting("random")
     closeMenu()
   }
 
   const handleResearchPublicationClick = () => {
     state.setCurrentCategory("projects")
     state.setCurrentPage("research & publication")
+    state.setCurrentSorting("random")
     closeMenu()
   }
 
@@ -145,20 +160,11 @@ const Navigation = () => {
   HANDLE SORTING
   */
 
-  const handleSortingByName = () => {
-    state.setCurrentSorting("name")
+  const handleSorting = (method) => {
+    state.setCurrentSorting(method)
     closeMenu()
   }
 
-  const handleSortingByDate = () => {
-    state.setCurrentSorting("date")
-    closeMenu()
-  }
-
-  const handleSortingByRandom = () => {
-    state.setCurrentSorting("random")
-    closeMenu()
-  }
   /**
    HANDLE LANGUAGE
    */
@@ -232,6 +238,15 @@ const Navigation = () => {
 
     if (state.currentSorting == "date") {
       return state.currentLanguage == "cn" ? "日期" : "Date"
+    }
+    if (state.currentSorting == "size") {
+      return state.currentLanguage == "cn" ? "面积" : "Size"
+    }
+    if (state.currentSorting == "year") {
+      return state.currentLanguage == "cn" ? "年份" : "Year"
+    }
+    if (state.currentSorting == "location") {
+      return state.currentLanguage == "cn" ? "地点" : "Location"
     }
   }
   return (
@@ -427,13 +442,23 @@ const Navigation = () => {
           state.isTeamSortingMenuOpen ? "" : styles["menu-wrapper-hidden"]
         } ${styles["menu-tertiary"]}`}
       >
-        <div className={styles["menu-item"]} onClick={handleSortingByName}>
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("name")
+          }}
+        >
           <span className={styles["menu-item-title"]}>
             {state.currentLanguage == "cn" ? "名字" : "Name"}
           </span>
         </div>
 
-        <div className={styles["menu-item"]} onClick={handleSortingByRandom}>
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("random")
+          }}
+        >
           <span className={styles["menu-item-title"]}>
             {state.currentLanguage == "cn" ? "随机" : "Random"}
           </span>
@@ -446,13 +471,84 @@ const Navigation = () => {
           state.isAPSortingMenuOpen ? "" : styles["menu-wrapper-hidden"]
         } ${styles["menu-tertiary"]}`}
       >
-        <div className={styles["menu-item"]} onClick={handleSortingByDate}>
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("date")
+          }}
+        >
           <span className={styles["menu-item-title"]}>
             {state.currentLanguage == "cn" ? "日期" : "Date"}
           </span>
         </div>
 
-        <div className={styles["menu-item"]} onClick={handleSortingByRandom}>
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("random")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "随机" : "Random"}
+          </span>
+        </div>
+      </div>
+
+      {/* PROJECTS SORTING MENU */}
+      <div
+        className={`${styles["menu-wrapper"]} ${
+          state.isProjectsSortingMenuOpen ? "" : styles["menu-wrapper-hidden"]
+        } ${styles["menu-tertiary"]}`}
+      >
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("size")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "面积" : "Size"}
+          </span>
+        </div>
+
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("name")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "名字" : "Name"}
+          </span>
+        </div>
+
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("year")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "年份" : "Year"}
+          </span>
+        </div>
+
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("location")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "地点" : "Location"}
+          </span>
+        </div>
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("random")
+          }}
+        >
           <span className={styles["menu-item-title"]}>
             {state.currentLanguage == "cn" ? "随机" : "Random"}
           </span>
