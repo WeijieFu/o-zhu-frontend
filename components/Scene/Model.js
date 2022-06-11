@@ -5,6 +5,10 @@ import useNavigationState from "../../state/NavigationState"
 export default function Model({ url, index, router, target, root }) {
   const state = useNavigationState()
   const { nodes } = useGLTF(url)
+
+  // useEffect(() => {
+  //   console.log(index)
+  // })
   let meshes = []
   const handlePointerEnter = (e) => {
     e.srcElement.style.cursor = "pointer"

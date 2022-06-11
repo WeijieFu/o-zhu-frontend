@@ -27,6 +27,9 @@ const TeamGrid = () => {
       setData(data)
     }
     fetchAPI()
+    state.setCurrentCategory("about")
+    state.setCurrentPage("team")
+    state.setCurrentSorting("random")
   }, [])
 
   useEffect(() => {

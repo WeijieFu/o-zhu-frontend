@@ -22,6 +22,8 @@ const StudioGrid = () => {
       setData(data)
     }
     fetchAPI()
+    state.setCurrentCategory("about")
+    state.setCurrentPage("studio")
   }, [])
 
   useEffect(() => {

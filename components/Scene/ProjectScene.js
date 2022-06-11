@@ -14,7 +14,10 @@ const bottom = -8
 const left = -11
 const right = 11
 
-const ProjectScene = ({ data, router, root }) => {
+const ProjectScene = ({ data, router }) => {
+  // useEffect(() => {
+  //   console.log(data)
+  // })
   return (
     <div className={styles["canvas"]}>
       <Canvas
@@ -38,16 +41,18 @@ const ProjectScene = ({ data, router, root }) => {
         <Light />
         <Suspense>
           {data.map((value, index) => {
-            return (
-              <Model
-                url={value.Model}
-                index={index}
-                key={index}
-                router={router}
-                target={value._id}
-                root={value.Category}
-              />
-            )
+            if (value.index > -1) {
+              return (
+                <Model
+                  url={value.Model}
+                  index={value.index}
+                  key={index}
+                  router={router}
+                  target={value._id}
+                  root={value.Category}
+                />
+              )
+            }
           })}
         </Suspense>
         <GroundPlage />
@@ -65,7 +70,6 @@ function GroundPlage() {
     }
   }, [])
   const resizeCamera = () => {
-    console.log("resize")
     camera.top = top
     camera.bottom = bottom
     camera.left = left
