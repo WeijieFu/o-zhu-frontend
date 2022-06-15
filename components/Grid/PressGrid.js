@@ -10,19 +10,19 @@ import generateRandom from "./generateRandom"
 
 import { row, column, count, blinkTimes, interval } from "./GridSetting"
 
-const PressGrid = () => {
+const PressGrid = ({ data }) => {
   const state = useNavigationState()
   const [cells, setCells] = useState([])
 
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
 
-  useEffect(() => {
-    async function fetchAPI() {
-      const data = await getAward()
-      setData(data)
-    }
-    fetchAPI()
-  }, [])
+  // useEffect(() => {
+  //   async function fetchAPI() {
+  //     const data = await getAward()
+  //     setData(data)
+  //   }
+  //   fetchAPI()
+  // }, [])
 
   useEffect(() => {
     let i = 0

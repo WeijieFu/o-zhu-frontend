@@ -8,20 +8,20 @@ import { count, blinkTimes, interval } from "./GridSetting"
 import StudioScene from "../Scene/StudioScene"
 import useNavigationState from "../../state/NavigationState"
 
-const StudioGrid = () => {
+const StudioGrid = ({ data }) => {
   const router = useRouter()
   const state = useNavigationState()
 
   const [cells, setCells] = useState([])
 
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
 
   useEffect(() => {
-    async function fetchAPI() {
-      const data = await getStudio()
-      setData(data)
-    }
-    fetchAPI()
+    // async function fetchAPI() {
+    //   const data = await getStudio()
+    //   setData(data)
+    // }
+    // fetchAPI()
     state.setCurrentCategory("about")
     state.setCurrentPage("studio")
   }, [])

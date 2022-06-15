@@ -10,11 +10,11 @@ import generateRandom from "./generateRandom"
 
 import { row, column, count, blinkTimes, interval } from "./GridSetting"
 
-const TeamGrid = () => {
+const TeamGrid = ({ data }) => {
   const state = useNavigationState()
   const [cells, setCells] = useState([])
 
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
   const [personDescriptionData, setPersonDescriptionData] = useState([])
   const [isPersonDescriptionShown, setIsPersonDescriptionShown] = useState(
     false
@@ -22,11 +22,11 @@ const TeamGrid = () => {
   const [defaultPosition, setDefaultPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
-    async function fetchAPI() {
-      const data = await getTeam()
-      setData(data)
-    }
-    fetchAPI()
+    // async function fetchAPI() {
+    //   const data = await getTeam()
+    //   setData(data)
+    // }
+    // fetchAPI()
     state.setCurrentCategory("about")
     state.setCurrentPage("team")
     state.setCurrentSorting("random")

@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react"
 import styles from "../../styles/Grid/Grid.module.css"
 
+import ReactMarkdown from "react-markdown"
+
 import CloseButton from "../Button/CloseButton"
 import Draggable from "react-draggable"
 
@@ -63,11 +65,14 @@ const LocationGrid = ({ currentLocation }) => {
         <Draggable>
           <div className={styles["grid-info-container"]}>
             <div className={styles["grid-info-block"]}>
-              {/* <div>Office Profile</div> */}
-              <div>
-                {state.currentLanguage == "cn"
-                  ? currentLocation.DescriptionCN
-                  : currentLocation.Description}
+              <div class={styles["grid-markdown"]}>
+                <ReactMarkdown
+                  children={
+                    state.currentLanguage == "cn"
+                      ? currentLocation.DescriptionCN
+                      : currentLocation.Description
+                  }
+                />
               </div>
               <div className={styles["grid-info-close"]} onClick={handleClose}>
                 <CloseButton />

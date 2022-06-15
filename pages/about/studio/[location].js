@@ -8,20 +8,21 @@ import getStudio from "../../../api/getStudio"
 import LocationGrid from "../../../components/Grid/LocationGrid"
 import Navigation from "../../../components/Navigation"
 
-const Location = () => {
+const Location = ({ data }) => {
   const [currentLocation, setCurrentLocation] = useState()
   const router = useRouter()
   const { location } = router.query
 
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
 
-  useEffect(() => {
-    async function fetchAPI() {
-      const data = await getStudio()
-      setData(data)
-    }
-    fetchAPI()
-  }, [])
+  // useEffect(() => {
+  //   async function fetchAPI() {
+  //     const data = await getStudio()
+  //     setData(data)
+  //   }
+  //   fetchAPI()
+  //   console.log(data)
+  // }, [])
 
   useEffect(() => {
     if (data) {
@@ -48,3 +49,23 @@ const Location = () => {
 }
 
 export default Location
+
+export async function getStaticPaths() {
+  const data = await getStudio()
+
+  const paths = data.map((item) => ({
+    params: { location: item.Location.toLowerCase() },
+  }))
+
+  return {
+    paths,
+    fallback: false, // false or 'blocking'
+  }
+}
+
+export async function getStaticProps() {
+  const data = await getStudio()
+
+  // Pass post data to the page via props
+  return { props: { data } }
+}

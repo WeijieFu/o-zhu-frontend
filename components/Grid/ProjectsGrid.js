@@ -12,7 +12,7 @@ import useNavigationState from "../../state/NavigationState"
 
 import generateRandom from "./generateRandom"
 
-const ProjectsGrid = () => {
+const ProjectsGrid = ({ data }) => {
   const router = useRouter()
   const { category } = router.query
 
@@ -20,15 +20,15 @@ const ProjectsGrid = () => {
 
   const [cells, setCells] = useState([])
 
-  const [data, setData] = useState([])
+  // const [data, setData] = useState([])
 
   useEffect(() => {
     if (category) {
-      async function fetchAPI() {
-        const data = await getProjects(category)
-        setData(data)
-      }
-      fetchAPI()
+      // async function fetchAPI() {
+      //   const data = await getProjects(category)
+      //   setData(data)
+      // }
+      // fetchAPI()
       state.setCurrentSorting("random")
       state.setCurrentCategory("projects")
       state.setCurrentPage(

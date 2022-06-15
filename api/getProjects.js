@@ -12,11 +12,11 @@ const getProjects = async (category) => {
       ]
       const responseData = []
 
-      categories.forEach(async (category) => {
+      for (const category of categories) {
         const res = await fetch(`${baseURL}/${category}`)
         const resJson = await res.json()
         responseData.push(...resJson.data)
-      })
+      }
 
       return responseData
     } catch (err) {

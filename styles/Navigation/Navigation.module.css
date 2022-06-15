@@ -13,8 +13,8 @@
 
 .menu-button-icon{
     cursor: pointer;
-    border: 1px #000 solid;
-    border-radius: 1rem;    
+    border: var(--container-border);
+    border-radius: var(--container-border-radius);    
 
     width: 5rem;
     height: 5rem;
@@ -37,12 +37,12 @@
 }
 .menu-button-text{
     cursor: pointer;
-    border: 1px #000 solid;
-    border-radius: 1rem;    
+    border: var(--container-border);
+    border-radius: var(--container-border-radius);   
 
     height: 5rem;
-    padding-left: 2.25rem;
-    margin: 0 calc((100vw/11 - 5rem)/2);
+    padding-left: 2rem;
+    margin: 0 calc((100vw/11 - 4rem)/2);
     align-self: center;
 
     display: flex;
@@ -70,13 +70,13 @@
 
 .menu-wrapper{
     position: absolute;
-    border: 1px #000 solid;
-    border-radius: 1rem;    
+    border: var(--container-border);
+    border-radius: var(--container-border-radius);    
     background-color: #fff;
     display: flex;
     flex-direction: column;
 
-    width: calc(100vw/11 * 2 + 5rem)
+    width: calc(100vw/11 * 2 + 4rem)
 }
 
 .menu-item{
@@ -85,7 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2.25rem;
+    padding: 0 2rem;
 }
 .menu-item:first-child{
     margin-top: calc((100vw/11 - 5rem)/2 * (-1))
@@ -103,16 +103,16 @@
 }
 
 .menu-primary {
-    bottom: calc((100vw/11 - 5rem)/2);
+    bottom: calc((100vw/11 - 4rem)/2);
     left:calc(100vw/11 + (100vw/11 - 5rem)/2);
 }
 .menu-secondary{
     bottom: calc((100vw/11 - 5rem)/2);
-    left:calc(100vw/11 * 4 + (100vw/11 - 5rem)/2);
+    left:calc(100vw/11 * 4 + (100vw/11 - 4rem)/2);
 }
 .menu-tertiary{
     bottom: calc((100vw/11 - 5rem)/2);
-    left:calc(100vw/11 * 7 + (100vw/11 - 5rem)/2);
+    left:calc(100vw/11 * 7 + (100vw/11 - 4rem)/2);
 }
 
 
@@ -125,22 +125,22 @@
         width: auto;
     }
     .menu-button-text{
-        margin: 0 calc((100vh/8 - 5rem)/2);
+        margin: 0 calc((100vh/8 - 4rem)/2);
     }
     .menu-wrapper{
-        width: calc(100vh/8 * 2 + 5rem)
+        width: calc(100vh/8 * 2 + 4rem)
     }
     .menu-primary {
         bottom: calc((100vh/8 - 5rem)/2);
-        left:calc(100vh/8 * 1 + (100vh/8 - 5rem)/2);
+        left:calc(100vh/8 * 1 + (100vh/8 - 4rem)/2);
     }
     .menu-secondary{
         bottom: calc((100vh/8 - 5rem)/2);
-        left:calc(100vh/8 * 4 + (100vh/8 - 5rem)/2);
+        left:calc(100vh/8 * 4 + (100vh/8 - 4rem)/2);
     }
     .menu-tertiary{
         bottom: calc((100vh/8 - 5rem)/2);
-        left:calc(100vh/8 * 7 + (100vh/8 - 5rem)/2);
+        left:calc(100vh/8 * 7 + (100vh/8 - 4rem)/2);
     }
     .menu-item{
         height: calc(100vh/8);

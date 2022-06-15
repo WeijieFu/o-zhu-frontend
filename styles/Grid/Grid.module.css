@@ -101,9 +101,9 @@
 
     width: 2rem;
     height: 2rem;
-    border-radius: 1rem;
+    border-radius: var(--container-border-radius); 
     background-color:#fff;
-    border: 1px solid #000;
+    border: var(--container-border);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -123,8 +123,8 @@
     width: calc(100vw/11 * 3 - (100vw/11 - 5rem));
 
     cursor: pointer;
-    border: 1px #000 solid;
-    border-radius: 1rem;    
+    border: var(--container-border);
+    border-radius: var(--container-border-radius);   
 
     height: 5rem;
     padding-left: 2.25rem;
@@ -153,14 +153,14 @@
     position:absolute;
     bottom: 0;
 
-    background-color: aqua;
+
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
    
     background-color:#fff;
-    border: 1px solid #000;
-    border-radius: 1rem;
+    border: var(--container-border);
+    border-radius: var(--container-border-radius); 
     padding: 2rem;
 
     cursor:grab;
@@ -176,15 +176,18 @@
     right: -3rem;
     width: 2rem;
     height: 2rem;
-    border-radius: 1rem;
+    border-radius: var(--container-border-radius); 
     background-color:#fff;
-    border: 1px solid #000;
+    border: var(--container-border);
     display: flex;
     align-items: center;
     justify-content: center;
 
     cursor: pointer;
 }
+
+
+
 
 @media only screen and (min-aspect-ratio: 11/8){
     .grid-container{
