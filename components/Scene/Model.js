@@ -1,11 +1,12 @@
-import React, { useEffect } from "react"
-import { useGLTF } from "@react-three/drei"
+import React, { useEffect, useRef } from "react"
+import { useGLTF, Edges } from "@react-three/drei"
 import getCellPosition from "./getCellPosition"
 import useNavigationState from "../../state/NavigationState"
+
 export default function Model({ url, index, router, target, root }) {
   const state = useNavigationState()
   const { nodes } = useGLTF(url)
-
+  const ref = useRef()
   // useEffect(() => {
   //   console.log(index)
   // })
@@ -31,7 +32,8 @@ export default function Model({ url, index, router, target, root }) {
         onPointerLeave={handlePointerLeave}
         onClick={handleClick}
       >
-        <meshStandardMaterial side={2} color="pink" />
+        <meshStandardMaterial side={2} color="lightgrey" />
+        <Edges />
       </mesh>
     )
   })
@@ -43,6 +45,7 @@ export default function Model({ url, index, router, target, root }) {
       rotation={[0, -Math.PI / 4, 0]}
       scale={[0.4, 0.4, 0.4]}
       position={[getCellPosition(index).x, 0, getCellPosition(index).z]}
+      ref={ref}
     >
       {meshes}
     </group>

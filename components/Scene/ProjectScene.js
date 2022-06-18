@@ -3,8 +3,6 @@ import { Canvas, useThree, useFrame } from "@react-three/fiber"
 
 import styles from "../../styles/Scene/Scene.module.css"
 
-import getCellPosition from "./getCellPosition"
-
 import Model from "./Model"
 
 const position = [0, 10, 10]
@@ -15,9 +13,6 @@ const left = -11
 const right = 11
 
 const ProjectScene = ({ data, router, category }) => {
-  // useEffect(() => {
-  //   console.log(data)
-  // })
   return (
     <div className={styles["canvas"]}>
       <Canvas
