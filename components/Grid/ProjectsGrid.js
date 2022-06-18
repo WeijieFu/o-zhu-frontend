@@ -24,11 +24,6 @@ const ProjectsGrid = ({ data }) => {
 
   useEffect(() => {
     if (category) {
-      // async function fetchAPI() {
-      //   const data = await getProjects(category)
-      //   setData(data)
-      // }
-      // fetchAPI()
       state.setCurrentSorting("random")
       state.setCurrentCategory("projects")
       state.setCurrentPage(
@@ -228,7 +223,7 @@ const ProjectsGrid = ({ data }) => {
     }
 
     if (state.currentSorting == "location") {
-      const finalCell = sortByYear()
+      const finalCell = sortByLocation()
       setCells(finalCell)
     }
   }, [state.currentSorting])
@@ -267,7 +262,7 @@ const ProjectsGrid = ({ data }) => {
           )
         })}
       </div>
-      {data && <ProjectScene data={data} router={router} />}
+      {data && <ProjectScene data={data} router={router} category={category} />}
     </>
   )
 }

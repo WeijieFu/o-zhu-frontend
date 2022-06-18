@@ -17,8 +17,8 @@ export default function Model({ url, index, router, target, root }) {
     e.srcElement.style.cursor = "auto"
   }
   const handleClick = (e) => {
-    router.push(`${root}/${target.toLowerCase()}`)
     state.setCurrentSorting("")
+    router.push(`${root}/${target.toLowerCase()}`)
   }
   meshes = nodes.Scene.children.map((mesh) => {
     return (

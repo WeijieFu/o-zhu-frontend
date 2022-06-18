@@ -1,35 +1,13 @@
 import baseURL from "./baseURL"
 
-const getProjects = async (category) => {
-  if (category == "all") {
-    try {
-      const categories = [
-        "exhibition",
-        "interior",
-        "architecture",
-        "urban_design",
-        "research_publication",
-      ]
-      const responseData = []
+const getProjects = async () => {
+  try {
+    const res = await fetch(`${baseURL}/Projects`)
+    const resJson = await res.json()
 
-      for (const category of categories) {
-        const res = await fetch(`${baseURL}/${category}`)
-        const resJson = await res.json()
-        responseData.push(...resJson.data)
-      }
-
-      return responseData
-    } catch (err) {
-      console.log(err)
-    }
-  } else {
-    try {
-      const res = await fetch(`${baseURL}/${category}`)
-      const projects = await res.json()
-      return projects.data
-    } catch (err) {
-      console.log(err)
-    }
+    return resJson.data
+  } catch (err) {
+    console.log(err)
   }
 }
 

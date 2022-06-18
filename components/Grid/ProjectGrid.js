@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef } from "react"
 import styles from "../../styles/Grid/Grid.module.css"
-
+import ReactMarkdown from "react-markdown"
 import CloseButton from "../Button/CloseButton"
 import Draggable from "react-draggable"
 import Spot from "../Project/Spot"
@@ -170,12 +170,14 @@ const ProjectGrid = ({ data }) => {
         <Draggable>
           <div className={styles["grid-info-container"]}>
             <div className={styles["grid-info-block"]}>
-              <div>
-                {" "}
-                {state.currentLanguage == "cn"
-                  ? data.InformationCN
-                  : data.Information}
-              </div>
+              <ReactMarkdown
+                children={
+                  state.currentLanguage == "cn"
+                    ? data.InformationCN
+                    : data.Information
+                }
+              />
+
               <div className={styles["grid-info-close"]} onClick={handleClose}>
                 <CloseButton />
               </div>

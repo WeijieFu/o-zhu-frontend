@@ -38,9 +38,20 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  console.log(context.params)
-  const data = await getProjects(context.params.category)
+  const resData = await getProjects()
+  const data = []
+  if (context.params.category == "all") {
+    return { props: { data: resData } }
+  } else {
+    for (const project of resData) {
+      for (const category of project.Category) {
+        if (category.Category == context.params.category) {
+          data.push(project)
+        }
+      }
+    }
+    return { props: { data: data } }
+  }
 
   // Pass post data to the page via props
-  return { props: { data } }
 }

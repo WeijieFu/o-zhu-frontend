@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import styles from "../../styles/Pages/About/PersonalDescription.module.css"
-
+import ReactMarkdown from "react-markdown"
 import Draggable from "react-draggable"
 import CloseButton from "../Button/CloseButton"
 
@@ -36,9 +36,13 @@ const PersonDescription = ({
           </div>
         </div>
         <div className={styles.section}>
-          {state.currentLanguage == "cn"
-            ? personDescriptionData.DescriptionCN
-            : personDescriptionData.Description}
+          <ReactMarkdown
+            children={
+              state.currentLanguage == "cn"
+                ? personDescriptionData.DescriptionCN
+                : personDescriptionData.Description
+            }
+          />
         </div>
 
         <div className={styles.section}>

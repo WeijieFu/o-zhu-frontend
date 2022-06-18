@@ -14,7 +14,7 @@ const bottom = -8
 const left = -11
 const right = 11
 
-const ProjectScene = ({ data, router }) => {
+const ProjectScene = ({ data, router, category }) => {
   // useEffect(() => {
   //   console.log(data)
   // })
@@ -49,7 +49,7 @@ const ProjectScene = ({ data, router }) => {
                   key={index}
                   router={router}
                   target={value._id}
-                  root={value.Category}
+                  root={category}
                 />
               )
             }

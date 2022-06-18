@@ -103,8 +103,8 @@
 }
 
 .menu-primary {
-    bottom: calc((100vw/11 - 4rem)/2);
-    left:calc(100vw/11 + (100vw/11 - 5rem)/2);
+    bottom: calc((100vw/11 - 5rem)/2);
+    left:calc(100vw/11 + (100vw/11 - 4rem)/2);
 }
 .menu-secondary{
     bottom: calc((100vw/11 - 5rem)/2);
