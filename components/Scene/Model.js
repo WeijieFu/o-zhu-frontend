@@ -2,14 +2,14 @@ import React, { useEffect, useRef } from "react"
 import { useGLTF, Edges } from "@react-three/drei"
 import getCellPosition from "./getCellPosition"
 import useNavigationState from "../../state/NavigationState"
+import GUI from "lil-gui"
+import { useFrame } from "@react-three/fiber"
 
-export default function Model({ url, index, router, target, root }) {
+export default function Model({ url, index, router, target, root, params }) {
   const state = useNavigationState()
   const { nodes } = useGLTF(url)
   const ref = useRef()
-  // useEffect(() => {
-  //   console.log(index)
-  // })
+  console.log(nodes)
   let meshes = []
   const handlePointerEnter = (e) => {
     e.srcElement.style.cursor = "pointer"
@@ -22,6 +22,7 @@ export default function Model({ url, index, router, target, root }) {
     router.push(`${root}/${target.toLowerCase()}`)
   }
   meshes = nodes.Scene.children.map((mesh) => {
+    console.log(mesh)
     return (
       <mesh
         geometry={mesh.geometry}
@@ -32,8 +33,8 @@ export default function Model({ url, index, router, target, root }) {
         onPointerLeave={handlePointerLeave}
         onClick={handleClick}
       >
-        <meshStandardMaterial side={2} color="lightgrey" />
-        <Edges />
+        <meshStandardMaterial side={2} color={params.objectColor} />
+        <Edges scale={1.0} />
       </mesh>
     )
   })
@@ -42,8 +43,8 @@ export default function Model({ url, index, router, target, root }) {
   return (
     <group
       dispose={null}
-      rotation={[0, -Math.PI / 4, 0]}
-      scale={[0.4, 0.4, 0.4]}
+      rotation={[Math.PI / 2, 0, -Math.PI / 4]}
+      scale={[1.2, 1.2, 1.2]}
       position={[getCellPosition(index).x, 0, getCellPosition(index).z]}
       ref={ref}
     >
