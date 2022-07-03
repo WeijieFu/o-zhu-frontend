@@ -44,7 +44,7 @@ export default function Model({ url, index, router, target, root, params }) {
     <group
       dispose={null}
       rotation={[Math.PI / 2, 0, -Math.PI / 4]}
-      scale={[1.2, 1.2, 1.2]}
+      scale={[1.4, 1.4, 1.4]}
       position={[getCellPosition(index).x, 0, getCellPosition(index).z]}
       ref={ref}
     >

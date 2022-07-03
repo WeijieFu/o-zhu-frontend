@@ -56,6 +56,7 @@ const ProjectScene = ({ data, router, category }) => {
         }}
         flat
       >
+        {/* <color attach="background" args={["lightgrey"]} /> */}
         <Light params={params} />
 
         <Suspense>

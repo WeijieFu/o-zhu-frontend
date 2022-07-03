@@ -1,8 +1,9 @@
 
 .grid-container{  
+    --cell-width: calc(100vw /11);
     display: grid;
-    grid-template-columns: repeat(11,calc(100vw/11));
-    grid-template-rows: repeat(7, calc(100vw/11));
+    grid-template-columns: repeat(11,var(--cell-width));
+    grid-template-rows: calc(100vh - var(--cell-width) * 7) repeat(6, 1fr);
     width: 100%;
     position: relative;
 
@@ -10,8 +11,9 @@
   
 .grid-title{
     grid-column-start: span 11;
-    align-self: flex-end;
+    align-self: flex-start;
     justify-self: center;
+    transform: translateY(calc(var(--cell-width) * 0.25));
    
 }
 .grid-cell{
@@ -202,7 +204,7 @@
 
     }
     .grid-title{
-        transform: translateY( calc(var(--cell-height) * -0.5));
+        /* transform: translateY(calc(var(--cell-height) * 0.5)); */
     }
     .grid-cell{
         width: var(--cell-height);
