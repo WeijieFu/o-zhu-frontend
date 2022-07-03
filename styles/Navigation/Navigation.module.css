@@ -120,36 +120,37 @@
 @media only screen and (min-aspect-ratio: 11/8){
 
     .container{
-        height: calc(100vh / 8);
-        grid-template-columns: repeat(11, 12.5vh);
+        --cell-height: calc(100vh / 7.75);
+        height: var(--cell-height);
+        grid-template-columns: repeat(11, var(--cell-height));
         width: auto;
     }
     .menu-button-text{
-        margin: 0 calc((100vh/8 - 4rem)/2);
+        margin: 0 calc((var(--cell-height) - 4rem)/2);
     }
     .menu-wrapper{
-        width: calc(100vh/8 * 2 + 4rem)
+        width: calc(var(--cell-height)* 2 + 4rem)
     }
     .menu-primary {
-        bottom: calc((100vh/8 - 5rem)/2);
-        left:calc(100vh/8 * 1 + (100vh/8 - 4rem)/2);
+        bottom: calc((var(--cell-height) - 5rem)/2);
+        left:calc(var(--cell-height) * 1 + (var(--cell-height) - 4rem)/2);
     }
     .menu-secondary{
-        bottom: calc((100vh/8 - 5rem)/2);
-        left:calc(100vh/8 * 4 + (100vh/8 - 4rem)/2);
+        bottom: calc((var(--cell-height) - 5rem)/2);
+        left:calc(var(--cell-height) * 4 + (var(--cell-height) - 4rem)/2);
     }
     .menu-tertiary{
-        bottom: calc((100vh/8 - 5rem)/2);
-        left:calc(100vh/8 * 7 + (100vh/8 - 4rem)/2);
+        bottom: calc((var(--cell-height) - 5rem)/2);
+        left:calc(var(--cell-height) * 7 + (var(--cell-height) - 4rem)/2);
     }
     .menu-item{
-        height: calc(100vh/8);
+        height: var(--cell-height);
     }
     .menu-item:first-child{
-        margin-top: calc((100vh/8 - 5rem)/2 * (-1))
+        margin-top: calc((var(--cell-height) - 5rem)/2 * (-1))
     }
     .menu-item:last-child{
         height: 5rem;
-        margin-top: calc((100vh/8 - 5rem)/2)
+        margin-top: calc((var(--cell-height) - 5rem)/2)
     }
 }

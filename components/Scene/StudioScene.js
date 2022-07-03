@@ -6,6 +6,7 @@ import styles from "../../styles/Scene/Scene.module.css"
 import getCellPosition from "./getCellPosition"
 
 import Model from "./Model"
+import GUI from "lil-gui"
 
 const position = [0, 10, 10]
 const zoom = 1
@@ -15,6 +16,29 @@ const left = -11
 const right = 11
 
 const StudioScene = ({ data, router }) => {
+  const [params, setParams] = useState({
+    directionalLightIntensity: 1.5,
+    ambientLightIntensity: 0.5,
+    shadowOpacity: 0.5,
+    objectColor: "#ffffff",
+    edgeWidth: 1,
+  })
+
+  useEffect(() => {
+    const gui = new GUI()
+
+    const light = gui.addFolder("Light")
+    light.add(params, "directionalLightIntensity", 0, 10, 0.1)
+    light.add(params, "ambientLightIntensity", 0, 3, 0.1)
+
+    const shadow = gui.addFolder("Shadow")
+    shadow.add(params, "shadowOpacity", 0, 1, 0.05)
+
+    // const object = gui.addFolder("Object")
+    // object.addColor(params, "objectColor")
+    // object.add(params, "edgeWidth", 0, 10, 0.1)
+  }, [])
+
   return (
     <div className={styles["canvas"]}>
       <Canvas
@@ -59,6 +83,7 @@ const StudioScene = ({ data, router }) => {
                 router={router}
                 target={value.Location}
                 root="/about/studio"
+                params={params}
               />
             )
           })}
