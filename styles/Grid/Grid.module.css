@@ -204,7 +204,7 @@
 
     }
     .grid-title{
-        /* transform: translateY(calc(var(--cell-height) * 0.5)); */
+        transform: translateY(calc(var(--cell-height) * 0.25 ));
     }
     .grid-cell{
         width: var(--cell-height);
