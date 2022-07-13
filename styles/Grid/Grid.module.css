@@ -193,8 +193,6 @@
 
 @media only screen and (min-aspect-ratio: 11/8){
 
-
-
     .grid-container{
         --cell-height: calc(100vh / 7.75);
         width: auto;
@@ -206,16 +204,18 @@
     .grid-title{
         transform: translateY(calc(var(--cell-height) * 0.25 ));
     }
+
     .grid-cell{
         width: var(--cell-height);
         height: var(--cell-height);
         padding-top: 100%;
-    
     }
+
     .grid-cell-label{
         width: var(--cell-height);
         height: var(--cell-height);
     }
+
     .grid-cell-image{
         width: calc(var(--cell-height) * 0.6);
     }
@@ -223,6 +223,7 @@
     .grid-cell-image-large{
         padding-bottom: calc(var(--cell-height)/2);
     }
+    
     .grid-button-info{
         right: var(--cell-height);
         bottom: calc(-5rem - (var(--cell-height) - 5rem)/2);
