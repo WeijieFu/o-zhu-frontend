@@ -6,7 +6,7 @@
     cursor: grab;
 
     background-color:#fff;
-    border: 1px solid #000;
+    border: var(--container-border);
     border-radius: 1rem;
     padding: 2rem;
    

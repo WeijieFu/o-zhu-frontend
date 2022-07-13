@@ -119,41 +119,44 @@ const ProjectGrid = ({ data }) => {
               </div>
             </span>
           </span>
-
-          <div className={`${styles["grid-cell-image-large"]}`}>
-            <span
-              className={styles["grid-cell-image-arrow-left"]}
-              onClick={handleLeftClick}
-            />
-            <div className={`${styles["grid-cell-image-large-wrapper"]}`}>
-              <img
-                src={data.Images[currentImageIndex].Image}
-                alt={data.Images[currentImageIndex].Name}
+          {data.Images && (
+            <div className={`${styles["grid-cell-image-large"]}`}>
+              <span
+                className={styles["grid-cell-image-arrow-left"]}
+                onClick={handleLeftClick}
               />
-              {data.Images[currentImageIndex].Spot.map((value, index) => {
-                return (
-                  <span
-                    className={styles["grid-cell-image-spot"]}
-                    style={{
-                      left: `${value.x * 100}%`,
-                      top: `${value.y * 100}%`,
-                    }}
-                    onClick={(e) => {
-                      handleSpotClick(e, index)
-                    }}
-                    key={index}
-                  >
-                    {index + 1}
-                  </span>
-                )
-              })}
-            </div>
+              <div className={`${styles["grid-cell-image-large-wrapper"]}`}>
+                <img
+                  src={data.Images[currentImageIndex].Image}
+                  alt={data.Images[currentImageIndex].Name}
+                />
 
-            <span
-              className={styles["grid-cell-image-arrow-right"]}
-              onClick={handleRightClick}
-            />
-          </div>
+                {data.Images[currentImageIndex].Spot &&
+                  data.Images[currentImageIndex].Spot.map((value, index) => {
+                    return (
+                      <span
+                        className={styles["grid-cell-image-spot"]}
+                        style={{
+                          left: `${value.x * 100}%`,
+                          top: `${value.y * 100}%`,
+                        }}
+                        onClick={(e) => {
+                          handleSpotClick(e, index)
+                        }}
+                        key={index}
+                      >
+                        {index + 1}
+                      </span>
+                    )
+                  })}
+              </div>
+
+              <span
+                className={styles["grid-cell-image-arrow-right"]}
+                onClick={handleRightClick}
+              />
+            </div>
+          )}
         </>
       )}
 

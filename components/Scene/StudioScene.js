@@ -58,7 +58,7 @@ const StudioScene = ({ data, router }) => {
         flat
       >
         {/* <gridHelper /> */}
-        <color attach="background" args={["lightgrey"]} />
+        {/* <color attach="background" args={["lightgrey"]} /> */}
         <ambientLight intensity={0.5} />
         {/* <pointLight
           position={[10, 10, 10]}
