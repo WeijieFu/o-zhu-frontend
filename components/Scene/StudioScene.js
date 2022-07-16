@@ -19,21 +19,18 @@ const StudioScene = ({ data, router }) => {
   const [params, setParams] = useState({
     directionalLightIntensity: 1.5,
     ambientLightIntensity: 0.5,
-    shadowOpacity: 0.5,
+    shadowOpacity: 1,
     objectColor: "#ffffff",
     edgeWidth: 1,
   })
 
   useEffect(() => {
-    const gui = new GUI()
-
-    const light = gui.addFolder("Light")
-    light.add(params, "directionalLightIntensity", 0, 10, 0.1)
-    light.add(params, "ambientLightIntensity", 0, 3, 0.1)
-
-    const shadow = gui.addFolder("Shadow")
-    shadow.add(params, "shadowOpacity", 0, 1, 0.05)
-
+    // const gui = new GUI()
+    // const light = gui.addFolder("Light")
+    // light.add(params, "directionalLightIntensity", 0, 10, 0.1)
+    // light.add(params, "ambientLightIntensity", 0, 3, 0.1)
+    // const shadow = gui.addFolder("Shadow")
+    // shadow.add(params, "shadowOpacity", 0, 1, 0.05)
     // const object = gui.addFolder("Object")
     // object.addColor(params, "objectColor")
     // object.add(params, "edgeWidth", 0, 10, 0.1)
@@ -57,7 +54,6 @@ const StudioScene = ({ data, router }) => {
         }}
         flat
       >
-        {/* <gridHelper /> */}
         {/* <color attach="background" args={["lightgrey"]} /> */}
         <ambientLight intensity={0.5} />
         {/* <pointLight

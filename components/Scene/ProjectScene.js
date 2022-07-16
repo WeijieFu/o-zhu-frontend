@@ -16,23 +16,20 @@ const right = 11
 
 const ProjectScene = ({ data, router, category }) => {
   const [params, setParams] = useState({
-    directionalLightIntensity: 1.5,
-    ambientLightIntensity: 0.5,
-    shadowOpacity: 0.5,
+    directionalLightIntensity: 2,
+    ambientLightIntensity: 0.25,
+    shadowOpacity: 1,
     objectColor: "#ffffff",
     edgeWidth: 1,
   })
 
   useEffect(() => {
-    const gui = new GUI()
-
-    const light = gui.addFolder("Light")
-    light.add(params, "directionalLightIntensity", 0, 10, 0.1)
-    light.add(params, "ambientLightIntensity", 0, 3, 0.1)
-
-    const shadow = gui.addFolder("Shadow")
-    shadow.add(params, "shadowOpacity", 0, 1, 0.05)
-
+    // const gui = new GUI()
+    // const light = gui.addFolder("Light")
+    // light.add(params, "directionalLightIntensity", 0, 10, 0.1)
+    // light.add(params, "ambientLightIntensity", 0, 3, 0.1)
+    // const shadow = gui.addFolder("Shadow")
+    // shadow.add(params, "shadowOpacity", 0, 1, 0.05)
     // const object = gui.addFolder("Object")
     // object.addColor(params, "objectColor")
     // object.add(params, "edgeWidth", 0, 10, 0.1)
@@ -82,11 +79,11 @@ const ProjectScene = ({ data, router, category }) => {
   )
 }
 
-const GroundPlage = (props) => {
+const GroundPlage = ({ params }) => {
   const { camera } = useThree()
   const shadowMaterial = useRef()
   useFrame(() => {
-    shadowMaterial.current.opacity = props.params.shadowOpacity
+    shadowMaterial.current.opacity = params.shadowOpacity
   })
   useEffect(() => {
     window.addEventListener("resize", resizeCamera)
@@ -107,7 +104,7 @@ const GroundPlage = (props) => {
       <shadowMaterial
         attach="material"
         transparent
-        opacity={props.params.shadowOpacity}
+        opacity={params.shadowOpacity}
         ref={shadowMaterial}
       />
     </mesh>
