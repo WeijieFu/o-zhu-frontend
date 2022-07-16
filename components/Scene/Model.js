@@ -25,7 +25,7 @@ export default function Model({
   useFrame((state) => {
     const x = 1600 / state.viewport.width
     const y = ((7.75 / 11) * 1600) / state.viewport.height
-    const ratio = 2 / x
+    const ratio = 1.6 / x
     // console.log(x, y)
     ref.current.scale.set(
       ratio * x * 0.707,
