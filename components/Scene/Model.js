@@ -5,33 +5,22 @@ import useNavigationState from "../../state/NavigationState"
 import GUI from "lil-gui"
 import { useFrame } from "@react-three/fiber"
 
-export default function Model({
-  url,
-  index,
-  router,
-  target,
-  root,
-  params,
-  scale,
-}) {
+export default function Model({ url, index, router, target, root, params }) {
   const state = useNavigationState()
   const { nodes } = useGLTF(url)
   const ref = useRef()
 
-  useEffect(() => {
-    console.log(scale)
-  })
-
   useFrame((state) => {
     const x = 1600 / state.viewport.width
     const y = ((7.75 / 11) * 1600) / state.viewport.height
-    const ratio = 1.6 / x
+    const ratio = 1.4 / x
     // console.log(x, y)
     ref.current.scale.set(
-      ratio * x * 0.707,
-      ratio * y * 0.707,
-      ratio * y * 0.707
+      (ratio * x * Math.sqrt(2)) / Math.sqrt(3),
+      (ratio * y * Math.sqrt(2)) / Math.sqrt(3),
+      (ratio * y * Math.sqrt(2)) / Math.sqrt(3)
     )
+
     // console.log(ref.current)
     // ref.current.rotation.set(Math.PI / 2, 0, -Math.PI / 4)
   })
@@ -59,7 +48,7 @@ export default function Model({
         onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}
         onClick={handleClick}
-        rotation={[Math.PI / 2, 0, -Math.PI / 4]}
+        rotation={[Math.PI / 2, 0, Math.PI / 4]}
       >
         <meshStandardMaterial side={2} color={params.objectColor} />
         <Edges scale={1.0} />
@@ -76,6 +65,10 @@ export default function Model({
       ref={ref}
     >
       {meshes}
+      {/* <mesh scale={[0.5, 0.5, 0.5]}>
+        <boxBufferGeometry />
+        <meshNormalMaterial />
+      </mesh> */}
     </group>
   )
 }

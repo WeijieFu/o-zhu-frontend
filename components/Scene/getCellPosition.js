@@ -60,14 +60,14 @@ for (let z = -(row - 2); z <= row - 2; z += 2) {
 //   { x: 7, z: 4 },
 //   { x: 9, z: 4 },
 // ]
-const offset = 0 * 1.414
+const offset = 0 * Math.sqrt(3)
 const getCellPosition = (index) => {
   // console.log(index)
   const cellIndex = index - Math.floor(index / column)
 
   const position = {
     x: cellPosition[cellIndex].x,
-    z: cellPosition[cellIndex].z * 1.414 + offset,
+    z: cellPosition[cellIndex].z * 1.8 + offset,
   }
   return position
 }

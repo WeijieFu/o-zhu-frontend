@@ -7,7 +7,7 @@ import Model from "./Model"
 
 import GUI from "lil-gui"
 
-const position = [0, 10, 10]
+const position = [0, 10, 10 * Math.sqrt(2)]
 const zoom = 1
 const top = 8
 const bottom = -8
@@ -17,7 +17,7 @@ const right = 11
 const ProjectScene = ({ data, router, category }) => {
   const [params, setParams] = useState({
     directionalLightIntensity: 2,
-    ambientLightIntensity: 0.25,
+    ambientLightIntensity: 0.1,
     shadowOpacity: 1,
     objectColor: "#ffffff",
     edgeWidth: 1,
