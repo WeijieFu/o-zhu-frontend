@@ -80,7 +80,7 @@ const ProjectsGrid = ({ data }) => {
     return finalCell
   }
 
-  const sortByName = () => {
+  const sortByName = (column) => {
     const filteredCell = cells.filter((cell) => cell.name !== "0")
     const sortedCell = []
     if (state.currentLanguage == "en") {
@@ -101,7 +101,7 @@ const ProjectsGrid = ({ data }) => {
       locationCN: "0",
     })
     sortedCell.forEach((value, index) => {
-      finalCell[index] = {
+      finalCell[index + Math.floor(index / (column - 1))] = {
         name: value.name,
         nameCN: value.nameCN,
         size: value.size,
@@ -109,7 +109,10 @@ const ProjectsGrid = ({ data }) => {
         location: value.location,
         locationCN: value.locationCN,
       }
-      data[index].index = index
+
+      // data[index].index = index + Math.floor(index / (column - 1))
+      let obj = data.find((o) => o.Name === value.name)
+      obj.index = index + Math.floor(index / (column - 1))
     })
     return finalCell
   }
@@ -130,7 +133,7 @@ const ProjectsGrid = ({ data }) => {
       locationCN: "0",
     })
     sortedCell.forEach((value, index) => {
-      finalCell[index] = {
+      finalCell[index + Math.floor(index / (column - 1))] = {
         name: value.name,
         nameCN: value.nameCN,
         size: value.size,
@@ -138,7 +141,9 @@ const ProjectsGrid = ({ data }) => {
         location: value.location,
         locationCN: value.locationCN,
       }
-      data[index].index = index
+      // data[index].index = index + Math.floor(index / (column - 1))
+      let obj = data.find((o) => o.Name === value.name)
+      obj.index = index + Math.floor(index / (column - 1))
     })
     return finalCell
   }
@@ -159,7 +164,7 @@ const ProjectsGrid = ({ data }) => {
       locationCN: "0",
     })
     sortedCell.forEach((value, index) => {
-      finalCell[index] = {
+      finalCell[index + Math.floor(index / (column - 1))] = {
         name: value.name,
         nameCN: value.nameCN,
         size: value.size,
@@ -167,8 +172,11 @@ const ProjectsGrid = ({ data }) => {
         location: value.location,
         locationCN: value.locationCN,
       }
-      data[index].index = index
+      // data[index].index = index + Math.floor(index / (column - 1))
+      let obj = data.find((o) => o.Name === value.name)
+      obj.index = index + Math.floor(index / (column - 1))
     })
+
     return finalCell
   }
 
@@ -188,7 +196,7 @@ const ProjectsGrid = ({ data }) => {
       locationCN: "0",
     })
     sortedCell.forEach((value, index) => {
-      finalCell[index] = {
+      finalCell[index + Math.floor(index / (column - 1))] = {
         name: value.name,
         nameCN: value.nameCN,
         size: value.size,
@@ -196,7 +204,9 @@ const ProjectsGrid = ({ data }) => {
         location: value.location,
         locationCN: value.locationCN,
       }
-      data[index].index = index
+      // data[index].index = index + Math.floor(index / (column - 1))
+      let obj = data.find((o) => o.Name === value.name)
+      obj.index = index + Math.floor(index / (column - 1))
     })
     return finalCell
   }
@@ -208,22 +218,22 @@ const ProjectsGrid = ({ data }) => {
       setCells(finalCell)
     }
     if (state.currentSorting == "name") {
-      const finalCell = sortByName()
+      const finalCell = sortByName(column)
       setCells(finalCell)
     }
 
     if (state.currentSorting == "size") {
-      const finalCell = sortBySize()
+      const finalCell = sortBySize(column)
       setCells(finalCell)
     }
 
     if (state.currentSorting == "year") {
-      const finalCell = sortByYear()
+      const finalCell = sortByYear(column)
       setCells(finalCell)
     }
 
     if (state.currentSorting == "location") {
-      const finalCell = sortByLocation()
+      const finalCell = sortByLocation(column)
       setCells(finalCell)
     }
   }, [state.currentSorting])

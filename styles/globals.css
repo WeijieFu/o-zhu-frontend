@@ -23,5 +23,5 @@ a:hover{
 :root{
   --container-border-radius: 1.25rem;
   --container-horizontal-padding: 1rem;
-  --container-border: 0.75px #555 solid;
+  --container-border: 0.0625rem #555 solid;
 }

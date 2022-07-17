@@ -24,16 +24,8 @@ const ProjectScene = ({ data, router, category }) => {
   })
 
   useEffect(() => {
-    // const gui = new GUI()
-    // const light = gui.addFolder("Light")
-    // light.add(params, "directionalLightIntensity", 0, 10, 0.1)
-    // light.add(params, "ambientLightIntensity", 0, 3, 0.1)
-    // const shadow = gui.addFolder("Shadow")
-    // shadow.add(params, "shadowOpacity", 0, 1, 0.05)
-    // const object = gui.addFolder("Object")
-    // object.addColor(params, "objectColor")
-    // object.add(params, "edgeWidth", 0, 10, 0.1)
-  }, [])
+    // console.log(data)
+  }, [data])
 
   return (
     <div className={styles["canvas"]}>
