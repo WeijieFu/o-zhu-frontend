@@ -104,13 +104,13 @@ const Light = (props) => {
   const ambientLight = useRef()
   useFrame((state) => {
     directionalLight.current.position.set(
-      40 * state.pointer.x,
-      80,
-      -40 * state.pointer.y
+      30 * state.pointer.x,
+      40,
+      -30 * state.pointer.y
     )
     // directionalLight.current.intensity = props.params.directionalLightIntensity
     // ambientLight.current.intensity = props.params.ambientLightIntensity
-    directionalLight.current.shadow.bias = -0.00005
+    directionalLight.current.shadow.bias = -0.0005
   })
   return (
     <>
