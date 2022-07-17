@@ -41,6 +41,7 @@ export async function getStaticProps(context) {
   const resData = await getProjects()
   const data = []
   if (context.params.category == "all") {
+    console.log(resData.length)
     return { props: { data: resData } }
   } else {
     for (const project of resData) {

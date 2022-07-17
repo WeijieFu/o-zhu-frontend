@@ -56,6 +56,7 @@ const ProjectsGrid = ({ data }) => {
         setCells(finalCell)
       }
     }, interval)
+    console.log(data)
   }, [data])
 
   //SORTING METHODS

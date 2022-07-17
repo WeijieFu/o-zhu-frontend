@@ -104,23 +104,28 @@ const Light = (props) => {
   const ambientLight = useRef()
   useFrame((state) => {
     directionalLight.current.position.set(
-      20 * state.pointer.x,
-      40,
-      -20 * state.pointer.y
+      40 * state.pointer.x,
+      80,
+      -40 * state.pointer.y
     )
-    directionalLight.current.intensity = props.params.directionalLightIntensity
-    ambientLight.current.intensity = props.params.ambientLightIntensity
+    // directionalLight.current.intensity = props.params.directionalLightIntensity
+    // ambientLight.current.intensity = props.params.ambientLightIntensity
+    directionalLight.current.shadow.bias = -0.00005
   })
   return (
     <>
-      <ambientLight intensity={0.5} ref={ambientLight} />
+      <ambientLight
+        intensity={props.params.ambientLightIntensity}
+        ref={ambientLight}
+      />
       <directionalLight
         castShadow
-        position={[0, 5, 5]}
+        position={[0, 10, 10]}
         intensity={props.params.directionalLightIntensity}
         shadow-mapSize-width={4096}
         shadow-mapSize-height={4096}
-        shadow-camera-far={200}
+        shadow-camera-far={100}
+        shadow-camera-near={0}
         shadow-camera-left={-15}
         shadow-camera-right={15}
         shadow-camera-top={15}
