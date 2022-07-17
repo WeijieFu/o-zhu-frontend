@@ -8,7 +8,7 @@ import getCellPosition from "./getCellPosition"
 import Model from "./Model"
 import GUI from "lil-gui"
 
-const position = [0, 10, 10]
+const position = [0, 10, 10 * Math.sqrt(2)]
 const zoom = 1
 const top = 8
 const bottom = -8
@@ -23,18 +23,6 @@ const StudioScene = ({ data, router }) => {
     objectColor: "#ffffff",
     edgeWidth: 1,
   })
-
-  useEffect(() => {
-    // const gui = new GUI()
-    // const light = gui.addFolder("Light")
-    // light.add(params, "directionalLightIntensity", 0, 10, 0.1)
-    // light.add(params, "ambientLightIntensity", 0, 3, 0.1)
-    // const shadow = gui.addFolder("Shadow")
-    // shadow.add(params, "shadowOpacity", 0, 1, 0.05)
-    // const object = gui.addFolder("Object")
-    // object.addColor(params, "objectColor")
-    // object.add(params, "edgeWidth", 0, 10, 0.1)
-  }, [])
 
   return (
     <div className={styles["canvas"]}>
