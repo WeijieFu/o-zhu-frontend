@@ -14,7 +14,6 @@ export default function Model({ url, index, router, target, root, params }) {
     const x = 1600 / state.viewport.width
     const y = ((7.75 / 11) * 1600) / state.viewport.height
     const ratio = 1.4 / x
-    // console.log(x, y)
     ref.current.scale.set(
       (ratio * x * Math.sqrt(2)) / Math.sqrt(3),
       (ratio * y * Math.sqrt(2)) / Math.sqrt(3),
@@ -51,7 +50,7 @@ export default function Model({ url, index, router, target, root, params }) {
         rotation={[Math.PI / 2, 0, Math.PI / 4]}
       >
         <meshStandardMaterial side={2} color={params.objectColor} />
-        <Edges scale={1.0} />
+        <Edges scale={1} threshold={15} />
       </mesh>
     )
   })
@@ -65,10 +64,14 @@ export default function Model({ url, index, router, target, root, params }) {
       ref={ref}
     >
       {meshes}
-      {/* <mesh scale={[0.5, 0.5, 0.5]}>
+      <mesh
+        scale={[1, 1, 1]}
+        rotation={[0, -Math.PI / 4, 0]}
+        position={[0, 0.5, 0]}
+      >
         <boxBufferGeometry />
-        <meshNormalMaterial />
-      </mesh> */}
+        <meshNormalMaterial wireframe />
+      </mesh>
     </group>
   )
 }
