@@ -76,14 +76,14 @@ const AwardGrid = ({ data }) => {
     const finalCell = Array(count)
     finalCell.fill({ name: "0" })
     sortedCell.forEach((value, index) => {
-      finalCell[index] = {
+      finalCell[index + Math.floor(index / (column - 1))] = {
         name: value.name,
         image: value.image,
         url: value.url,
         index: index,
       }
     })
-    console.log(finalCell)
+
     return finalCell
   }
 

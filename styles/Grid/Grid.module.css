@@ -4,20 +4,43 @@
     --cell-height: calc(100vh / 7.75);
     display: grid;
     grid-template-columns: repeat(11,1fr);
-    grid-template-rows: calc(var(--cell-height) * 0.75) repeat(6, var(--cell-height));
+    grid-template-rows:  repeat(6, var(--cell-height));
     width: 100%;
-    height: calc(100vh - var(--cell-height));
-    position: relative;
+    /* height: calc(100vh - var(--cell-height)); */
 
+    overflow-x: hidden;
+    overflow-y: hidden;
+    /* overflow-y: scroll; */
+
+
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+
+    padding-top: calc(var(--cell-height) * 0.75);
+    /* margin-bottom: calc(var(--cell-height) * -0.75); */
 }
+
+.grid-container::-webkit-scrollbar {
+    display: none;
+  }
   
 .grid-title{
     grid-column-start: span 11;
-    display: grid;
+    display: flex;
 
-    align-items: center;
+    /* align-items: center; */
     justify-content: center;
-    transform: translateY(calc(var(--cell-height) * -0.125));
+    transform: translateY(calc(var(--cell-height) * 0));
+
+    position:fixed;
+    top:0;
+    width: 100%;
+    height: calc(var(--cell-height)*1.2);
+    padding-top:calc(var(--cell-height) * 0.25) ;
+
+    background-color: #fff;
+
+    z-index: 100;
    
 }
 .grid-cell{
@@ -25,8 +48,10 @@
     width: var(--cell-width);
     /* padding-top: 100%; */
     height: var(--cell-height);
-
 }
+/* .grid-cell:nth-last-child(-n+11){
+    height: calc(var(--cell-height) * 0。25);
+} */
   
 .grid-cell-label{
     position: absolute;

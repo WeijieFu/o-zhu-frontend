@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
-import _ from "lodash"
+import _, { set } from "lodash"
 import Link from "next/link"
 
 import styles from "../../styles/Grid/Grid.module.css"
@@ -13,19 +13,13 @@ import { row, column, count, blinkTimes, interval } from "./GridSetting"
 const PressGrid = ({ data }) => {
   const state = useNavigationState()
   const [cells, setCells] = useState([])
-
-  // const [data, setData] = useState([])
-
-  // useEffect(() => {
-  //   async function fetchAPI() {
-  //     const data = await getAward()
-  //     setData(data)
-  //   }
-  //   fetchAPI()
-  // }, [])
+  const scrollContainer = useRef()
+  const [scroll, setScroll] = useState(0)
+  const pagesCount = Math.ceil(data.length / ((row - 1) * (column - 1) * 0.5))
 
   useEffect(() => {
     let i = 0
+
     const blickInterval = setInterval(() => {
       let initialCell = Array.from({ length: count }, () => {
         return {
@@ -36,15 +30,28 @@ const PressGrid = ({ data }) => {
       i++
       if (data && i > blinkTimes) {
         clearInterval(blickInterval)
-        const finalCell = sortByRandom(count, row, column, data.length)
+        const finalCell = sortByRandom(
+          pagesCount,
+          count,
+          row,
+          column,
+          data.length
+        )
         setCells(finalCell)
       }
     }, interval)
   }, [data])
+
   //HANDLE SORTING METHOD CHANGE
   useEffect(() => {
     if (state.currentSorting == "random") {
-      const finalCell = sortByRandom(count, row, column, data.length)
+      const finalCell = sortByRandom(
+        pagesCount,
+        count,
+        row,
+        column,
+        data.length
+      )
       setCells(finalCell)
     }
     if (state.currentSorting == "date") {
@@ -54,9 +61,12 @@ const PressGrid = ({ data }) => {
   }, [state.currentSorting])
 
   //SORTING METHODS
-  const sortByRandom = (count, row, column, length) => {
-    const randomArray = generateRandom(count, row, column, length)
-    const finalCell = Array(count)
+  const sortByRandom = (pagesCount, count, row, column, length) => {
+    //how many pages, how many numbers on one page, how many rows, how many column, how long is the data
+    // console.log(pagesCount, count, row, column, length)
+    const randomArray = generateRandom(pagesCount, count, row, column, length)
+    // console.log(randomArray)
+    const finalCell = Array(count * pagesCount)
     finalCell.fill({ name: "0" })
     randomArray.forEach((value, index) => {
       finalCell[value] = {
@@ -76,15 +86,28 @@ const PressGrid = ({ data }) => {
     const finalCell = Array(count)
     finalCell.fill({ name: "0" })
     sortedCell.forEach((value, index) => {
-      finalCell[index] = {
+      finalCell[index + Math.floor(index / (column - 1))] = {
         name: value.name,
         image: value.image,
         url: value.url,
         index: index,
       }
     })
-    console.log(finalCell)
+    // console.log(finalCell)
     return finalCell
+  }
+  //HANDLE SCROLL
+  const handleScroll = (e) => {
+    if (cells.length > count) {
+      const direction = e.deltaY / Math.abs(e.deltaY)
+
+      if (direction > 0 && scroll < (pagesCount - 1) * row) {
+        setScroll(scroll + direction)
+      }
+      if (direction < 0 && scroll > 0) {
+        setScroll(scroll + direction)
+      }
+    }
   }
 
   /*
@@ -92,13 +115,22 @@ const PressGrid = ({ data }) => {
 */
   return (
     <>
-      <div className={styles["grid-container"]}>
+      <div
+        className={styles["grid-container"]}
+        onWheel={handleScroll}
+        ref={scrollContainer}
+      >
         <div className={styles["grid-title"]}>
           {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
         </div>
+
         {cells.map((item, index) => {
           return (
-            <span className={styles["grid-cell"]} key={index}>
+            <span
+              className={styles["grid-cell"]}
+              key={index}
+              style={{ transform: `translateY(${scroll * -100}%)` }}
+            >
               <span className={styles["grid-cell-label"]}>
                 <div className={styles["grid-cell-name"]}>{item.name}</div>
                 {item.image && (
