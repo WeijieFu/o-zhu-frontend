@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useRef } from "react"
-import _, { set } from "lodash"
 import Link from "next/link"
-
+import _ from "lodash"
 import styles from "../../styles/Grid/Grid.module.css"
 
-import getAward from "../../api/getAward"
 import useNavigationState from "../../state/NavigationState"
 import generateRandom from "./generateRandom"
 
@@ -13,9 +11,7 @@ import { row, column, count, blinkTimes, interval } from "./GridSetting"
 const PressGrid = ({ data }) => {
   const state = useNavigationState()
   const [cells, setCells] = useState([])
-  const scrollContainer = useRef()
   const [scroll, setScroll] = useState(0)
-  const pagesCount = Math.ceil(data.length / ((row - 1) * (column - 1) * 0.5))
 
   useEffect(() => {
     let i = 0
@@ -30,13 +26,8 @@ const PressGrid = ({ data }) => {
       i++
       if (data && i > blinkTimes) {
         clearInterval(blickInterval)
-        const finalCell = sortByRandom(
-          pagesCount,
-          count,
-          row,
-          column,
-          data.length
-        )
+
+        const finalCell = sortByRandom(count, row, column, data.length)
         setCells(finalCell)
       }
     }, interval)
@@ -45,27 +36,21 @@ const PressGrid = ({ data }) => {
   //HANDLE SORTING METHOD CHANGE
   useEffect(() => {
     if (state.currentSorting == "random") {
-      const finalCell = sortByRandom(
-        pagesCount,
-        count,
-        row,
-        column,
-        data.length
-      )
+      const finalCell = sortByRandom(count, row, column, data.length)
       setCells(finalCell)
     }
     if (state.currentSorting == "date") {
-      const finalCell = sortByName()
+      console.log(state.currentSorting)
+      const finalCell = sortByName(count, row, column, data.length)
+
       setCells(finalCell)
     }
   }, [state.currentSorting])
 
   //SORTING METHODS
-  const sortByRandom = (pagesCount, count, row, column, length) => {
-    //how many pages, how many numbers on one page, how many rows, how many column, how long is the data
-    // console.log(pagesCount, count, row, column, length)
+  const sortByRandom = (count, row, column, length) => {
+    const pagesCount = Math.ceil(length / ((row - 1) * (column - 1) * 0.5))
     const randomArray = generateRandom(pagesCount, count, row, column, length)
-    // console.log(randomArray)
     const finalCell = Array(count * pagesCount)
     finalCell.fill({ name: "0" })
     randomArray.forEach((value, index) => {
@@ -76,14 +61,14 @@ const PressGrid = ({ data }) => {
         index: index,
       }
     })
-
     return finalCell
   }
 
-  const sortByName = () => {
+  const sortByName = (count, row, column, length) => {
+    const pagesCount = Math.ceil(length / ((row - 1) * (column - 1)))
     const filteredCell = cells.filter((cell) => cell.name !== "0")
     const sortedCell = _.sortBy(filteredCell, ({ name }) => name.toLowerCase())
-    const finalCell = Array(count)
+    const finalCell = Array(count * pagesCount)
     finalCell.fill({ name: "0" })
     sortedCell.forEach((value, index) => {
       finalCell[index + Math.floor(index / (column - 1))] = {
@@ -93,14 +78,17 @@ const PressGrid = ({ data }) => {
         index: index,
       }
     })
-    // console.log(finalCell)
+
     return finalCell
   }
   //HANDLE SCROLL
   const handleScroll = (e) => {
     if (cells.length > count) {
       const direction = e.deltaY / Math.abs(e.deltaY)
-
+      const pagesCount =
+        state.currentSorting === "random"
+          ? Math.ceil(data.length / ((row - 1) * (column - 1) * 0.5))
+          : Math.ceil(data.length / ((row - 1) * (column - 1)))
       if (direction > 0 && scroll < (pagesCount - 1) * row) {
         setScroll(scroll + direction)
       }
@@ -115,11 +103,7 @@ const PressGrid = ({ data }) => {
 */
   return (
     <>
-      <div
-        className={styles["grid-container"]}
-        onWheel={handleScroll}
-        ref={scrollContainer}
-      >
+      <div className={styles["grid-container"]} onWheel={handleScroll}>
         <div className={styles["grid-title"]}>
           {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
         </div>

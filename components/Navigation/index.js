@@ -137,7 +137,6 @@ const Navigation = () => {
   }
 
   const handleResearchPublicationClick = () => {
-    console.log(state.currentPage)
     state.setCurrentCategory("projects")
     state.setCurrentPage("research & publication")
     state.setCurrentSorting("random")

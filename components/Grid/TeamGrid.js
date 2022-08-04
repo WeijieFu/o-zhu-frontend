@@ -22,14 +22,10 @@ const TeamGrid = ({ data }) => {
   const [defaultPosition, setDefaultPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
-    // async function fetchAPI() {
-    //   const data = await getTeam()
-    //   setData(data)
-    // }
-    // fetchAPI()
     state.setCurrentCategory("about")
     state.setCurrentPage("team")
     state.setCurrentSorting("random")
+    console.log(data)
   }, [])
 
   useEffect(() => {
@@ -52,12 +48,13 @@ const TeamGrid = ({ data }) => {
   }, [data])
   //HANDLE SORTING METHOD CHANGE
   useEffect(() => {
+    console.log(cells)
     if (state.currentSorting == "random") {
       const finalCell = sortByRandom(count, row, column, data.length)
       setCells(finalCell)
     }
     if (state.currentSorting == "name") {
-      const finalCell = sortByName()
+      const finalCell = sortByName(count, row, column, data.length)
       setCells(finalCell)
     }
   }, [state.currentSorting])
@@ -69,7 +66,8 @@ const TeamGrid = ({ data }) => {
   }
   //SORTING METHODS
   const sortByRandom = (count, row, column, length) => {
-    const randomArray = generateRandom(count, row, column, length)
+    const pagesCount = 1
+    const randomArray = generateRandom(pagesCount, count, row, column, length)
     const finalCell = Array(count)
     finalCell.fill({ name: "0", nameCN: "0" })
     randomArray.forEach((value, index) => {
@@ -84,7 +82,7 @@ const TeamGrid = ({ data }) => {
     return finalCell
   }
 
-  const sortByName = () => {
+  const sortByName = (count, row, column, length) => {
     const filteredCell = cells.filter((cell) => cell.name !== "0")
     const sortedCell = []
     if (state.currentLanguage == "en") {

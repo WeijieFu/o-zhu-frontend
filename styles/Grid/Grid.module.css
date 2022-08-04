@@ -17,7 +17,7 @@
     scrollbar-width: none;  /* Firefox */
 
     padding-top: calc(var(--cell-height) * 0.75);
-    /* margin-bottom: calc(var(--cell-height) * -0.75); */
+
 }
 
 .grid-container::-webkit-scrollbar {
@@ -28,7 +28,6 @@
     grid-column-start: span 11;
     display: flex;
 
-    /* align-items: center; */
     justify-content: center;
     transform: translateY(calc(var(--cell-height) * 0));
 
@@ -46,12 +45,10 @@
 .grid-cell{
     position: relative;
     width: var(--cell-width);
-    /* padding-top: 100%; */
     height: var(--cell-height);
+    pointer-events: none;
 }
-/* .grid-cell:nth-last-child(-n+11){
-    height: calc(var(--cell-height) * 0。25);
-} */
+
   
 .grid-cell-label{
     position: absolute;
@@ -62,6 +59,8 @@
     width: var(--cell-width);
     height: var(--cell-height);
     z-index: 10;
+
+    pointer-events: all;
 }
 
 .grid-cell-link{
@@ -79,6 +78,7 @@
     transform: translate(-50%, -50%);
 
     cursor: pointer;
+    z-index: 10;
  
 }
 .grid-draggable{
