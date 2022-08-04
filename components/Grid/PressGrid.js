@@ -37,12 +37,13 @@ const PressGrid = ({ data }) => {
   useEffect(() => {
     if (state.currentSorting == "random") {
       const finalCell = sortByRandom(count, row, column, data.length)
+      setScroll(0)
       setCells(finalCell)
     }
     if (state.currentSorting == "date") {
       console.log(state.currentSorting)
       const finalCell = sortByName(count, row, column, data.length)
-
+      setScroll(0)
       setCells(finalCell)
     }
   }, [state.currentSorting])
