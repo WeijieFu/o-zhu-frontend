@@ -10,7 +10,7 @@
     display: grid;
     grid-template-columns: repeat(11, 1fr);
     z-index: 20;
-    outline: #fff solid calc(var(--cell-height)*0.35);
+    outline: #fff solid calc(var(--cell-height)*0.375);
     background-color: #fff;
 }
 
