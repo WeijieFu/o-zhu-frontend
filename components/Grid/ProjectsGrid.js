@@ -19,9 +19,14 @@ const ProjectsGrid = ({ data }) => {
   const state = useNavigationState()
 
   const [cells, setCells] = useState([])
-
+  const [scroll, setScroll] = useState(0)
   // const [data, setData] = useState([])
-
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll)
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+    }
+  }, [])
   useEffect(() => {
     if (category) {
       state.setCurrentSorting("random")
@@ -60,8 +65,9 @@ const ProjectsGrid = ({ data }) => {
 
   //SORTING METHODS
   const sortByRandom = (count, row, column, length) => {
-    const randomArray = generateRandom(count, row, column, length)
-    const finalCell = Array(count)
+    const pagesCount = Math.ceil(length / ((row - 1) * (column - 1) * 0.5))
+    const randomArray = generateRandom(pagesCount, count, row, column, length)
+    const finalCell = Array(count * pagesCount)
 
     finalCell.fill({ name: "0", nameCN: "0" })
 
@@ -76,11 +82,11 @@ const ProjectsGrid = ({ data }) => {
       }
       data[index].index = value
     })
-
     return finalCell
   }
 
-  const sortByName = (column) => {
+  const sortByName = (count, row, column, length) => {
+    const pagesCount = Math.ceil(length / ((row - 1) * (column - 1)))
     const filteredCell = cells.filter((cell) => cell.name !== "0")
     const sortedCell = []
     if (state.currentLanguage == "en") {
@@ -91,7 +97,7 @@ const ProjectsGrid = ({ data }) => {
       sortedCell = _.sortBy(filteredCell, ({ nameCN }) => nameCN)
     }
 
-    const finalCell = Array(count)
+    const finalCell = Array(count * pagesCount)
     finalCell.fill({
       name: "0",
       nameCN: "0",
@@ -117,13 +123,14 @@ const ProjectsGrid = ({ data }) => {
     return finalCell
   }
 
-  const sortBySize = () => {
+  const sortBySize = (count, row, column, length) => {
+    const pagesCount = Math.ceil(length / ((row - 1) * (column - 1)))
     const filteredCell = cells.filter((cell) => cell.name !== "0")
     const sortedCell = []
 
     sortedCell = _.sortBy(filteredCell, ({ size }) => size)
 
-    const finalCell = Array(count)
+    const finalCell = Array(count * pagesCount)
     finalCell.fill({
       name: "0",
       nameCN: "0",
@@ -148,13 +155,14 @@ const ProjectsGrid = ({ data }) => {
     return finalCell
   }
 
-  const sortByYear = () => {
+  const sortByYear = (count, row, column, length) => {
+    const pagesCount = Math.ceil(length / ((row - 1) * (column - 1)))
     const filteredCell = cells.filter((cell) => cell.name !== "0")
     const sortedCell = []
 
     sortedCell = _.sortBy(filteredCell, ({ year }) => year)
 
-    const finalCell = Array(count)
+    const finalCell = Array(count * pagesCount)
     finalCell.fill({
       name: "0",
       nameCN: "0",
@@ -180,13 +188,14 @@ const ProjectsGrid = ({ data }) => {
     return finalCell
   }
 
-  const sortByLocation = () => {
+  const sortByLocation = (count, row, column, length) => {
+    const pagesCount = Math.ceil(length / ((row - 1) * (column - 1)))
     const filteredCell = cells.filter((cell) => cell.name !== "0")
     const sortedCell = []
 
     sortedCell = _.sortBy(filteredCell, ({ location }) => location)
 
-    const finalCell = Array(count)
+    const finalCell = Array(count * pagesCount)
     finalCell.fill({
       name: "0",
       nameCN: "0",
@@ -216,25 +225,30 @@ const ProjectsGrid = ({ data }) => {
     if (state.currentSorting == "random") {
       const finalCell = sortByRandom(count, row, column, data.length)
       setCells(finalCell)
+      setScroll(0)
     }
     if (state.currentSorting == "name") {
-      const finalCell = sortByName(column)
+      const finalCell = sortByName(count, row, column, data.length)
       setCells(finalCell)
+      setScroll(0)
     }
 
     if (state.currentSorting == "size") {
-      const finalCell = sortBySize(column)
+      const finalCell = sortBySize(count, row, column, data.length)
       setCells(finalCell)
+      setScroll(0)
     }
 
     if (state.currentSorting == "year") {
-      const finalCell = sortByYear(column)
+      const finalCell = sortByYear(count, row, column, data.length)
       setCells(finalCell)
+      setScroll(0)
     }
 
     if (state.currentSorting == "location") {
-      const finalCell = sortByLocation(column)
+      const finalCell = sortByLocation(count, row, column, data.length)
       setCells(finalCell)
+      setScroll(0)
     }
   }, [state.currentSorting])
 
@@ -256,6 +270,24 @@ const ProjectsGrid = ({ data }) => {
       return state.currentLanguage == "cn" ? item.locationCN : item.location
     }
   }
+
+  //HANDLE SCROLL
+  const handleScroll = (e) => {
+    console.log(scroll)
+    if (cells.length > count) {
+      const direction = e.deltaY / Math.abs(e.deltaY)
+      const pagesCount =
+        state.currentSorting === "random"
+          ? Math.ceil(data.length / ((row - 1) * (column - 1) * 0.5))
+          : Math.ceil(data.length / ((row - 1) * (column - 1)))
+      if (direction > 0 && scroll < (pagesCount - 1) * row) {
+        setScroll(scroll + direction)
+      }
+      if (direction < 0 && scroll > 0) {
+        setScroll(scroll + direction)
+      }
+    }
+  }
   return (
     <>
       <div className={styles["grid-container"]}>
@@ -264,7 +296,11 @@ const ProjectsGrid = ({ data }) => {
         </div>
         {cells.map((item, index) => {
           return (
-            <span className={styles["grid-cell"]} key={index}>
+            <span
+              className={styles["grid-cell"]}
+              key={index}
+              style={{ transform: `translateY(${scroll * -100}%)` }}
+            >
               <span className={styles["grid-cell-label"]}>
                 <div className={styles["grid-cell-name"]}>{name(item)}</div>
               </span>
@@ -272,7 +308,15 @@ const ProjectsGrid = ({ data }) => {
           )
         })}
       </div>
-      {data && <ProjectScene data={data} router={router} category={category} />}
+      {data && (
+        <ProjectScene
+          data={data}
+          router={router}
+          category={category}
+          handleScroll={handleScroll}
+          scroll={scroll}
+        />
+      )}
     </>
   )
 }

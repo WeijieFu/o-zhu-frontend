@@ -1,8 +1,9 @@
 .container{
     width: 25rem;
+
     /* max-height: 60vh; */
 
-    z-index: 20;
+    z-index: 200;
     cursor: grab;
 
     background-color:#fff;

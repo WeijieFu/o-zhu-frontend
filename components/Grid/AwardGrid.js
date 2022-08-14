@@ -56,7 +56,7 @@ const AwardGrid = ({ data }) => {
     finalCell.fill({ name: "0" })
     randomArray.forEach((value, index) => {
       finalCell[value] = {
-        name: data[index].Date.slice(0, 10),
+        name: data[index].Date.slice(0, 10).toString().replaceAll("-", " "),
         image: data[index].Image,
         url: data[index].URL,
         index: index,

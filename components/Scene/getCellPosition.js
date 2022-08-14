@@ -1,13 +1,6 @@
 import { row, column } from "../Grid/GridSetting"
 //row = 6 ; column = 11
 
-const cellPosition = []
-for (let z = -(row - 2); z <= row - 2; z += 2) {
-  for (let x = -(column - 2); x <= column - 2; x += 2) {
-    cellPosition.push({ x, z })
-  }
-}
-
 // const cellPosition = [
 //   { x: -9, z: -4 },
 //   { x: -7, z: -4 },
@@ -61,7 +54,16 @@ for (let z = -(row - 2); z <= row - 2; z += 2) {
 //   { x: 9, z: 4 },
 // ]
 const offset = 0 * Math.sqrt(3)
-const getCellPosition = (index) => {
+const getCellPosition = (index, length) => {
+  const pagesCount = Math.ceil(length / ((row - 1) * (column - 1) * 0.5))
+  const cellPosition = []
+  for (let z = -(row - 2); z <= row * (pagesCount + 1); z += 2) {
+    for (let x = -(column - 2); x <= column - 2; x += 2) {
+      cellPosition.push({ x, z })
+    }
+  }
+  // console.log(pagesCount, length, cellPosition)
+  // console.log(index)
   // console.log(index)
   const cellIndex = index - Math.floor(index / column)
 

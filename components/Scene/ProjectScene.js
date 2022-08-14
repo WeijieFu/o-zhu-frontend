@@ -14,7 +14,7 @@ const bottom = -8
 const left = -11
 const right = 11
 
-const ProjectScene = ({ data, router, category }) => {
+const ProjectScene = ({ data, router, category, handleScroll, scroll }) => {
   const [params, setParams] = useState({
     directionalLightIntensity: 2,
     ambientLightIntensity: 0.1,
@@ -23,8 +23,12 @@ const ProjectScene = ({ data, router, category }) => {
     edgeWidth: 1,
   })
 
+  useEffect(() => {
+    console.log(scroll)
+  }, [])
+
   return (
-    <div className={styles["canvas"]}>
+    <div className={styles["canvas"]} onWheel={handleScroll}>
       <Canvas
         onCreated={(state) => {
           state.camera.top = top
@@ -51,11 +55,13 @@ const ProjectScene = ({ data, router, category }) => {
                 <Model
                   url={value.Model}
                   index={value.index}
+                  length={data.length}
                   key={index}
                   router={router}
                   target={value._id}
                   root={category}
                   params={params}
+                  scroll={scroll}
                 />
               )
             }

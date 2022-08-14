@@ -5,7 +5,16 @@ import useNavigationState from "../../state/NavigationState"
 import GUI from "lil-gui"
 import { useFrame } from "@react-three/fiber"
 
-export default function Model({ url, index, router, target, root, params }) {
+export default function Model({
+  url,
+  index,
+  length,
+  router,
+  target,
+  root,
+  params,
+  scroll,
+}) {
   const state = useNavigationState()
   const { nodes } = useGLTF(url)
   const ref = useRef()
@@ -60,7 +69,11 @@ export default function Model({ url, index, router, target, root, params }) {
     <group
       dispose={null}
       // scale={[1.4, 1.4, 1.4]}
-      position={[getCellPosition(index).x, 0, getCellPosition(index).z]}
+      position={[
+        getCellPosition(index, length).x,
+        0,
+        getCellPosition(index, length).z - scroll * 3.6,
+      ]}
       ref={ref}
     >
       {meshes}
