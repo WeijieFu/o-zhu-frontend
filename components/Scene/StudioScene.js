@@ -63,11 +63,13 @@ const StudioScene = ({ data, router }) => {
               <Model
                 url={value.Model}
                 index={index}
+                length={data.length}
                 key={index}
                 router={router}
                 target={value.Location}
                 root="/about/studio"
                 params={params}
+                scroll={0}
               />
             )
           })}
@@ -87,7 +89,6 @@ function GroundPlage() {
     }
   }, [])
   const resizeCamera = () => {
-    console.log("resize")
     camera.top = top
     camera.bottom = bottom
     camera.left = left
