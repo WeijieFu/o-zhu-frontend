@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useRef } from "react"
 import styles from "../../styles/Grid/Grid.module.css"
-import Link from "next/link"
-import getStudio from "../../api/getStudio"
+
 import { useRouter } from "next/router"
 
 import { count, blinkTimes, interval } from "./GridSetting"

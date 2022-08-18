@@ -150,9 +150,10 @@
 
 
 .grid-button-info{
-    position: absolute;
+    position: fixed;
     right: var(--cell-width);
-    bottom: calc(-5rem - (var(--cell-height) - 5rem)/2);
+    /* bottom: calc(-5rem - (var(--cell-height) - 5rem)/2); */
+    bottom: calc(var(--cell-height)/2 - 5rem/2);
     width: calc(var(--cell-width) * 3 - (var(--cell-width) - 4rem));
 
     cursor: pointer;

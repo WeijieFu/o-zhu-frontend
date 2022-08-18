@@ -25,28 +25,16 @@ const Project = ({ data }) => {
 export default Project
 
 export async function getStaticPaths() {
-  const categories = [
-    "all",
-    "exhibition",
-    "interior",
-    "architecture",
-    "urban_design",
-    "research_publication",
-  ]
-
   const projects = await getProjects()
 
   const paths = []
 
-  for (const category of categories) {
-    for (const project of projects) {
-      paths.push({
-        params: {
-          category: category,
-          id: project._id,
-        },
-      })
-    }
+  for (const project of projects) {
+    paths.push({
+      params: {
+        id: project._id,
+      },
+    })
   }
 
   return {

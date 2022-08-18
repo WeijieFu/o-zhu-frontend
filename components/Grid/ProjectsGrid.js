@@ -6,7 +6,6 @@ import { useRouter } from "next/router"
 
 import { row, column, count, blinkTimes, interval } from "./GridSetting"
 import ProjectScene from "../Scene/ProjectScene"
-import getProjects from "../../api/getProjects"
 
 import useNavigationState from "../../state/NavigationState"
 

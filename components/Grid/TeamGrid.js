@@ -3,7 +3,6 @@ import _ from "lodash"
 
 import styles from "../../styles/Grid/Grid.module.css"
 
-import getTeam from "../../api/getTeam"
 import PersonDescription from "../About/PersonDescription"
 import useNavigationState from "../../state/NavigationState"
 import generateRandom from "./generateRandom"
