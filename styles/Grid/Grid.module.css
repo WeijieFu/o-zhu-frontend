@@ -99,9 +99,9 @@
 .grid-cell-image-large{
     grid-column-start: 1;
     grid-column-end: 12;
-    grid-row-start: 3;
-    grid-row-end: 8;
-    padding-bottom: calc(100vw/11/2);
+    grid-row-start: 2;
+    grid-row-end: 6;
+
    
     display: flex;
     justify-content: center;

@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react"
 import { useRouter } from "next/router"
 
-import styles from "../../../styles/Pages/About/Location.module.css"
+import styles from "../../styles/Pages/About/Location.module.css"
 
-import getProject from "../../../api/getProject"
-import getProjects from "../../../api/getProjects"
-import ProjectGrid from "../../../components/Grid/ProjectGrid"
+import getProject from "../../api/getProject"
+import getProjects from "../../api/getProjects"
+import ProjectGrid from "../../components/Grid/ProjectGrid"
 
-import Navigation from "../../../components/Navigation"
+import Navigation from "../../components/Navigation"
 
 const Project = ({ data }) => {
   return (

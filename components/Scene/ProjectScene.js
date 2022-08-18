@@ -59,7 +59,7 @@ const ProjectScene = ({ data, router, category, handleScroll, scroll }) => {
                   key={index}
                   router={router}
                   target={value._id}
-                  root={category}
+                  root={"/project"}
                   params={params}
                   scroll={scroll}
                 />
