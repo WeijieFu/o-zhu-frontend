@@ -47,6 +47,6 @@ export async function getStaticProps(context) {
   const id = context.params.id
   const data = await getProject(id)
 
-  return { props: { data: data } }
+  return { props: { data: JSON.parse(JSON.stringify(data)) } }
   // Pass post data to the page via props
 }
