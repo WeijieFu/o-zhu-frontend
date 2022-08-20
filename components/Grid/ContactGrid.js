@@ -45,9 +45,11 @@ const ContactGrid = ({ data }) => {
       }
     }, interval)
   }, [data])
-
+  const handleMenuClose = () => {
+    console.log("click")
+  }
   return (
-    <div className={styles["grid-container"]}>
+    <div className={styles["grid-container"]} onClick={handleMenuClose}>
       <div className={styles["grid-title"]}>
         {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
       </div>

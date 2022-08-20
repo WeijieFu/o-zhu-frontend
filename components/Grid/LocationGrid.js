@@ -5,19 +5,23 @@ import ReactMarkdown from "react-markdown"
 
 import CloseButton from "../Button/CloseButton"
 import Draggable from "react-draggable"
-
+import { useRouter } from "next/router"
 import useNavigationState from "../../state/NavigationState"
 
 const LocationGrid = ({ currentLocation }) => {
   const [isInformationShown, setIsInformationShown] = useState(false)
   const state = useNavigationState()
-
+  const router = useRouter()
   const handleInformationClick = (e) => {
     setIsInformationShown(true)
   }
 
   const handleClose = () => {
     setIsInformationShown(false)
+  }
+
+  const handleBack = () => {
+    router.back()
   }
 
   return (
@@ -81,6 +85,10 @@ const LocationGrid = ({ currentLocation }) => {
           </div>
         </Draggable>
       )}
+
+      <div className={styles["grid-back"]} onClick={handleBack}>
+        {state.currentLanguage == "cn" ? "退回" : "Back"}
+      </div>
     </div>
   )
 }

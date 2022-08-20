@@ -5,7 +5,7 @@ import CloseButton from "../Button/CloseButton"
 import Draggable from "react-draggable"
 import Spot from "../Project/Spot"
 import useNavigationState from "../../state/NavigationState"
-
+import { useRouter } from "next/router"
 const ProjectGrid = ({ data }) => {
   const [isInformationShown, setIsInformationShown] = useState(false)
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
@@ -13,7 +13,7 @@ const ProjectGrid = ({ data }) => {
   const [defaultPosition, setDefaultPosition] = useState({ x: 0, y: 0 })
   const [spotIndex, setSpotIndex] = useState(0)
   const state = useNavigationState()
-
+  const router = useRouter()
   const handleInformationClick = () => {
     setIsInformationShown(true)
   }
@@ -47,6 +47,10 @@ const ProjectGrid = ({ data }) => {
       setIsSpotShown(true)
     }
     setDefaultPosition({ x: e.clientX, y: e.clientY })
+  }
+
+  const handleBack = () => {
+    router.back()
   }
 
   return (
@@ -197,6 +201,10 @@ const ProjectGrid = ({ data }) => {
           setIsSpotShown={setIsSpotShown}
         />
       )}
+
+      <div className={styles["grid-back"]} onClick={handleBack}>
+        {state.currentLanguage == "cn" ? "退回" : "Back"}
+      </div>
     </div>
   )
 }

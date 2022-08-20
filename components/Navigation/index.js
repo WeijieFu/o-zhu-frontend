@@ -8,6 +8,9 @@ const Navigation = () => {
   const state = useNavigationState()
 
   const handleMenuToggle = () => {
+    if (state.isMenuOpen) {
+      closeMenu()
+    }
     state.setIsMenuOpen(!state.isMenuOpen)
   }
   const handleProjectsMenuToggle = () => {
@@ -70,15 +73,7 @@ const Navigation = () => {
  */
   const closeMenu = () => {
     // MAIN
-    state.setIsMenuOpen(false)
-    //SECONDARY
-    state.setIsAboutMenuOpen(false)
-    state.setIsProjectsMenuOpen(false)
-    state.setIsAPMenuOpen(false)
-    //TERIARY
-    state.setIsTeamSortingMenuOpen(false)
-    state.setIsAPSortingMenuOpen(false)
-    state.setIsProjectsSortingMenuOpen(false)
+    state.closeAll()
   }
   const handleAwardClick = () => {
     state.setCurrentCategory("award & press")

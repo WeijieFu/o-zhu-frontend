@@ -10,7 +10,7 @@
     display: grid;
     grid-template-columns: repeat(11, 1fr);
     z-index: 20;
-    outline: #fff solid calc(var(--cell-height)*0.375);
+    outline: #fff solid calc(var(--cell-height)*0.5 - 0.5rem);
     background-color: #fff;
 }
 
@@ -29,6 +29,9 @@
 
     align-self: center;
     justify-self: center;
+}
+.menu-button-icon:hover{
+    color: #aaa;
 }
 
 .menu-button-main{
@@ -51,6 +54,9 @@
     display: flex;
     align-items: center;
     text-transform: capitalize;
+}
+.menu-button-text:hover{
+    color: #aaa
 }
 
 .menu-button-primary{
@@ -89,6 +95,10 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 2rem;
+}
+
+.menu-item:hover{
+    color: #aaa;
 }
 .menu-item:first-child{
     margin-top: calc((var(--cell-height) - 5rem)/2 * (-1))

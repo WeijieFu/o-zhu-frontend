@@ -29,6 +29,16 @@ const useNavigationState = create((set) => ({
     set((state) => ({ isProjectsSortingMenuOpen: bool })),
   setCurrentLanguage: (language) =>
     set((state) => ({ currentLanguage: language })),
+  closeAll: () =>
+    set(() => ({
+      isMenuOpen: false,
+      isAboutMenuOpen: false,
+      isProjectsMenuOpen: false,
+      isAPMenuOpen: false,
+      isTeamSortingMenuOpen: false,
+      isAPSortingMenuMenuOpen: false,
+      isProjectsSortingMenuOpen: false,
+    })),
 }))
 
 export default useNavigationState

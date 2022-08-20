@@ -56,7 +56,8 @@ export default function Model({
         onPointerEnter={handlePointerEnter}
         onPointerLeave={handlePointerLeave}
         onClick={handleClick}
-        rotation={[Math.PI / 2, 0, Math.PI / 4]}
+        // rotation={[Math.PI / 2, 0, Math.PI / 4]}
+        rotation={[0, -Math.PI / 4, 0]}
       >
         <meshStandardMaterial side={2} color={params.objectColor} />
         <Edges scale={1} threshold={15} />
@@ -77,14 +78,14 @@ export default function Model({
       ref={ref}
     >
       {meshes}
-      <mesh
+      {/* <mesh
         scale={[1, 1, 1]}
         rotation={[0, -Math.PI / 4, 0]}
         position={[0, 0.5, 0]}
       >
         <boxBufferGeometry />
         <meshNormalMaterial wireframe />
-      </mesh>
+      </mesh> */}
     </group>
   )
 }
