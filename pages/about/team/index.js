@@ -1,16 +1,28 @@
 import React from "react"
 import Navigation from "../../../components/Navigation"
+import MobileNavigation from "../../../components/MobileNavigation"
 import TeamGrid from "../../../components/Grid/TeamGrid"
 
 import styles from "../../../styles/Pages/About/About.module.css"
 
 import getTeam from "../../../api/getTeam"
+import useGridState from "../../../state/GridState"
+import useNavigationState from "../../../state/NavigationState"
+import isClickingMenu from "../../../utils/isClickingMenu"
 
 const Team = ({ data }) => {
+  const grid = useGridState()
+  const state = useNavigationState()
+  const handleClick = (e) => {
+    if (!isClickingMenu(e.target.className)) {
+      state.closeAll()
+    }
+  }
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick}>
       <TeamGrid data={data} />
-      <Navigation />
+      {grid.layout === "web" && <Navigation />}
+      {grid.layout === "mobile" && <MobileNavigation />}
     </div>
   )
 }

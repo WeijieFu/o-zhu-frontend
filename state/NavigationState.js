@@ -36,7 +36,7 @@ const useNavigationState = create((set) => ({
       isProjectsMenuOpen: false,
       isAPMenuOpen: false,
       isTeamSortingMenuOpen: false,
-      isAPSortingMenuMenuOpen: false,
+      isAPSortingMenuOpen: false,
       isProjectsSortingMenuOpen: false,
     })),
 }))

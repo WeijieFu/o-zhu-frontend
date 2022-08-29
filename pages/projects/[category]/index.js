@@ -6,9 +6,17 @@ import styles from "../../../styles/Pages/Projects/Exhibition.module.css"
 
 import getProjects from "../../../api/getProjects"
 
+import isClickingMenu from "../../../utils/isClickingMenu"
+import useNavigationState from "../../../state/NavigationState"
 const Projects = ({ data }) => {
+  const state = useNavigationState()
+  const handleClick = (e) => {
+    if (!isClickingMenu(e.target.className)) {
+      state.closeAll()
+    }
+  }
   return (
-    <div className={styles["container"]}>
+    <div className={styles["container"]} onClick={handleClick}>
       <ProjectsGrid data={data} />
       <Navigation />
     </div>

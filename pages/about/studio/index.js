@@ -4,10 +4,17 @@ import StudioGrid from "../../../components/Grid/StudioGrid"
 
 import getStudio from "../../../api/getStudio"
 import styles from "../../../styles/Pages/About/About.module.css"
-
+import useNavigationState from "../../../state/NavigationState"
+import isClickingMenu from "../../../utils/isClickingMenu"
 const Studio = ({ data }) => {
+  const state = useNavigationState()
+  const handleClick = (e) => {
+    if (!isClickingMenu(e.target.className)) {
+      state.closeAll()
+    }
+  }
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick}>
       <StudioGrid data={data} />
       <Navigation />
     </div>

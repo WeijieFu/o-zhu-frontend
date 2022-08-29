@@ -272,7 +272,6 @@ const ProjectsGrid = ({ data }) => {
 
   //HANDLE SCROLL
   const handleScroll = (e) => {
-    console.log(scroll)
     if (cells.length > count) {
       const direction = e.deltaY / Math.abs(e.deltaY)
       const pagesCount =

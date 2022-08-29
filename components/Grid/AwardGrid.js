@@ -6,13 +6,19 @@ import styles from "../../styles/Grid/Grid.module.css"
 
 import useNavigationState from "../../state/NavigationState"
 import generateRandom from "./generateRandom"
-
-import { row, column, count, blinkTimes, interval } from "./GridSetting"
+import useGridState from "../../state/GridState"
+// import { row, column, count, blinkTimes, interval } from "./GridSetting"
 
 const AwardGrid = ({ data }) => {
   const state = useNavigationState()
   const [cells, setCells] = useState([])
   const [scroll, setScroll] = useState(0)
+  const grid = useGridState()
+  const count = grid.row * grid.column
+  const row = grid.row
+  const column = grid.column
+  const blinkTimes = grid.blinkTimes
+  const interval = grid.interval
 
   useEffect(() => {
     let i = 0
@@ -31,6 +37,7 @@ const AwardGrid = ({ data }) => {
         const finalCell = sortByRandom(count, row, column, data.length)
         setCells(finalCell)
       }
+      console.log(column)
     }, interval)
   }, [data])
 
@@ -41,7 +48,6 @@ const AwardGrid = ({ data }) => {
       setCells(finalCell)
     }
     if (state.currentSorting == "date") {
-      console.log(state.currentSorting)
       const finalCell = sortByName(count, row, column, data.length)
 
       setCells(finalCell)

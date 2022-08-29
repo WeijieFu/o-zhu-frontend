@@ -6,18 +6,14 @@ import getContact from "../../api/getContact"
 import { count, blinkTimes, interval } from "./GridSetting"
 
 import useNavigationState from "../../state/NavigationState"
-
+import useGridState from "../../state/GridState"
 const ContactGrid = ({ data }) => {
   const [cells, setCells] = useState([])
-  // const [data, setData] = useState([])
+  const grid = useGridState()
   const state = useNavigationState()
   // useEffect(() => {
-  //   async function fetchAPI() {
-  //     const data = await getContact()
-  //     setData(data)
-  //   }
-  //   fetchAPI()
-  // }, [])
+  //   console.log(grid.column)
+  // }, [grid.column])
 
   useEffect(() => {
     let i = 0

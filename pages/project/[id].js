@@ -8,10 +8,18 @@ import getProjects from "../../api/getProjects"
 import ProjectGrid from "../../components/Grid/ProjectGrid"
 
 import Navigation from "../../components/Navigation"
+import useNavigationState from "../../state/NavigationState"
+import isClickingMenu from "../../utils/isClickingMenu"
 
 const Project = ({ data }) => {
+  const state = useNavigationState()
+  const handleClick = (e) => {
+    if (!isClickingMenu(e.target.className)) {
+      state.closeAll()
+    }
+  }
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick}>
       {data && (
         <>
           <ProjectGrid data={data} />

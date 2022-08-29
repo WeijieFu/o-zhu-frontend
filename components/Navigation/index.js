@@ -216,7 +216,7 @@ const Navigation = () => {
       return state.currentLanguage == "cn" ? "城市规划" : "Urban Design"
     }
     if (state.currentPage == "research & publication") {
-      console.log(state.currentPage)
+      ;`console`.log(state.currentPage)
       return state.currentLanguage == "cn"
         ? "学术研究 & 出版"
         : "Research & Publication"
@@ -245,6 +245,7 @@ const Navigation = () => {
       return state.currentLanguage == "cn" ? "地点" : "Location"
     }
   }
+
   return (
     <div className={styles.container}>
       <div
@@ -283,9 +284,7 @@ const Navigation = () => {
       >
         <span>{state.currentLanguage == "cn" ? "EN" : "中文"}</span>
       </div>
-
       {/* MAIN MENU */}
-
       <div
         className={`${styles["menu-wrapper"]} ${
           state.isMenuOpen ? "" : styles["menu-wrapper-hidden"]
@@ -410,7 +409,6 @@ const Navigation = () => {
           </div>
         </Link>
       </div>
-
       {/* AP MENU */}
       <div
         className={`${styles["menu-wrapper"]} ${
@@ -460,7 +458,6 @@ const Navigation = () => {
           </span>
         </div>
       </div>
-
       {/* AWARD AND PRESS SORTING MENU */}
       <div
         className={`${styles["menu-wrapper"]} ${
@@ -489,7 +486,6 @@ const Navigation = () => {
           </span>
         </div>
       </div>
-
       {/* PROJECTS SORTING MENU */}
       <div
         className={`${styles["menu-wrapper"]} ${

@@ -6,16 +6,22 @@ import styles from "../../styles/Grid/Grid.module.css"
 import useNavigationState from "../../state/NavigationState"
 import generateRandom from "./generateRandom"
 
-import { row, column, count, blinkTimes, interval } from "./GridSetting"
+// import { row, column, count, blinkTimes, interval } from "./GridSetting"
+import useGridState from "../../state/GridState"
 
 const PressGrid = ({ data }) => {
   const state = useNavigationState()
   const [cells, setCells] = useState([])
   const [scroll, setScroll] = useState(0)
+  const grid = useGridState()
+  const count = grid.row * grid.column
+  const row = grid.row
+  const column = grid.column
+  const blinkTimes = grid.blinkTimes
+  const interval = grid.interval
 
   useEffect(() => {
     let i = 0
-
     const blickInterval = setInterval(() => {
       let initialCell = Array.from({ length: count }, () => {
         return {
@@ -62,6 +68,7 @@ const PressGrid = ({ data }) => {
         index: index,
       }
     })
+    // console.log(column, finalCell)
     return finalCell
   }
 
@@ -98,13 +105,19 @@ const PressGrid = ({ data }) => {
       }
     }
   }
-
+  const handleTouch = (e) => {
+    console.log(e)
+  }
   /*
   TEMPLATE
 */
   return (
     <>
-      <div className={styles["grid-container"]} onWheel={handleScroll}>
+      <div
+        className={styles["grid-container"]}
+        onWheel={handleScroll}
+        onTouchMove={handleTouch}
+      >
         <div className={styles["grid-title"]}>
           {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
         </div>

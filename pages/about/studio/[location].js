@@ -7,23 +7,20 @@ import getStudio from "../../../api/getStudio"
 
 import LocationGrid from "../../../components/Grid/LocationGrid"
 import Navigation from "../../../components/Navigation"
+import useNavigationState from "../../../state/NavigationState"
+import isClickingMenu from "../../../utils/isClickingMenu"
 
 const Location = ({ data }) => {
   const [currentLocation, setCurrentLocation] = useState()
   const router = useRouter()
   const { location } = router.query
 
-  // const [data, setData] = useState([])
-
-  // useEffect(() => {
-  //   async function fetchAPI() {
-  //     const data = await getStudio()
-  //     setData(data)
-  //   }
-  //   fetchAPI()
-  //   console.log(data)
-  // }, [])
-
+  const state = useNavigationState()
+  const handleClick = (e) => {
+    if (!isClickingMenu(e.target.className)) {
+      state.closeAll()
+    }
+  }
   useEffect(() => {
     if (data) {
       data.forEach((value) => {
@@ -37,7 +34,7 @@ const Location = ({ data }) => {
   }, [data])
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={handleClick}>
       {currentLocation && (
         <>
           <LocationGrid currentLocation={currentLocation} />

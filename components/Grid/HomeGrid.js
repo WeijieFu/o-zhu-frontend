@@ -1,11 +1,16 @@
 import React, { useEffect, useState } from "react"
 import styles from "../../styles/Grid/Grid.module.css"
 
-import { count, blinkTimes, interval } from "./GridSetting"
+// import { count, blinkTimes, interval } from "./GridSetting"
 import useNavigationState from "../../state/NavigationState"
+import useGridState from "../../state/GridState"
+
 const HomeGrid = () => {
   const [cells, setCells] = useState([])
   const state = useNavigationState()
+  const grid = useGridState()
+  const count = grid.row * grid.column
+
   useEffect(() => {
     let i = 0
     const blickInterval = setInterval(async () => {
@@ -14,16 +19,19 @@ const HomeGrid = () => {
       )
       setCells(initialCell)
       i++
-      if (i > blinkTimes) {
+      if (i > grid.blinkTimes) {
         clearInterval(blickInterval)
         initialCell = Array(count).fill("0")
         setCells(initialCell)
       }
-    }, interval)
+    }, grid.interval)
   }, [])
 
   return (
-    <div className={styles["grid-container"]}>
+    <div
+      className={styles["grid-container"]}
+      style={{ gridTemplateColumns: `repeat(${grid.column},1fr)` }}
+    >
       <div className={styles["grid-title"]}>
         {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
       </div>

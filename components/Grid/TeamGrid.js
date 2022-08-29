@@ -7,24 +7,31 @@ import PersonDescription from "../About/PersonDescription"
 import useNavigationState from "../../state/NavigationState"
 import generateRandom from "./generateRandom"
 
-import { row, column, count, blinkTimes, interval } from "./GridSetting"
+// import { row, column, count, blinkTimes, interval } from "./GridSetting"
+import useGridState from "../../state/GridState"
 
 const TeamGrid = ({ data }) => {
   const state = useNavigationState()
+  const grid = useGridState()
+  const count = grid.row * grid.column
+  const row = grid.row
+  const column = grid.column
+  const blinkTimes = grid.blinkTimes
+  const interval = grid.interval
+
   const [cells, setCells] = useState([])
 
   // const [data, setData] = useState([])
   const [personDescriptionData, setPersonDescriptionData] = useState([])
-  const [isPersonDescriptionShown, setIsPersonDescriptionShown] = useState(
-    false
-  )
+  const [isPersonDescriptionShown, setIsPersonDescriptionShown] =
+    useState(false)
   const [defaultPosition, setDefaultPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
     state.setCurrentCategory("about")
     state.setCurrentPage("team")
     state.setCurrentSorting("random")
-    console.log(data)
+    console.log(grid.column)
   }, [])
 
   useEffect(() => {
@@ -40,6 +47,7 @@ const TeamGrid = ({ data }) => {
       i++
       if (data && i > blinkTimes) {
         clearInterval(blickInterval)
+
         const finalCell = sortByRandom(count, row, column, data.length)
         setCells(finalCell)
       }
@@ -47,7 +55,6 @@ const TeamGrid = ({ data }) => {
   }, [data])
   //HANDLE SORTING METHOD CHANGE
   useEffect(() => {
-    console.log(cells)
     if (state.currentSorting == "random") {
       const finalCell = sortByRandom(count, row, column, data.length)
       setCells(finalCell)
@@ -77,7 +84,8 @@ const TeamGrid = ({ data }) => {
         index: index,
       }
     })
-
+    console.log(column)
+    console.log(finalCell)
     return finalCell
   }
 
@@ -119,7 +127,6 @@ const TeamGrid = ({ data }) => {
           />
         </span>
       )}
-
       <div className={styles["grid-container"]}>
         <div className={styles["grid-title"]}>
           {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
