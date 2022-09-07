@@ -1,12 +1,15 @@
 import React from "react"
 import Navigation from "../../../components/Navigation"
+import MobileNavigation from "../../../components/MobileNavigation"
 import StudioGrid from "../../../components/Grid/StudioGrid"
 
 import getStudio from "../../../api/getStudio"
 import styles from "../../../styles/Pages/About/About.module.css"
 import useNavigationState from "../../../state/NavigationState"
 import isClickingMenu from "../../../utils/isClickingMenu"
+import useGridState from "../../../state/GridState"
 const Studio = ({ data }) => {
+  const grid = useGridState()
   const state = useNavigationState()
   const handleClick = (e) => {
     if (!isClickingMenu(e.target.className)) {
@@ -16,7 +19,8 @@ const Studio = ({ data }) => {
   return (
     <div className={styles.container} onClick={handleClick}>
       <StudioGrid data={data} />
-      <Navigation />
+      {grid.layout === "web" && <Navigation />}
+      {grid.layout === "mobile" && <MobileNavigation />}
     </div>
   )
 }

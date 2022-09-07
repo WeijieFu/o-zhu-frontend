@@ -40,7 +40,7 @@ const ContactGrid = ({ data }) => {
         setCells(finalCell)
       }
     }, interval)
-  }, [data])
+  }, [data, grid.layout])
   const handleMenuClose = () => {
     console.log("click")
   }

@@ -4,15 +4,23 @@ import _ from "lodash"
 import styles from "../../styles/Grid/Grid.module.css"
 import { useRouter } from "next/router"
 
-import { row, column, count, blinkTimes, interval } from "./GridSetting"
+// import { row, column, count, blinkTimes, interval } from "./GridSetting"
 import ProjectScene from "../Scene/ProjectScene"
-
+import MobileProjectScene from "../Scene/MobileProjectScene"
 import useNavigationState from "../../state/NavigationState"
-
+import useGridState from "../../state/GridState"
 import generateRandom from "./generateRandom"
 
 const ProjectsGrid = ({ data }) => {
   const router = useRouter()
+
+  const grid = useGridState()
+  const count = grid.row * grid.column
+  const row = grid.row
+  const column = grid.column
+  const blinkTimes = grid.blinkTimes
+  const interval = grid.interval
+
   const { category } = router.query
 
   const state = useNavigationState()
@@ -40,7 +48,7 @@ const ProjectsGrid = ({ data }) => {
 
   useEffect(() => {
     let i = 0
-    const blickInterval = setInterval(async () => {
+    const blickInterval = setInterval(() => {
       let initialCell = Array.from({ length: count }, () => {
         return {
           name: Math.floor(Math.random() * 10),
@@ -60,7 +68,7 @@ const ProjectsGrid = ({ data }) => {
         setCells(finalCell)
       }
     }, interval)
-  }, [data])
+  }, [data, grid.layout])
 
   //SORTING METHODS
   const sortByRandom = (count, row, column, length) => {
@@ -81,6 +89,7 @@ const ProjectsGrid = ({ data }) => {
       }
       data[index].index = value
     })
+    // console.log(finalCell, column, count, pagesCount)
     return finalCell
   }
 
@@ -307,13 +316,26 @@ const ProjectsGrid = ({ data }) => {
         })}
       </div>
       {data && (
-        <ProjectScene
-          data={data}
-          router={router}
-          category={category}
-          handleScroll={handleScroll}
-          scroll={scroll}
-        />
+        <>
+          {grid.layout == "web" && (
+            <ProjectScene
+              data={data}
+              router={router}
+              category={category}
+              handleScroll={handleScroll}
+              scroll={scroll}
+            />
+          )}
+          {grid.layout == "mobile" && (
+            <MobileProjectScene
+              data={data}
+              router={router}
+              category={category}
+              handleScroll={handleScroll}
+              scroll={scroll}
+            />
+          )}
+        </>
       )}
     </>
   )

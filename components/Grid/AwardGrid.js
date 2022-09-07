@@ -39,7 +39,7 @@ const AwardGrid = ({ data }) => {
       }
       console.log(column)
     }, interval)
-  }, [data])
+  }, [data, grid.layout])
 
   //HANDLE SORTING METHOD CHANGE
   useEffect(() => {

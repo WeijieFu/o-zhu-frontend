@@ -1,4 +1,6 @@
-import { row, column } from "../Grid/GridSetting"
+// import { row, column } from "../Grid/GridSetting"
+import useGridState from "../../state/GridState"
+
 //row = 6 ; column = 11
 
 // const cellPosition = [
@@ -55,9 +57,13 @@ import { row, column } from "../Grid/GridSetting"
 // ]
 const offset = 0 * Math.sqrt(3)
 const getCellPosition = (index, length) => {
+  const grid = useGridState()
+  const row = grid.row
+  const column = grid.column
+
   const pagesCount = Math.ceil(length / ((row - 1) * (column - 1) * 0.5))
   const cellPosition = []
-  for (let z = -(row - 2); z <= row * (pagesCount + 1); z += 2) {
+  for (let z = -(row - 2); z <= row * (pagesCount * 2); z += 2) {
     for (let x = -(column - 2); x <= column - 2; x += 2) {
       cellPosition.push({ x, z })
     }
@@ -71,6 +77,8 @@ const getCellPosition = (index, length) => {
     x: cellPosition[cellIndex].x,
     z: cellPosition[cellIndex].z * 1.8 + offset,
   }
+
+  // console.log(cellPosition, length, row, column, pagesCount)
   return position
 }
 export default getCellPosition

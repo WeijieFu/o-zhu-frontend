@@ -26,7 +26,7 @@ const generateRandom = (pagesCount, count, row, column, length) => {
       }
     }
   }
-
+  console.log(nums, column)
   return nums
 }
 

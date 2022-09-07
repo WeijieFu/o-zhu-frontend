@@ -37,7 +37,7 @@ const PressGrid = ({ data }) => {
         setCells(finalCell)
       }
     }, interval)
-  }, [data])
+  }, [data, grid.layout])
 
   //HANDLE SORTING METHOD CHANGE
   useEffect(() => {

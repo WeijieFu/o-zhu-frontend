@@ -9,10 +9,10 @@ const position = [0, 10, 10 * Math.sqrt(2)]
 const zoom = 1
 const top = 7.75
 const bottom = -7.75
-const right = 11
-const left = -11
+const right = 4
+const left = -4
 
-const StudioScene = ({ data, router }) => {
+const MobileStudioScene = ({ data, router }) => {
   const [params, setParams] = useState({
     directionalLightIntensity: 1.5,
     ambientLightIntensity: 0.5,
@@ -127,4 +127,4 @@ const Light = () => {
   )
 }
 
-export default StudioScene
+export default MobileStudioScene

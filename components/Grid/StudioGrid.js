@@ -4,13 +4,16 @@ import styles from "../../styles/Grid/Grid.module.css"
 import { useRouter } from "next/router"
 
 import { count, blinkTimes, interval } from "./GridSetting"
+
 import StudioScene from "../Scene/StudioScene"
+import MobileStudioScene from "../Scene/MobileStudioScene"
 import useNavigationState from "../../state/NavigationState"
+import useGridState from "../../state/GridState"
 
 const StudioGrid = ({ data }) => {
   const router = useRouter()
   const state = useNavigationState()
-
+  const grid = useGridState()
   const [cells, setCells] = useState([])
 
   // const [data, setData] = useState([])
@@ -49,7 +52,7 @@ const StudioGrid = ({ data }) => {
         // console.log(data[0].Model.data.attributes.url)
       }
     }, interval)
-  }, [data])
+  }, [data, grid.layout])
 
   return (
     <>
@@ -69,7 +72,14 @@ const StudioGrid = ({ data }) => {
           )
         })}
       </div>
-      {data && <StudioScene data={data} router={router} />}
+      {data && (
+        <>
+          {grid.layout == "web" && <StudioScene data={data} router={router} />}
+          {grid.layout == "mobile" && (
+            <MobileStudioScene data={data} router={router} />
+          )}
+        </>
+      )}
     </>
   )
 }

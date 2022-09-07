@@ -11,10 +11,16 @@ const position = [0, 10, 10 * Math.sqrt(2)]
 const zoom = 1
 const top = 7.75
 const bottom = -7.75
-const left = -11
-const right = 11
+const left = -4
+const right = 4
 
-const ProjectScene = ({ data, router, category, handleScroll, scroll }) => {
+const MobileProjectScene = ({
+  data,
+  router,
+  category,
+  handleScroll,
+  scroll,
+}) => {
   const [params, setParams] = useState({
     directionalLightIntensity: 2,
     ambientLightIntensity: 0.1,
@@ -142,4 +148,4 @@ const Light = (props) => {
   )
 }
 
-export default ProjectScene
+export default MobileProjectScene

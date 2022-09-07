@@ -248,6 +248,7 @@
 
 
 @media only screen and (max-width: 750px) {
+
     .grid-container{  
         --cell-width: calc(100vw / 4);
         grid-template-columns: repeat(4,1fr);
@@ -257,5 +258,84 @@
         top:0;
         left:0;
         z-index: 500;
+    }
+    .grid-cell-location{
+        grid-column-start: 1;
+    }
+
+    .grid-cell-image-large{
+        grid-column-start: unset;
+        grid-column-end: unset;
+        grid-row-start: unset;
+        grid-row-end: unset;
+        position: absolute;
+        top: calc(var(--cell-height)*1.75);
+        height: calc(var(--cell-height) * 5);
+        margin: 0 calc((var(--cell-width) - 5rem)/2);
+        display: flex;
+        flex-direction: column;
+        overflow-y: scroll;
+        justify-content: unset;
+
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+
+    }
+
+    .grid-cell-image-large::-webkit-scrollbar {
+        display: none;
+    }
+    .grid-cell-image-large img{
+        height: unset;
+        width: 100%;
+        margin-bottom: 1rem;
+
+    }
+
+    .grid-arrow-left{
+        position: absolute;
+        left:1.5rem;
+        top:calc(var(--cell-height) * 1.25);
+        z-index: 100;
+    }
+    .grid-arrow-right{
+        position: absolute;
+        right:1.5rem;
+        top:calc(var(--cell-height) * 1.25);
+        z-index: 100;
+    }
+
+    .grid-info-container{
+        grid-column-start: 2; 
+    }
+    .grid-button-info{
+        position: fixed;
+        right: calc((var(--cell-width) - 5rem)/2);
+        width: 5rem;
+        padding-left: 0rem;
+        margin: 0;
+        justify-content: center;
+        z-index: 21;
+    }
+    .grid-back{
+        left: calc((var(--cell-width) - 5rem)/2);
+        top: unset;
+        bottom: calc(var(--cell-height)/2 - 5rem/2);
+
+
+        width: 5rem;
+        height:5rem;
+
+        border-radius: var(--container-border-radius); 
+        border: var(--container-border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: translate(0);
+        text-decoration: none;
+    }
+
+    .grid-cell-email{
+        grid-column-start: 2;
     }
 }

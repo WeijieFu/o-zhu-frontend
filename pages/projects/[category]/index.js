@@ -1,5 +1,6 @@
 import React from "react"
 import Navigation from "../../../components/Navigation"
+import MobileNavigation from "../../../components/MobileNavigation"
 import ProjectsGrid from "../../../components/Grid/ProjectsGrid"
 
 import styles from "../../../styles/Pages/Projects/Exhibition.module.css"
@@ -8,8 +9,11 @@ import getProjects from "../../../api/getProjects"
 
 import isClickingMenu from "../../../utils/isClickingMenu"
 import useNavigationState from "../../../state/NavigationState"
+import useGridState from "../../../state/GridState"
+
 const Projects = ({ data }) => {
   const state = useNavigationState()
+  const grid = useGridState()
   const handleClick = (e) => {
     if (!isClickingMenu(e.target.className)) {
       state.closeAll()
@@ -18,7 +22,8 @@ const Projects = ({ data }) => {
   return (
     <div className={styles["container"]} onClick={handleClick}>
       <ProjectsGrid data={data} />
-      <Navigation />
+      {grid.layout === "web" && <Navigation />}
+      {grid.layout === "mobile" && <MobileNavigation />}
     </div>
   )
 }

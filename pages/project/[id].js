@@ -6,13 +6,15 @@ import styles from "../../styles/Pages/About/Location.module.css"
 import getProject from "../../api/getProject"
 import getProjects from "../../api/getProjects"
 import ProjectGrid from "../../components/Grid/ProjectGrid"
-
+import MobileProjectGrid from "../../components/Grid/MobileProjectGrid"
 import Navigation from "../../components/Navigation"
+import useGridState from "../../state/GridState"
 import useNavigationState from "../../state/NavigationState"
 import isClickingMenu from "../../utils/isClickingMenu"
 
 const Project = ({ data }) => {
   const state = useNavigationState()
+  const grid = useGridState()
   const handleClick = (e) => {
     if (!isClickingMenu(e.target.className)) {
       state.closeAll()
@@ -22,8 +24,13 @@ const Project = ({ data }) => {
     <div className={styles.container} onClick={handleClick}>
       {data && (
         <>
-          <ProjectGrid data={data} />
-          <Navigation />
+          {grid.layout == "web" && (
+            <>
+              <ProjectGrid data={data} />
+              <Navigation />
+            </>
+          )}
+          {grid.layout == "mobile" && <MobileProjectGrid data={data} />}
         </>
       )}
     </div>

@@ -6,8 +6,10 @@ import styles from "../../../styles/Pages/About/Location.module.css"
 import getStudio from "../../../api/getStudio"
 
 import LocationGrid from "../../../components/Grid/LocationGrid"
+import MobileLocationGrid from "../../../components/Grid/MobileLocationGrid"
 import Navigation from "../../../components/Navigation"
 import useNavigationState from "../../../state/NavigationState"
+import useGridState from "../../../state/GridState"
 import isClickingMenu from "../../../utils/isClickingMenu"
 
 const Location = ({ data }) => {
@@ -16,6 +18,7 @@ const Location = ({ data }) => {
   const { location } = router.query
 
   const state = useNavigationState()
+  const grid = useGridState()
   const handleClick = (e) => {
     if (!isClickingMenu(e.target.className)) {
       state.closeAll()
@@ -37,8 +40,18 @@ const Location = ({ data }) => {
     <div className={styles.container} onClick={handleClick}>
       {currentLocation && (
         <>
-          <LocationGrid currentLocation={currentLocation} />
-          <Navigation />
+          {grid.layout === "web" && (
+            <>
+              <Navigation />
+              <LocationGrid currentLocation={currentLocation} />
+            </>
+          )}
+
+          {grid.layout === "mobile" && (
+            <>
+              <MobileLocationGrid currentLocation={currentLocation} />
+            </>
+          )}
         </>
       )}
     </div>

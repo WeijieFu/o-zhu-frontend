@@ -12,6 +12,7 @@ const useGridState = create((set) => ({
       layout: "web",
       row: 6,
       column: 11,
+      horizontal: 8,
     })),
   setGridToMobile: () =>
     set(() => ({
