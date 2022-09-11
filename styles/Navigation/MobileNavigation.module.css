@@ -1,8 +1,10 @@
 .container{
-    --cell-height: calc(100vh / 7.75);
+    /* --viewport-height: 100vh; */
+    --cell-height: calc(var(--viewport-height) / 7.75);
     --cell-width: calc(100vw / 4);
     font-size: 1rem;
     height: var(--cell-height);
+    /* height: calc(100vh/7.75); */
     width: 100%;
     
     position: fixed;
@@ -11,8 +13,11 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     z-index: 200;
-    outline: #fff solid calc(var(--cell-height)*0.5 - 0.5rem);
+    outline: #fff solid calc(var(--cell-height)*0.5 - 1rem);
+
     background-color: #fff;
+
+
 }
 
 .menu-button-main{
@@ -42,12 +47,13 @@
     position: fixed;
     left: calc((var(--cell-width) - 5rem)/2);
     bottom: calc((var(--cell-height) - 5rem)/2);
-
-    height: calc(100vh - var(--cell-height)*1.03);
+    /* bottom: calc(((100vh/7.75) - 5rem)/2); */
+    height: calc( var(--cell-height) * 5);
+    /* height: calc( (100vh/7.75)*5); */
     width: calc(100vw - var(--cell-width)/2);
 
     background-color: #fff;
-    overflow-y: scroll;
+    overflow-y: hidden;
 
 
     -ms-overflow-style: none;  /* IE and Edge */
@@ -58,6 +64,7 @@
   }
 .menu-item{
     height: var(--cell-height);
+    /* height: calc((100vh/7.75)); */
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -67,9 +74,12 @@
 
 .menu-sub-item{
     height: var(--cell-height);
+    /* height: calc((100vh/7.75)); */
     display: flex;
     align-items: center;
     justify-content: space-between;
     padding: 0 10rem;
 
 }
+
+

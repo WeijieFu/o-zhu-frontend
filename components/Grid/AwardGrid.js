@@ -104,13 +104,45 @@ const AwardGrid = ({ data }) => {
       }
     }
   }
+  /*
+  HANDLE TOUCH
+  */
+  const [touchStart, setTouchStart] = useState(0)
+  const [scrollStart, setScrollStart] = useState(0)
+  const lastItem = useRef()
+
+  const handleTouchStart = (e) => {
+    setTouchStart(e.nativeEvent.touches[0].clientY)
+  }
+  const handleTouchMove = (e) => {
+    const step = window.innerHeight / 7.75
+    const currentTouch = e.nativeEvent.touches[0].clientY
+    const delta = Math.floor((currentTouch - touchStart) / step) * step
+    const newScroll = delta + scrollStart
+    const rect = lastItem.current.getBoundingClientRect()
+    if (delta > 0 && newScroll <= 0) {
+      setScroll(newScroll)
+    }
+    if (delta < 0 && rect.bottom > window.innerHeight - step) {
+      setScroll(newScroll)
+    }
+  }
+  const handleTouchEnd = (e) => {
+    setScrollStart(scroll)
+  }
 
   /*
   TEMPLATE
 */
   return (
     <>
-      <div className={styles["grid-container"]} onWheel={handleScroll}>
+      <div
+        className={styles["grid-container"]}
+        onWheel={handleScroll}
+        onTouchStart={handleTouchStart}
+        onTouchMove={handleTouchMove}
+        onTouchEnd={handleTouchEnd}
+      >
         <div className={styles["grid-title"]}>
           {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
         </div>
@@ -120,7 +152,13 @@ const AwardGrid = ({ data }) => {
             <span
               className={styles["grid-cell"]}
               key={index}
-              style={{ transform: `translateY(${scroll * -100}%)` }}
+              style={{
+                transform:
+                  grid.layout === "web"
+                    ? `translateY(${scroll * -100}%)`
+                    : `translateY(${scroll}px)`,
+              }}
+              ref={index === cells.length - 1 ? lastItem : null}
             >
               <span className={styles["grid-cell-label"]}>
                 <div className={styles["grid-cell-name"]}>{item.name}</div>

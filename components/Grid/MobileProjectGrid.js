@@ -183,7 +183,7 @@ const MobileProjectGrid = ({ data }) => {
                     <img src={image.Image} alt={image.Name} />
 
                     {image.Spot &&
-                      image.map((value, index) => {
+                      image.Spot.map((value, index) => {
                         return (
                           <span
                             className={styles["grid-cell-image-spot"]}

@@ -6,15 +6,7 @@
     bottom: 0;
  
     width: 100vw;
-    height: 100vh;
+    height: var(--viewport-height);
     z-index: 20;
 }
 
-@media only screen and (min-aspect-ratio: 11/8){
-    /* .canvas{
-         --cell-height: calc(100vh / 7.75);
-        position: absolute;
-        width: calc(var(--cell-height) * 11);
-        height: calc(var(--cell-height) * 8);
-    } */
-}

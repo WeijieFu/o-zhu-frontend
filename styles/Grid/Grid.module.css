@@ -1,13 +1,13 @@
 
 .grid-container{  
     --cell-width: calc(100vw / 11);
-    --cell-height: calc(100vh / 7.75);
+    --cell-height: calc((var(--viewport-height)) / 7.75);
     display: grid;
     grid-template-columns: repeat(11,1fr);
     grid-template-rows:  repeat(6, var(--cell-height));
     width: 100%;
     /* height: calc(100vh - var(--cell-height)); */
-    height: 100vh;
+    height: var(--viewport-height);
 
     overflow-x: hidden;
     overflow-y: hidden;
@@ -104,19 +104,28 @@
     grid-row-end: 7;
 
    
-    display: flex;
-    justify-content: center;
+    /* display: flex;
+    justify-content: center; */
+
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
 
     padding-bottom: calc(var(--cell-height)*0.5)
 }
 
 .grid-cell-image-large img{
+    width: auto;
     height: 100%;
+ 
 }
 
 
 .grid-cell-image-large-wrapper{
     position:relative;
+    display: inline-block;
+    width: auto;
+    height: calc(var(--cell-height) * 5)
+
 }
 
 .grid-cell-image-arrow-left{
@@ -124,12 +133,14 @@
     height: 100%;
     cursor:w-resize;
 
+
 }
 
 .grid-cell-image-arrow-right{
     width: 100%;
     height: 100%;
     cursor:e-resize;
+
 
 }
 
@@ -251,8 +262,16 @@
 
     .grid-container{  
         --cell-width: calc(100vw / 4);
+        /* --viewport-height: calc(100vh - 114px); */
+        /* --viewport-height: 100vh;  */
+        /* Wechat 100vh, chrome, safari 100vh - 114px */
+        --cell-height: calc(var(--viewport-height) / 7.75);
         grid-template-columns: repeat(4,1fr);
+        height: var(--viewport-height);
+
     }
+
+
      .grid-draggable{
       position: fixed;
         top:0;
@@ -338,4 +357,7 @@
     .grid-cell-email{
         grid-column-start: 2;
     }
+
+
+
 }

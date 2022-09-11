@@ -19,7 +19,11 @@ const MobileProjectScene = ({
   router,
   category,
   handleScroll,
+  handleTouchStart,
+  handleTouchMove,
+  handleTouchEnd,
   scroll,
+  step,
 }) => {
   const [params, setParams] = useState({
     directionalLightIntensity: 2,
@@ -34,7 +38,13 @@ const MobileProjectScene = ({
   // }, [])
 
   return (
-    <div className={styles["canvas"]} onWheel={handleScroll}>
+    <div
+      className={styles["canvas"]}
+      onWheel={handleScroll}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <Canvas
         onCreated={(state) => {
           state.camera.top = top
@@ -67,7 +77,7 @@ const MobileProjectScene = ({
                   target={value._id}
                   root={"/project"}
                   params={params}
-                  scroll={scroll}
+                  scroll={-scroll / step}
                 />
               )
             }

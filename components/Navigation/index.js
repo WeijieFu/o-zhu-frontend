@@ -216,7 +216,6 @@ const Navigation = () => {
       return state.currentLanguage == "cn" ? "城市规划" : "Urban Design"
     }
     if (state.currentPage == "research & publication") {
-      ;`console`.log(state.currentPage)
       return state.currentLanguage == "cn"
         ? "学术研究 & 出版"
         : "Research & Publication"

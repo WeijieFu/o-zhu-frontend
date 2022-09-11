@@ -26,12 +26,18 @@ const ProjectsGrid = ({ data }) => {
   const state = useNavigationState()
 
   const [cells, setCells] = useState([])
-  const [scroll, setScroll] = useState(0)
+
   // const [data, setData] = useState([])
   useEffect(() => {
-    window.addEventListener("scroll", handleScroll)
+    // window.addEventListener("scroll", handleScroll)
+    // window.addEventListener("touchstart", handleTouchStart)
+    // window.addEventListener("touchmove", handleTouchMove)
+    // window.addEventListener("touchend", handleTouchEnd)
     return () => {
-      window.removeEventListener("scroll", handleScroll)
+      // window.removeEventListener("scroll", handleScroll)
+      // window.removeEventListener("touchstart", handleTouchStart)
+      // window.removeEventListener("touchmove", handleTouchMove)
+      // window.removeEventListener("touchend", handleTouchEnd)
     }
   }, [])
   useEffect(() => {
@@ -280,6 +286,7 @@ const ProjectsGrid = ({ data }) => {
   }
 
   //HANDLE SCROLL
+  const [scroll, setScroll] = useState(0)
   const handleScroll = (e) => {
     if (cells.length > count) {
       const direction = e.deltaY / Math.abs(e.deltaY)
@@ -295,6 +302,42 @@ const ProjectsGrid = ({ data }) => {
       }
     }
   }
+
+  /*
+  HANDLE TOUCH
+  */
+  const [touchStart, setTouchStart] = useState(0)
+  const [scrollStart, setScrollStart] = useState(0)
+  const lastItem = useRef()
+
+  const handleTouchStart = async (e) => {
+    // console.log(e.touches[0].clientY)
+    setTouchStart(e.touches[0].clientY)
+  }
+  const handleTouchMove = async (e) => {
+    // console.log(window)
+    const step = window.innerHeight / 7.75
+    const currentTouch = e.touches[0].clientY
+    const delta = Math.floor((currentTouch - touchStart) / step) * step
+    const newScroll = delta + scrollStart
+    // console.log(touchStart)
+    const rect = lastItem.current.getBoundingClientRect()
+    if (delta > 0 && newScroll <= 0) {
+      // console.log("down")
+      setScroll(newScroll)
+      // console.log(rect.bottom)
+    }
+    if (delta < 0 && rect.bottom > window.innerHeight - step) {
+      // console.log("up")
+      setScroll(newScroll)
+    }
+  }
+  const handleTouchEnd = (e) => {
+    // console.log(e)
+    // console.log(scroll)
+    setScrollStart(scroll)
+  }
+
   return (
     <>
       <div className={styles["grid-container"]}>
@@ -306,7 +349,13 @@ const ProjectsGrid = ({ data }) => {
             <span
               className={styles["grid-cell"]}
               key={index}
-              style={{ transform: `translateY(${scroll * -100}%)` }}
+              style={{
+                transform:
+                  grid.layout === "web"
+                    ? `translateY(${scroll * -100}%)`
+                    : `translateY(${scroll}px)`,
+              }}
+              ref={index === cells.length - 1 ? lastItem : null}
             >
               <span className={styles["grid-cell-label"]}>
                 <div className={styles["grid-cell-name"]}>{name(item)}</div>
@@ -332,7 +381,11 @@ const ProjectsGrid = ({ data }) => {
               router={router}
               category={category}
               handleScroll={handleScroll}
+              handleTouchStart={handleTouchStart}
+              handleTouchMove={handleTouchMove}
+              handleTouchEnd={handleTouchEnd}
               scroll={scroll}
+              step={window.innerHeight / 7.75}
             />
           )}
         </>

@@ -1,5 +1,5 @@
 .container{
-    --cell-height: calc(100vh / 7.75);
+    --cell-height: calc(var(--viewport-height) / 7.75);
     font-size: 1rem;
     height: var(--cell-height);
     width: 100%;

@@ -12,6 +12,9 @@ const HomeGrid = () => {
   const count = grid.row * grid.column
 
   useEffect(() => {
+    state.setCurrentPage("")
+    state.setCurrentCategory("")
+    state.setCurrentSorting("")
     let i = 0
     const blickInterval = setInterval(async () => {
       let initialCell = Array.from({ length: count }, () =>
@@ -25,7 +28,7 @@ const HomeGrid = () => {
         setCells(initialCell)
       }
     }, grid.interval)
-  }, [])
+  }, [grid.layout])
 
   return (
     <div

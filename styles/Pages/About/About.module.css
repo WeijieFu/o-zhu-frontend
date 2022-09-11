@@ -1,6 +1,6 @@
 .container {
     padding: 0 ;
-    height: 100vh;
+    height: var(--viewport-height);
     width: 100vw;
     overflow: hidden;
     /* display: flex;
