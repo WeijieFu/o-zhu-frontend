@@ -55,7 +55,11 @@ const LocationGrid = ({ currentLocation }) => {
       </span>
 
       <span className={`${styles["grid-cell-image-large"]}`}>
-        <img src={currentLocation.Image} alt={currentLocation.Location} />
+        <span />
+        <div className={`${styles["grid-cell-image-large-wrapper"]}`}>
+          <img src={currentLocation.Image} alt={currentLocation.Location} />
+        </div>
+        <span />
       </span>
       {!isInformationShown && (
         <span
