@@ -31,7 +31,6 @@
     padding: 0 2rem;
     justify-content: center;
     align-items: center;
-    /* flex-grow: 0; */
 
     align-self: center;
     margin-left: calc((var(--cell-width) - 5rem)/2);
@@ -43,6 +42,23 @@
     white-space:nowrap;
 }
 
+.menu-button-text{
+    border: var(--container-border);
+    border-radius: var(--container-border-radius);   
+    grid-column: 4/5;
+    height: 5rem;  
+    display: flex;
+    padding: 0 2rem;
+    justify-content: center;
+    align-items: center;
+    /* flex-grow: 0; */
+
+    align-self: center;
+    margin-right: calc((var(--cell-width) - 5rem)/2);
+
+    background-color: #fff;
+}
+
 .menu-wrapper{
     border: var(--container-border);
     border-radius: var(--container-border-radius);  
@@ -50,8 +66,8 @@
     left: calc((var(--cell-width) - 5rem)/2);
     bottom: calc((var(--cell-height) - 5rem)/2);
     /* bottom: calc(((100vh/7.75) - 5rem)/2); */
-    height: calc( var(--cell-height) * 5);
-    /* height: calc( (100vh/7.75)*5); */
+    /* height: calc( var(--cell-height) * 5); */
+    max-height: calc( (100vh/7.75)*5);
     width: calc(100vw - var(--cell-width)/2);
 
     background-color: #fff;
@@ -64,6 +80,10 @@
 .menu-wrapper::-webkit-scrollbar {
     display: none;
   }
+
+  .menu-wrapper-hidden{
+    display: none;
+}
 .menu-item{
     height: var(--cell-height);
     /* height: calc((100vh/7.75)); */

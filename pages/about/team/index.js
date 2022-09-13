@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import Navigation from "../../../components/Navigation"
 import MobileNavigation from "../../../components/MobileNavigation"
 import TeamGrid from "../../../components/Grid/TeamGrid"
@@ -13,6 +13,8 @@ import isClickingMenu from "../../../utils/isClickingMenu"
 const Team = ({ data }) => {
   const grid = useGridState()
   const state = useNavigationState()
+  const [isPersonDescriptionShown, setIsPersonDescriptionShown] =
+    useState(false)
   const handleClick = (e) => {
     if (!isClickingMenu(e.target.className)) {
       state.closeAll()
@@ -20,9 +22,15 @@ const Team = ({ data }) => {
   }
   return (
     <div className={styles.container} onClick={handleClick}>
-      <TeamGrid data={data} />
+      <TeamGrid
+        data={data}
+        isPersonDescriptionShown={isPersonDescriptionShown}
+        setIsPersonDescriptionShown={setIsPersonDescriptionShown}
+      />
       {grid.layout === "web" && <Navigation />}
-      {grid.layout === "mobile" && <MobileNavigation />}
+      {grid.layout === "mobile" && (
+        <MobileNavigation isPersonDescriptionShown={isPersonDescriptionShown} />
+      )}
     </div>
   )
 }

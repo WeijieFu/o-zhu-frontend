@@ -3,7 +3,7 @@ import styles from "../../styles/Navigation/MobileNavigation.module.css"
 import useNavigationState from "../../state/NavigationState"
 import Link from "next/link"
 
-const MobileNavigation = () => {
+const MobileNavigation = ({ isPersonDescriptionShown }) => {
   const state = useNavigationState()
 
   const currentPage = () => {
@@ -50,13 +50,66 @@ const MobileNavigation = () => {
   const handleProjectsMenuToggle = () => {
     state.setIsProjectsMenuOpen(!state.isProjectsMenuOpen)
   }
-
   const handleAboutMenuToggle = () => {
     state.setIsAboutMenuOpen(!state.isAboutMenuOpen)
   }
 
   const handleAPMenuToggle = () => {
     state.setIsAPMenuOpen(!state.isAPMenuOpen)
+  }
+
+  const handleSortingMenuToggle = () => {
+    if (state.currentPage === "team") {
+      handleTeamSortingMenuToggle()
+    }
+
+    if (state.currentCategory === "award & press") {
+      handleAPSortingMenuToggle()
+    }
+
+    if (state.currentCategory === "projects") {
+      handleProjectsSortingMenuToggle()
+    }
+  }
+
+  const handleTeamSortingMenuToggle = () => {
+    state.setIsTeamSortingMenuOpen(!state.isTeamSortingMenuOpen)
+  }
+
+  const handleAPSortingMenuToggle = () => {
+    state.setIsAPSortingMenuOpen(!state.isAPSortingMenuOpen)
+  }
+
+  const handleProjectsSortingMenuToggle = () => {
+    state.setIsProjectsSortingMenuOpen(!state.isProjectsSortingMenuOpen)
+  }
+
+  const handleSorting = (method) => {
+    state.setCurrentSorting(method)
+    closeMenu()
+  }
+
+  const currentSorting = () => {
+    if (state.currentSorting == "random") {
+      return state.currentLanguage == "cn" ? "随机" : "Random"
+    }
+
+    if (state.currentSorting == "name") {
+      return state.currentLanguage == "cn" ? "名字" : "Name"
+    }
+
+    if (state.currentSorting == "date") {
+      return state.currentLanguage == "cn" ? "日期" : "Date"
+    }
+    if (state.currentSorting == "size") {
+      return state.currentLanguage == "cn" ? "面积" : "Size"
+    }
+    if (state.currentSorting == "year") {
+      return state.currentLanguage == "cn" ? "年份" : "Year"
+    }
+    if (state.currentSorting == "location") {
+      return state.currentLanguage == "cn" ? "地点" : "Location"
+    }
   }
 
   const handleContactClick = () => {
@@ -177,9 +230,39 @@ const MobileNavigation = () => {
   }
   return (
     <div className={styles["container"]}>
-      <div className={styles["menu-button-main"]} onClick={handleMenuToggle}>
+      <div
+        className={styles["menu-button-main"]}
+        onClick={handleMenuToggle}
+        style={
+          state.isMenuOpen ||
+          state.isTeamSortingMenuOpen ||
+          state.isAPSortingMenuOpen ||
+          state.isProjectsSortingMenuOpen
+            ? { borderWidth: `${0}px` }
+            : {}
+        }
+      >
         <span>{state.currentPage ? currentPage() : "+"}</span>
       </div>
+      {!isPersonDescriptionShown && (
+        <div
+          className={`${styles["menu-button-text"]} ${
+            state.currentSorting ? "" : styles["menu-button-hidden"]
+          } ${styles["menu-button-tertiary"]}`}
+          onClick={handleSortingMenuToggle}
+          style={
+            state.isMenuOpen ||
+            state.isTeamSortingMenuOpen ||
+            state.isAPSortingMenuOpen ||
+            state.isProjectsSortingMenuOpen
+              ? { borderWidth: `${0}px` }
+              : {}
+          }
+        >
+          <span>{currentSorting()}</span>
+        </div>
+      )}
+
       {state.isMenuOpen && (
         <>
           <div
@@ -379,6 +462,123 @@ const MobileNavigation = () => {
           </div>
         </>
       )}
+
+      {/* TEAM SORTING MENU */}
+      <div
+        className={`${styles["menu-wrapper"]} ${
+          state.isTeamSortingMenuOpen ? "" : styles["menu-wrapper-hidden"]
+        } ${styles["menu-tertiary"]}`}
+      >
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("name")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "名字" : "Name"}
+          </span>
+        </div>
+
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("random")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "随机" : "Random"}
+          </span>
+        </div>
+      </div>
+      {/* AWARD AND PRESS SORTING MENU */}
+      <div
+        className={`${styles["menu-wrapper"]} ${
+          state.isAPSortingMenuOpen ? "" : styles["menu-wrapper-hidden"]
+        } ${styles["menu-tertiary"]}`}
+      >
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("date")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "日期" : "Date"}
+          </span>
+        </div>
+
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("random")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "随机" : "Random"}
+          </span>
+        </div>
+      </div>
+      {/* PROJECTS SORTING MENU */}
+      <div
+        className={`${styles["menu-wrapper"]} ${
+          state.isProjectsSortingMenuOpen ? "" : styles["menu-wrapper-hidden"]
+        } ${styles["menu-tertiary"]}`}
+      >
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("size")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "面积" : "Size"}
+          </span>
+        </div>
+
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("name")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "名字" : "Name"}
+          </span>
+        </div>
+
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("year")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "年份" : "Year"}
+          </span>
+        </div>
+
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("location")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "地点" : "Location"}
+          </span>
+        </div>
+        <div
+          className={styles["menu-item"]}
+          onClick={() => {
+            handleSorting("random")
+          }}
+        >
+          <span className={styles["menu-item-title"]}>
+            {state.currentLanguage == "cn" ? "随机" : "Random"}
+          </span>
+        </div>
+      </div>
     </div>
   )
 }

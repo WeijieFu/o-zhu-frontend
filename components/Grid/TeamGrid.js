@@ -10,7 +10,11 @@ import generateRandom from "./generateRandom"
 // import { row, column, count, blinkTimes, interval } from "./GridSetting"
 import useGridState from "../../state/GridState"
 
-const TeamGrid = ({ data }) => {
+const TeamGrid = ({
+  data,
+  isPersonDescriptionShown,
+  setIsPersonDescriptionShown,
+}) => {
   const state = useNavigationState()
   const grid = useGridState()
   const count = grid.row * grid.column
@@ -23,8 +27,7 @@ const TeamGrid = ({ data }) => {
 
   // const [data, setData] = useState([])
   const [personDescriptionData, setPersonDescriptionData] = useState([])
-  const [isPersonDescriptionShown, setIsPersonDescriptionShown] =
-    useState(false)
+
   const [defaultPosition, setDefaultPosition] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
@@ -84,8 +87,8 @@ const TeamGrid = ({ data }) => {
         index: index,
       }
     })
-    console.log(column)
-    console.log(finalCell)
+    // console.log(column)
+    // console.log(finalCell)
     return finalCell
   }
 
@@ -103,7 +106,7 @@ const TeamGrid = ({ data }) => {
     const finalCell = Array(count)
     finalCell.fill({ name: "0", nameCN: "0" })
     sortedCell.forEach((value, index) => {
-      finalCell[index] = {
+      finalCell[index + Math.floor(index / (column - 1))] = {
         name: value.name,
         nameCN: value.nameCN,
         image: value.image,
