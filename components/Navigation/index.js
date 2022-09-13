@@ -257,6 +257,7 @@ const Navigation = () => {
         className={`${styles["menu-button-text"]} ${
           state.currentCategory ? "" : styles["menu-button-hidden"]
         } ${styles["menu-button-primary"]}`}
+        style={state.isMenuOpen ? { borderWidth: `${0}px` } : {}}
         onClick={handleMenuToggle}
       >
         <span>{currentCategory()}</span>
@@ -265,6 +266,13 @@ const Navigation = () => {
         className={`${styles["menu-button-text"]} ${
           state.currentPage ? "" : styles["menu-button-hidden"]
         } ${styles["menu-button-secondary"]}`}
+        style={
+          state.isProjectsMenuOpen ||
+          state.isAPMenuOpen ||
+          state.isAboutMenuOpen
+            ? { borderWidth: `${0}px` }
+            : {}
+        }
         onClick={handleSubMenuToggle}
       >
         <span>{currentPage()}</span>
@@ -274,6 +282,13 @@ const Navigation = () => {
           state.currentSorting ? "" : styles["menu-button-hidden"]
         } ${styles["menu-button-tertiary"]}`}
         onClick={handleSortingMenuToggle}
+        style={
+          state.isTeamSortingMenuOpen ||
+          state.isAPSortingMenuOpen ||
+          state.isProjectsSortingMenuOpen
+            ? { borderWidth: `${0}px` }
+            : {}
+        }
       >
         <span>{currentSorting()}</span>
       </div>
@@ -300,7 +315,6 @@ const Navigation = () => {
 
         <div className={styles["menu-item"]} onClick={handleAboutMenuToggle}>
           <span className={styles["menu-item-title"]}>
-            {" "}
             {state.currentLanguage == "cn" ? "关于" : "About"}
           </span>
           <span className={styles["menu-item-toggle"]}>

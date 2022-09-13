@@ -4,7 +4,9 @@ import Draggable from "react-draggable"
 import CloseButton from "../Button/CloseButton"
 import useNavigationState from "../../state/NavigationState"
 import ReactMarkdown from "react-markdown"
+import useGridState from "../../state/GridState"
 const Spot = ({ defaultPosition, data, index, setIsSpotShown }) => {
+  const grid = useGridState()
   const handleClose = () => {
     setIsSpotShown(false)
   }
@@ -29,10 +31,11 @@ const Spot = ({ defaultPosition, data, index, setIsSpotShown }) => {
             <img src={data.Image} alt={data.ProjectImage} />
           </div>
         )}
-
-        <div onClick={handleClose} className={styles["close"]}>
-          <CloseButton />
-        </div>
+        {grid.layout == "web" && (
+          <div onClick={handleClose} className={styles["close"]}>
+            <CloseButton />
+          </div>
+        )}
       </div>
     </Draggable>
   )

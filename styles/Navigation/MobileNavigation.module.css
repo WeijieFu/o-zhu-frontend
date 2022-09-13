@@ -34,7 +34,9 @@
     /* flex-grow: 0; */
 
     align-self: center;
-    margin-left: calc((var(--cell-width) - 5rem)/2)
+    margin-left: calc((var(--cell-width) - 5rem)/2);
+
+    background-color: #fff;
 }
 
 .menu-button-main span{

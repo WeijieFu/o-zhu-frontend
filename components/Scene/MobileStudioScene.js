@@ -99,7 +99,7 @@ function GroundPlage() {
   }
   return (
     <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-      <planeBufferGeometry args={[right * 2, right * 2 * 1.414]} />
+      <planeBufferGeometry args={[right * 2, top * 2 * 1.414]} />
       <shadowMaterial attach="material" transparent opacity={0.5} />
     </mesh>
   )

@@ -66,24 +66,26 @@ const MobileLocationGrid = ({ currentLocation }) => {
         </span>
       )}
       {isInformationShown && (
-        <Draggable>
-          <div className={styles["grid-info-container"]}>
-            <div className={styles["grid-info-block"]}>
-              <div class={styles["grid-markdown"]}>
-                <ReactMarkdown
-                  children={
-                    state.currentLanguage == "cn"
-                      ? currentLocation.DescriptionCN
-                      : currentLocation.Description
-                  }
-                />
-              </div>
-              <div className={styles["grid-info-close"]} onClick={handleClose}>
-                <CloseButton />
+        <>
+          <div className={styles["grid-info-close"]} onClick={handleClose}>
+            <CloseButton />
+          </div>
+          <Draggable>
+            <div className={styles["grid-info-container"]}>
+              <div className={styles["grid-info-block"]}>
+                <div class={styles["grid-markdown"]}>
+                  <ReactMarkdown
+                    children={
+                      state.currentLanguage == "cn"
+                        ? currentLocation.DescriptionCN
+                        : currentLocation.Description
+                    }
+                  />
+                </div>
               </div>
             </div>
-          </div>
-        </Draggable>
+          </Draggable>
+        </>
       )}
 
       <div className={styles["grid-back"]} onClick={handleBack}>

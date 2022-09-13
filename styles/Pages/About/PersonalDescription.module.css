@@ -42,3 +42,18 @@
 
     cursor: pointer;
 }
+
+
+@media only screen and (max-width: 750px) {
+    .button{
+        width: 5rem;
+        height: 5rem;
+        border-radius: 5rem;
+        position: fixed;
+        top: unset;
+        /* right: calc((var(--cell-width) - 5rem)/2); */
+        right: 2.5rem;
+        bottom: calc((var(--cell-height) - 5rem)/2);
+        z-index: 100;
+    }
+}

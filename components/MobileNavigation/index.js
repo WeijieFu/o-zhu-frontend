@@ -156,7 +156,6 @@ const MobileNavigation = () => {
   const [scrollStart, setScrollStart] = useState(0)
   const lastItem = useRef()
   const handleTouchStart = (e) => {
-    // console.log(e.nativeEvent.touches[0].clientY)
     setTouchStart(e.nativeEvent.touches[0].clientY)
   }
   const handleTouchMove = (e) => {

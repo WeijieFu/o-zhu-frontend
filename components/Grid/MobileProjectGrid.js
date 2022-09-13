@@ -11,7 +11,7 @@ const MobileProjectGrid = ({ data }) => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [isSpotShown, setIsSpotShown] = useState(false)
   const [defaultPosition, setDefaultPosition] = useState({ x: 0, y: 0 })
-  const [spotIndex, setSpotIndex] = useState(0)
+  const [spotIndex, setSpotIndex] = useState([0, 0])
   const state = useNavigationState()
   const router = useRouter()
   const [currentDetail, setCurrentDetail] = useState(0)
@@ -39,12 +39,13 @@ const MobileProjectGrid = ({ data }) => {
     }
   }
 
-  const handleSpotClick = (e, index) => {
-    if (index === spotIndex) {
+  const handleSpotClick = (e, imageIndex, index) => {
+    console.log(imageIndex, index, spotIndex)
+    if (imageIndex == spotIndex[0] && index == spotIndex[1]) {
       setIsSpotShown(!isSpotShown)
     }
-    if (index !== spotIndex) {
-      setSpotIndex(index)
+    if (imageIndex != spotIndex[0] || index != spotIndex[1]) {
+      setSpotIndex([imageIndex, index])
       setIsSpotShown(true)
     }
     setDefaultPosition({ x: e.clientX, y: e.clientY })
@@ -177,10 +178,10 @@ const MobileProjectGrid = ({ data }) => {
 
           {data.Images && (
             <div className={`${styles["grid-cell-image-large"]}`}>
-              {data.Images.map((image, index) => {
+              {data.Images.map((image, imageIndex) => {
                 return (
                   <div className={`${styles["grid-cell-image-large-wrapper"]}`}>
-                    <img src={image.Image} alt={image.Name} />
+                    <img key={imageIndex} src={image.Image} alt={image.Name} />
 
                     {image.Spot &&
                       image.Spot.map((value, index) => {
@@ -192,11 +193,17 @@ const MobileProjectGrid = ({ data }) => {
                               top: `${value.y * 100}%`,
                             }}
                             onClick={(e) => {
-                              handleSpotClick(e, index)
+                              handleSpotClick(e, imageIndex, index)
                             }}
                             key={index}
                           >
-                            {index + 1}
+                            {isSpotShown &&
+                            spotIndex[0] == imageIndex &&
+                            spotIndex[1] == index ? (
+                              <CloseButton />
+                            ) : (
+                              index + 1
+                            )}
                           </span>
                         )
                       })}
@@ -218,30 +225,31 @@ const MobileProjectGrid = ({ data }) => {
       )}
 
       {isInformationShown && (
-        <Draggable>
-          <div className={styles["grid-info-container"]}>
-            <div className={styles["grid-info-block"]}>
-              <ReactMarkdown
-                children={
-                  state.currentLanguage == "cn"
-                    ? data.InformationCN
-                    : data.Information
-                }
-              />
-
-              <div className={styles["grid-info-close"]} onClick={handleClose}>
-                <CloseButton />
+        <>
+          <div className={styles["grid-info-close"]} onClick={handleClose}>
+            <CloseButton />
+          </div>
+          <Draggable>
+            <div className={styles["grid-info-container"]}>
+              <div className={styles["grid-info-block"]}>
+                <ReactMarkdown
+                  children={
+                    state.currentLanguage == "cn"
+                      ? data.InformationCN
+                      : data.Information
+                  }
+                />
               </div>
             </div>
-          </div>
-        </Draggable>
+          </Draggable>
+        </>
       )}
 
       {isSpotShown && (
         <Spot
           defaultPosition={defaultPosition}
-          data={data.Images[currentImageIndex].Spot[spotIndex]}
-          index={spotIndex}
+          data={data.Images[spotIndex[0]].Spot[spotIndex[1]]}
+          index={spotIndex[1]}
           setIsSpotShown={setIsSpotShown}
         />
       )}

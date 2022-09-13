@@ -24,6 +24,8 @@ a:hover{
   --container-border-radius: 1.25rem;
   --container-horizontal-padding: 1rem;
   --container-border: 0.8px #555 solid;
+  --cell-width: calc(100vw / 11);
+  --cell-height: calc((var(--viewport-height)) / 7.75);
 }
 
 

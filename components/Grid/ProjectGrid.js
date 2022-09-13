@@ -5,6 +5,7 @@ import CloseButton from "../Button/CloseButton"
 import Draggable from "react-draggable"
 import Spot from "../Project/Spot"
 import useNavigationState from "../../state/NavigationState"
+
 import { useRouter } from "next/router"
 const ProjectGrid = ({ data }) => {
   const [isInformationShown, setIsInformationShown] = useState(false)
@@ -13,12 +14,14 @@ const ProjectGrid = ({ data }) => {
   const [defaultPosition, setDefaultPosition] = useState({ x: 0, y: 0 })
   const [spotIndex, setSpotIndex] = useState(0)
   const state = useNavigationState()
+
   const router = useRouter()
   const handleInformationClick = () => {
     setIsInformationShown(true)
   }
 
   const handleClose = () => {
+    // console.log("df")
     setIsInformationShown(false)
   }
 
@@ -185,7 +188,11 @@ const ProjectGrid = ({ data }) => {
                 }
               />
 
-              <div className={styles["grid-info-close"]} onClick={handleClose}>
+              <div
+                className={styles["grid-info-close"]}
+                onClick={handleClose}
+                onTouchStart={handleClose}
+              >
                 <CloseButton />
               </div>
             </div>

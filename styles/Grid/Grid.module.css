@@ -1,7 +1,6 @@
 
 .grid-container{  
-    --cell-width: calc(100vw / 11);
-    --cell-height: calc((var(--viewport-height)) / 7.75);
+  
     display: grid;
     grid-template-columns: repeat(11,1fr);
     grid-template-rows:  repeat(6, var(--cell-height));
@@ -298,7 +297,7 @@
 
         -ms-overflow-style: none;  /* IE and Edge */
         scrollbar-width: none;  /* Firefox */
-
+        z-index:10;
     }
 
     .grid-cell-image-large::-webkit-scrollbar {
@@ -308,7 +307,7 @@
         height: unset;
         width: 100%;
         margin-bottom: 1rem;
-
+     
     }
 
     .grid-arrow-left{
@@ -326,6 +325,7 @@
 
     .grid-info-container{
         grid-column-start: 2; 
+      
     }
     .grid-button-info{
         position: fixed;
@@ -352,12 +352,36 @@
         justify-content: center;
         transform: translate(0);
         text-decoration: none;
+        background-color: #fff;
     }
 
     .grid-cell-email{
         grid-column-start: 2;
     }
 
+    .grid-info-close{
+        position: fixed;
+
+        /* right: calc((var(--cell-width) - 5rem)/2); */
+        right: 2.5rem;
+        bottom: calc((var(--cell-height) - 5rem)/2);
+        top: unset;
+        width: 5rem;
+        height: 5rem;
+       
+        border-radius: 5rem;
+        z-index: 100;
+    }
+    .grid-info-block{
+        transform: translate(0, -6rem);
+    }
 
 
+    .grid-cell-image-spot{
+
+        width: 4rem;
+        height: 4rem;
+        border-radius: 4rem;
+
+    }
 }
