@@ -42,7 +42,7 @@ const Location = ({ data }) => {
         <>
           {grid.layout === "web" && (
             <>
-              <Navigation />
+              <Navigation isProjectPage={true} />
               <LocationGrid currentLocation={currentLocation} />
             </>
           )}

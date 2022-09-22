@@ -1,12 +1,28 @@
+@font-face {
+  font-family: Aktiv Grotesk;
+  src: url("../public/fonts/AktivGrotesk_CNSG_Rg.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: Univers LT Std;
+  ascent-override: 100%;
+  src: url("../public/fonts/UniversLTStd.otf") format("opentype");
+
+}
+
+
+
 html,
 body {
   padding: 0;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
   overflow: hidden;
+  /* font-family: Univers LT Std; */
   /* font-size: 12px; */
   font-size: calc(100vw * 12 / 1600);
+  line-height: 140%;
 }
 
 a {

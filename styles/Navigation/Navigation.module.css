@@ -10,7 +10,7 @@
     display: grid;
     grid-template-columns: repeat(11, 1fr);
     z-index: 20;
-    outline: #fff solid calc(var(--cell-height)*0.5 - 0.5rem);
+    outline: #fff solid calc(var(--cell-height)*0.5 - 0.75rem);
     background-color: #fff;
 }
 
@@ -18,7 +18,7 @@
     cursor: pointer;
     border: var(--container-border);
     border-radius: var(--container-border-radius);    
-
+    font-family: Univers LT Std;
     width: 5rem;
     height: 5rem;
 
@@ -30,8 +30,14 @@
     align-self: center;
     justify-self: center;
 }
+
+
 .menu-button-icon:hover{
     color: #aaa;
+}
+
+.menu-button-main{
+    grid-column: 1/2;
 }
 
 .menu-button-main{
@@ -47,13 +53,15 @@
     border-radius: var(--container-border-radius);   
 
     height: 5rem;
-    padding-left: 2rem;
+    padding:0 1.65rem;
     margin: 0 calc((100vw/11 - 4rem)/2);
     align-self: center;
 
     display: flex;
     align-items: center;
     text-transform: capitalize;
+    justify-content: space-between;
+
 }
 .menu-button-text:hover{
     color: #aaa
@@ -94,7 +102,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 2rem;
+    padding: 0 1.65rem;
 }
 
 .menu-item:hover{
@@ -127,7 +135,9 @@
     bottom: calc((var(--cell-height) - 5rem)/2);
     left:calc(100vw/11 * 7 + (100vw/11 - 4rem)/2);
 }
-
+.menu-text{
+    position: relative;
+}
 
 
 @media only screen and (min-aspect-ratio: 11/8){

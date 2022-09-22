@@ -14,6 +14,7 @@ const Contact = ({ data }) => {
   const grid = useGridState()
   const state = useNavigationState()
   const handleClick = (e) => {
+    console.log(e.target.className)
     if (!isClickingMenu(e.target.className)) {
       state.closeAll()
     }

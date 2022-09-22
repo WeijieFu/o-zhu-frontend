@@ -34,7 +34,6 @@ const TeamGrid = ({
     state.setCurrentCategory("about")
     state.setCurrentPage("team")
     state.setCurrentSorting("random")
-    console.log(grid.column)
   }, [])
 
   useEffect(() => {

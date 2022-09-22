@@ -27,7 +27,7 @@ const Project = ({ data }) => {
           {grid.layout == "web" && (
             <>
               <ProjectGrid data={data} />
-              <Navigation />
+              <Navigation isProjectPage={true} />
             </>
           )}
           {grid.layout == "mobile" && <MobileProjectGrid data={data} />}

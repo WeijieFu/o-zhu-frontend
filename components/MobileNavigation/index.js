@@ -242,7 +242,9 @@ const MobileNavigation = ({ isPersonDescriptionShown }) => {
             : {}
         }
       >
-        <span>{state.currentPage ? currentPage() : "+"}</span>
+        <span className={styles["menu-text"]}>
+          {state.currentPage ? currentPage() : "+"}
+        </span>
       </div>
       {!isPersonDescriptionShown && (
         <div
@@ -259,7 +261,7 @@ const MobileNavigation = ({ isPersonDescriptionShown }) => {
               : {}
           }
         >
-          <span>{currentSorting()}</span>
+          <span className={styles["menu-text"]}>{currentSorting()}</span>
         </div>
       )}
 

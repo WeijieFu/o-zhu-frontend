@@ -1,13 +1,19 @@
 import React from "react"
-
+import useGridState from "../../state/GridState"
 const CloseButton = () => {
+  const grid = useGridState()
   return (
     <svg
-      width="12"
-      height="12"
+      width="8"
+      height="8"
       viewBox="0 0 12 12"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
+      style={
+        grid.layout === "web"
+          ? { transform: `scale(${window.innerWidth / 1600})` }
+          : {}
+      }
     >
       <path
         fill-rule="evenodd"

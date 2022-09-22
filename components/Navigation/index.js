@@ -4,7 +4,7 @@ import styles from "../../styles/Navigation/Navigation.module.css"
 import Link from "next/link"
 import useNavigationState from "../../state/NavigationState"
 
-const Navigation = () => {
+const Navigation = ({ isProjectPage }) => {
   const state = useNavigationState()
 
   const handleMenuToggle = () => {
@@ -246,12 +246,17 @@ const Navigation = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div
+      className={styles.container}
+      style={isProjectPage ? { outline: "unset" } : {}}
+    >
       <div
         className={`${styles["menu-button-icon"]} ${styles["menu-button-main"]}`}
         onClick={handleMenuToggle}
       >
-        <span>{state.isMenuOpen ? "-" : "+"}</span>
+        <span className={styles["menu-text"]}>
+          {state.isMenuOpen ? "-" : "+"}
+        </span>
       </div>
       <div
         className={`${styles["menu-button-text"]} ${
@@ -260,7 +265,8 @@ const Navigation = () => {
         style={state.isMenuOpen ? { borderWidth: `${0}px` } : {}}
         onClick={handleMenuToggle}
       >
-        <span>{currentCategory()}</span>
+        <span className={styles["menu-text"]}>{currentCategory()}</span>
+        <span className={styles["menu-text"]}>+</span>
       </div>
       <div
         className={`${styles["menu-button-text"]} ${
@@ -275,7 +281,8 @@ const Navigation = () => {
         }
         onClick={handleSubMenuToggle}
       >
-        <span>{currentPage()}</span>
+        <span className={styles["menu-text"]}>{currentPage()}</span>
+        <span className={styles["menu-text"]}>+</span>
       </div>
       <div
         className={`${styles["menu-button-text"]} ${
@@ -290,13 +297,16 @@ const Navigation = () => {
             : {}
         }
       >
-        <span>{currentSorting()}</span>
+        <span className={styles["menu-text"]}>{currentSorting()}</span>
+        <span className={styles["menu-text"]}>+</span>
       </div>
       <div
         className={`${styles["menu-button-icon"]} ${styles["menu-button-language"]}`}
         onClick={handleLanguageToggle}
       >
-        <span>{state.currentLanguage == "cn" ? "EN" : "中文"}</span>
+        <span className={styles["menu-text"]}>
+          {state.currentLanguage == "cn" ? "EN" : "中文"}
+        </span>
       </div>
       {/* MAIN MENU */}
       <div
