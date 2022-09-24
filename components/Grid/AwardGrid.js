@@ -90,20 +90,23 @@ const AwardGrid = ({ data }) => {
   }
   //HANDLE SCROLL
   const handleScroll = (e) => {
+    const step = window.innerHeight / 7.75
     if (cells.length > count) {
       const direction = e.deltaY / Math.abs(e.deltaY)
       const pagesCount =
         state.currentSorting === "random"
           ? Math.ceil(data.length / ((row - 1) * (column - 1) * 0.5))
           : Math.ceil(data.length / ((row - 1) * (column - 1)))
-      if (direction > 0 && scroll < (pagesCount - 1) * row) {
-        setScroll(scroll + direction)
+      if (direction > 0 && scroll > -(pagesCount - 1) * row * step + step) {
+        setScroll(scroll - direction * step)
       }
-      if (direction < 0 && scroll > 0) {
-        setScroll(scroll + direction)
+      if (direction < 0 && scroll < -step) {
+        setScroll(scroll - direction * step)
       }
+      console.log(scroll, direction)
     }
   }
+
   /*
   HANDLE TOUCH
   */
@@ -144,7 +147,7 @@ const AwardGrid = ({ data }) => {
         onTouchEnd={handleTouchEnd}
       >
         <div className={styles["grid-title"]}>
-          {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
+          {state.currentLanguage == "cn" ? "〇筑设计" : "OFFICE ZHU"}
         </div>
 
         {cells.map((item, index) => {
@@ -153,10 +156,7 @@ const AwardGrid = ({ data }) => {
               className={styles["grid-cell"]}
               key={index}
               style={{
-                transform:
-                  grid.layout === "web"
-                    ? `translateY(${scroll * -100}%)`
-                    : `translateY(${scroll}px)`,
+                transform: `translateY(${scroll}px)`,
               }}
               ref={index === cells.length - 1 ? lastItem : null}
             >

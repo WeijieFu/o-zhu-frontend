@@ -28,6 +28,15 @@ function MyApp({ Component, pageProps }) {
   const setFont = (fontFamily) => {
     const body = document.getElementsByTagName("body")[0]
     body.style.setProperty("font-family", fontFamily)
+
+    if (fontFamily === "Univers LT Std") {
+      body.style.setProperty("letter-spacing", "0rem")
+      body.style.setProperty("line-height", "120%")
+    }
+    if (fontFamily === "Aktiv Grotesk") {
+      body.style.setProperty("letter-spacing", "0.15rem")
+      body.style.setProperty("line-height", "160%")
+    }
   }
   const handleResize = (e) => {
     // console.log(window.innerWidth, window.innerHeight)

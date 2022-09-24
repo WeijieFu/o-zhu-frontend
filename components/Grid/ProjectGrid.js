@@ -59,7 +59,7 @@ const ProjectGrid = ({ data }) => {
   return (
     <div className={styles["grid-container"]}>
       <div className={styles["grid-title"]}>
-        {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
+        {state.currentLanguage == "cn" ? "〇筑设计" : "OFFICE ZHU"}
       </div>
       {data.Date && (
         <>

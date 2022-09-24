@@ -27,19 +27,6 @@ const ProjectsGrid = ({ data }) => {
 
   const [cells, setCells] = useState([])
 
-  // const [data, setData] = useState([])
-  useEffect(() => {
-    // window.addEventListener("scroll", handleScroll)
-    // window.addEventListener("touchstart", handleTouchStart)
-    // window.addEventListener("touchmove", handleTouchMove)
-    // window.addEventListener("touchend", handleTouchEnd)
-    return () => {
-      // window.removeEventListener("scroll", handleScroll)
-      // window.removeEventListener("touchstart", handleTouchStart)
-      // window.removeEventListener("touchmove", handleTouchMove)
-      // window.removeEventListener("touchend", handleTouchEnd)
-    }
-  }, [])
   useEffect(() => {
     if (category) {
       state.setCurrentSorting("random")
@@ -288,18 +275,20 @@ const ProjectsGrid = ({ data }) => {
   //HANDLE SCROLL
   const [scroll, setScroll] = useState(0)
   const handleScroll = (e) => {
+    const step = window.innerHeight / 7.75
     if (cells.length > count) {
       const direction = e.deltaY / Math.abs(e.deltaY)
       const pagesCount =
         state.currentSorting === "random"
           ? Math.ceil(data.length / ((row - 1) * (column - 1) * 0.5))
           : Math.ceil(data.length / ((row - 1) * (column - 1)))
-      if (direction > 0 && scroll < (pagesCount - 1) * row) {
-        setScroll(scroll + direction)
+      if (direction > 0 && scroll > -(pagesCount - 1) * row * step + step) {
+        setScroll(scroll - direction * step)
       }
-      if (direction < 0 && scroll > 0) {
-        setScroll(scroll + direction)
+      if (direction < 0 && scroll < -step) {
+        setScroll(scroll - direction * step)
       }
+      console.log(scroll, direction)
     }
   }
 
@@ -311,11 +300,9 @@ const ProjectsGrid = ({ data }) => {
   const lastItem = useRef()
 
   const handleTouchStart = async (e) => {
-    // console.log(e.touches[0].clientY)
     setTouchStart(e.touches[0].clientY)
   }
   const handleTouchMove = async (e) => {
-    // console.log(window)
     const step = window.innerHeight / 7.75
     const currentTouch = e.touches[0].clientY
     const delta = Math.floor((currentTouch - touchStart) / step) * step
@@ -323,18 +310,13 @@ const ProjectsGrid = ({ data }) => {
     // console.log(touchStart)
     const rect = lastItem.current.getBoundingClientRect()
     if (delta > 0 && newScroll <= 0) {
-      // console.log("down")
       setScroll(newScroll)
-      // console.log(rect.bottom)
     }
     if (delta < 0 && rect.bottom > window.innerHeight - step) {
-      // console.log("up")
       setScroll(newScroll)
     }
   }
   const handleTouchEnd = (e) => {
-    // console.log(e)
-    // console.log(scroll)
     setScrollStart(scroll)
   }
 
@@ -342,7 +324,7 @@ const ProjectsGrid = ({ data }) => {
     <>
       <div className={styles["grid-container"]}>
         <div className={styles["grid-title"]}>
-          {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
+          {state.currentLanguage == "cn" ? "〇筑设计" : "OFFICE ZHU"}
         </div>
         {cells.map((item, index) => {
           return (
@@ -350,10 +332,7 @@ const ProjectsGrid = ({ data }) => {
               className={styles["grid-cell"]}
               key={index}
               style={{
-                transform:
-                  grid.layout === "web"
-                    ? `translateY(${scroll * -100}%)`
-                    : `translateY(${scroll}px)`,
+                transform: `translateY(${scroll}px)`,
               }}
               ref={index === cells.length - 1 ? lastItem : null}
             >
@@ -372,6 +351,9 @@ const ProjectsGrid = ({ data }) => {
               router={router}
               category={category}
               handleScroll={handleScroll}
+              handleTouchStart={handleTouchStart}
+              handleTouchMove={handleTouchMove}
+              handleTouchEnd={handleTouchEnd}
               scroll={scroll}
             />
           )}

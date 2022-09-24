@@ -36,7 +36,7 @@ const HomeGrid = () => {
       style={{ gridTemplateColumns: `repeat(${grid.column},1fr)` }}
     >
       <div className={styles["grid-title"]}>
-        {state.currentLanguage == "cn" ? "O筑设计" : "OFFICE ZHU"}
+        {state.currentLanguage == "cn" ? "〇筑设计" : "OFFICE ZHU"}
       </div>
       {cells.map((item, index) => {
         return (

@@ -14,7 +14,16 @@ const bottom = -7.75
 const left = -11
 const right = 11
 
-const ProjectScene = ({ data, router, category, handleScroll, scroll }) => {
+const ProjectScene = ({
+  data,
+  router,
+  category,
+  handleScroll,
+  scroll,
+  handleTouchStart,
+  handleTouchEnd,
+  handleTouchMove,
+}) => {
   const [params, setParams] = useState({
     directionalLightIntensity: 2,
     ambientLightIntensity: 0.1,
@@ -28,7 +37,13 @@ const ProjectScene = ({ data, router, category, handleScroll, scroll }) => {
   // }, [])
 
   return (
-    <div className={styles["canvas"]} onWheel={handleScroll}>
+    <div
+      className={styles["canvas"]}
+      onWheel={handleScroll}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+    >
       <Canvas
         onCreated={(state) => {
           state.camera.top = top
@@ -61,7 +76,7 @@ const ProjectScene = ({ data, router, category, handleScroll, scroll }) => {
                   target={value._id}
                   root={"/project"}
                   params={params}
-                  scroll={scroll}
+                  scroll={-scroll / (window.innerHeight / 7.75)}
                 />
               )
             }

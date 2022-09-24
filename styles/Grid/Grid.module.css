@@ -61,6 +61,8 @@
     z-index: 10;
     padding-right: 2.5rem;
     pointer-events: all;
+
+    line-height: 120%;
 }
 
 .grid-cell-link{
