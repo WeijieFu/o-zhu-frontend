@@ -97,7 +97,7 @@ const AwardGrid = ({ data }) => {
         state.currentSorting === "random"
           ? Math.ceil(data.length / ((row - 1) * (column - 1) * 0.5))
           : Math.ceil(data.length / ((row - 1) * (column - 1)))
-      if (direction > 0 && scroll > -(pagesCount - 1) * row * step + step) {
+      if (direction > 0 && scroll > -(pagesCount - 1) * row * step) {
         setScroll(scroll - direction * step)
       }
       if (direction < 0 && scroll < -step) {

@@ -34,7 +34,7 @@ const LocationGrid = ({ currentLocation }) => {
         className={`${styles["grid-cell"]} ${styles["grid-cell-location"]}`}
       >
         <span className={styles["grid-cell-label"]}>
-          <div>{state.currentLanguage == "cn" ? "地点:" : "Location"}</div>
+          <div>{state.currentLanguage == "cn" ? "地点:" : "Location:"}</div>
           <div>
             {state.currentLanguage == "cn"
               ? currentLocation.LocationCN
@@ -45,7 +45,7 @@ const LocationGrid = ({ currentLocation }) => {
 
       <span className={`${styles["grid-cell"]} ${styles["grid-cell-email"]}`}>
         <span className={styles["grid-cell-label"]}>
-          <div>{state.currentLanguage == "cn" ? "邮箱" : "Email"}</div>
+          <div>{state.currentLanguage == "cn" ? "邮箱" : "Email:"}</div>
           <div className={styles["grid-cell-link"]}>
             <a href={`mailto:${currentLocation.Email}`}>
               {currentLocation.Email}

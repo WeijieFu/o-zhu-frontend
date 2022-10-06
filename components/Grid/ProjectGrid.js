@@ -76,7 +76,7 @@ const ProjectGrid = ({ data }) => {
 
           <span className={`${styles["grid-cell"]} `}>
             <span className={styles["grid-cell-label"]}>
-              <div>{state.currentLanguage == "cn" ? "合作:" : "Client:"}</div>
+              <div>{state.currentLanguage == "cn" ? "客户:" : "Client:"}</div>
               <div>
                 {state.currentLanguage == "cn" ? data.ClientCN : data.Client}
               </div>
@@ -94,16 +94,10 @@ const ProjectGrid = ({ data }) => {
 
           <span className={`${styles["grid-cell"]} `}>
             <span className={styles["grid-cell-label"]}>
+              <div>{state.currentLanguage == "cn" ? "面积:" : "Area:"}</div>
               <div>
-                {state.currentLanguage == "cn" ? (
-                  "面积:"
-                ) : (
-                  <>
-                    M<sup>2</sup>:
-                  </>
-                )}
+                {data.Area} M<sup>2</sup>:
               </div>
-              <div>{data.Area}</div>
             </span>
           </span>
 

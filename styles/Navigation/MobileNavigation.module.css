@@ -13,7 +13,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     z-index: 200;
-    outline: #fff solid calc(var(--cell-height)*0.5 - 1rem);
+    outline: #fff solid calc(var(--cell-height)*0.5 - 1.5rem);
 
     background-color: #fff;
 

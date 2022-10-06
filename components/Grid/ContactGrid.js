@@ -32,7 +32,7 @@ const ContactGrid = ({ data }) => {
 
         let finalCell = Array.from({ length: count }, (_, index) => {
           return {
-            type: data[index] ? data[index].Type : "0",
+            type: data[index] ? `${data[index].Type}:` : "0",
             value: data[index] ? data[index].Value : "",
             url: data[index] ? data[index].URL : "",
           }

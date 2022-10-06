@@ -256,8 +256,13 @@
     /* .grid-container{
         background-color: aqua;
     } */
-}
 
+}
+@media screen and (max-width: 1000px) {
+    .grid-title{
+        height: calc(var(--cell-height)*1.5 - 3.5rem);
+    }
+}
 
 @media only screen and (max-width: 750px) {
 
@@ -271,7 +276,9 @@
         height: var(--viewport-height);
 
     }
-
+    .grid-title{
+        height: calc(var(--cell-height)*1.5 - 2rem);
+    }
 
      .grid-draggable{
       position: fixed;
