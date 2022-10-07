@@ -141,16 +141,10 @@ const MobileProjectGrid = ({ data }) => {
             <>
               <span className={`${styles["grid-cell"]} `}>
                 <span className={styles["grid-cell-label"]}>
+                  <div>{state.currentLanguage == "cn" ? "面积:" : "Area"}</div>
                   <div>
-                    {state.currentLanguage == "cn" ? (
-                      "面积:"
-                    ) : (
-                      <>
-                        M<sup>2</sup>:
-                      </>
-                    )}
+                    {data.Area} M<sup>2</sup>
                   </div>
-                  <div>{data.Area}</div>
                 </span>
               </span>
               <span className={`${styles["grid-cell"]} `}>
